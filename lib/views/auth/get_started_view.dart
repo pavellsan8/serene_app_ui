@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../viewmodels/auth/get_started_viewmodel.dart';
 import '../../utils/colors.dart';
+import '../../utils/routes.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});
@@ -16,13 +17,13 @@ class GetStartedScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 46,
+            horizontal: 36,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/get_started/welcome.png',
+                'assets/images/auth/welcome.png',
                 height: 300,
               ),
               const SizedBox(height: 24),
@@ -40,10 +41,10 @@ class GetStartedScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: Colors.grey,
+                  color: AppColors.fontColor,
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 50),
               SizedBox(
                 width: double.infinity,
                 height: 48,
@@ -70,19 +71,13 @@ class GetStartedScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 25),
               SizedBox(
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const GetStartedScreen(), //LoginScreen(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, AppRoutes.login);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,

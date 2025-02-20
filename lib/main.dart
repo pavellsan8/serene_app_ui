@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:serene_app/viewmodels/auth/get_started_viewmodel.dart';
-import 'package:serene_app/views/get_started/get_started_view.dart';
+import '../utils/routes.dart';
+import '../viewmodels/auth/get_started_viewmodel.dart';
+import '../views/auth/get_started_view.dart';
+import '../views/auth/login_view.dart';
 
 void main() {
   runApp(
@@ -20,9 +22,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GetStartedScreen(),
+      initialRoute: AppRoutes.getStarted,
+      routes: {
+        AppRoutes.getStarted: (context) => const GetStartedScreen(),
+        AppRoutes.login: (context) => const LoginScreen(),
+      },
     );
   }
 }
