@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../utils/colors.dart';
 import '../../viewmodels/auth/register_viewmodel.dart';
-import '../../widgets/register_textfield_widget.dart';
+import '../../widgets/auth/register_textfield_widget.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
