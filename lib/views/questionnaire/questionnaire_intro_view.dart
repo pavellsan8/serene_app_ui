@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/colors.dart';
+import '../../utils/routes.dart';
 
 class QuestionnaireIntroScreen extends StatelessWidget {
   const QuestionnaireIntroScreen({super.key});
@@ -71,7 +73,6 @@ class QuestionnaireIntroScreen extends StatelessWidget {
               ),
             ),
 
-            // Jarak antara tombol dan bagian bawah
             const SizedBox(height: 100),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36),
@@ -79,7 +80,9 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.questionnaire1);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,
                     shape: RoundedRectangleBorder(
