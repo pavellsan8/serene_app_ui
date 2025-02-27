@@ -14,14 +14,20 @@ class QuestionnaireIntroScreen extends StatelessWidget {
         backgroundColor: AppColors.backgroundColor,
         elevation: 0,
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              "Skip for now >>>",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: AppColors.buttonColor,
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 17,
+              vertical: 20,
+            ),
+            child: TextButton(
+              onPressed: () {},
+              child: const Text(
+                "Skip for now >>>",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.buttonColor,
+                ),
               ),
             ),
           ),
@@ -30,7 +36,6 @@ class QuestionnaireIntroScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 24),
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(20),
@@ -42,7 +47,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
+            const SizedBox(height: 50),
             const Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 28),
@@ -72,7 +77,6 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 100),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36),
@@ -99,7 +103,6 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 50),
           ],
         ),
