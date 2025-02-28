@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
 import '../../../widgets/questionnaire/continue_btn_widget.dart';
+import '../../../viewmodels/questionnaire/mood_page_viewmodel.dart';
 
 class MoodPage extends StatelessWidget {
-  final String? selectedMood;
-  final Function(String) onMoodSelected;
   final VoidCallback onContinue;
 
-  const MoodPage({
-    super.key,
-    required this.selectedMood,
-    required this.onMoodSelected,
-    required this.onContinue,
-  });
+  const MoodPage({super.key, required this.onContinue});
 
   @override
   Widget build(BuildContext context) {
-    final moodOptions = ['Happy', 'Stressed', 'Tired', 'Anxious', 'Empty'];
+    final moodViewModel = Provider.of<MoodViewModel>(context);
+
+    final moodOptions = ['Happy', 'Depressed', 'Tired', 'Anxious', 'Empty'];
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -35,31 +32,31 @@ class MoodPage extends StatelessWidget {
           ...moodOptions
               .map((option) => Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
-                    child: _buildMoodOption(option),
+                    child: _buildMoodOption(option, moodViewModel),
                   ))
               .toList(),
           const Spacer(),
-          ContinueButton(onPressed: onContinue),
+          ContinueButton(
+            onPressed: moodViewModel.isMoodSelected ? onContinue : () {},
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildMoodOption(String option) {
+  Widget _buildMoodOption(String option, MoodViewModel viewModel) {
     return InkWell(
-      onTap: () {
-        onMoodSelected(option);
-      },
+      onTap: () => viewModel.selectMood(option),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         decoration: BoxDecoration(
-          color: selectedMood == option
+          color: viewModel.selectedMood == option
               ? AppColors.buttonColor.withOpacity(0.1)
               : Colors.grey.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
-            color: selectedMood == option
+            color: viewModel.selectedMood == option
                 ? AppColors.buttonColor
                 : Colors.grey.withOpacity(0.2),
             width: 1.0,
@@ -74,13 +71,16 @@ class MoodPage extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: selectedMood == option ? AppColors.buttonColor : Colors.grey,
+                  color: viewModel.selectedMood == option
+                      ? AppColors.buttonColor
+                      : Colors.grey,
                   width: 2.0,
                 ),
-                color:
-                    selectedMood == option ? AppColors.buttonColor : Colors.transparent,
+                color: viewModel.selectedMood == option
+                    ? AppColors.buttonColor
+                    : Colors.transparent,
               ),
-              child: selectedMood == option
+              child: viewModel.selectedMood == option
                   ? const Icon(
                       Icons.check,
                       size: 16,
@@ -93,8 +93,9 @@ class MoodPage extends StatelessWidget {
               option,
               style: TextStyle(
                 fontSize: 16,
-                fontWeight:
-                    selectedMood == option ? FontWeight.w600 : FontWeight.w400,
+                fontWeight: viewModel.selectedMood == option
+                    ? FontWeight.w600
+                    : FontWeight.w400,
               ),
             ),
           ],
