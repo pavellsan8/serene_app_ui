@@ -85,9 +85,15 @@ class QuestionnaireScreen extends StatelessWidget {
                 controller: viewModel.pageController,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  FeelingPage(onContinue: viewModel.goToNextPage),
-                  MoodPage(onContinue: viewModel.goToNextPage),
-                  EmotionsPage(onContinue: viewModel.goToNextPage),
+                  FeelingPage(
+                    onContinue: () => viewModel.goToNextPage(context),
+                  ),
+                  MoodPage(
+                    onContinue: () => viewModel.goToNextPage(context),
+                  ),
+                  EmotionsPage(
+                    onContinue: () => viewModel.goToNextPage(context),
+                  ),
                 ],
               ),
             ),
