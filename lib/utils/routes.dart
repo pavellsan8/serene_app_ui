@@ -14,7 +14,7 @@ class AppRoutes {
   static const String register = '/register';
 
   static const String questionnaireIntro = '/questionnaire_intro';
-  static const String questionnaire1 = '/questionnaire_1';
+  static const String questionnairePage = '/questionnaire_section';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -24,7 +24,7 @@ class AppRoutes {
       register: (context) => const RegisterScreen(),
 
       questionnaireIntro: (context) => const QuestionnaireIntroScreen(),
-      questionnaire1: (context) => const QuestionnaireScreen(),
+      questionnairePage: (context) => const QuestionnaireScreen(),
     };
   }
 }

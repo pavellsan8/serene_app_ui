@@ -85,7 +85,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.questionnaire1);
+                    Navigator.pushNamed(context, AppRoutes.questionnairePage);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,

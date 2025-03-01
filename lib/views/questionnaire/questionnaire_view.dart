@@ -19,7 +19,6 @@ class QuestionnaireScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 25.0,
