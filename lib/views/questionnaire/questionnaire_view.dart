@@ -19,7 +19,6 @@ class QuestionnaireScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 25.0,
@@ -39,21 +38,21 @@ class QuestionnaireScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        // Handle skip
-                      },
-                      child: const Text(
-                        'Skip for now >>>',
-                        style: TextStyle(
-                          color: AppColors.buttonColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: Alignment.centerRight,
+                  //   child: TextButton(
+                  //     onPressed: () {
+                  //       // Handle skip
+                  //     },
+                  //     child: const Text(
+                  //       'Skip for now >>>',
+                  //       style: TextStyle(
+                  //         color: AppColors.buttonColor,
+                  //         fontWeight: FontWeight.w600,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

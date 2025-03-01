@@ -32,25 +32,6 @@ class QuestionnaireViewModel extends ChangeNotifier {
     }
   }
 
-  void updateFeelingValue(int value) {
-    selectedFeelingValue = value;
-    notifyListeners();
-  }
-
-  void updateMoodOption(String mood) {
-    selectedMoodOption = mood;
-    notifyListeners();
-  }
-
-  void toggleEmotion(String emotion) {
-    if (selectedEmotions.contains(emotion)) {
-      selectedEmotions.remove(emotion);
-    } else {
-      selectedEmotions.add(emotion);
-    }
-    notifyListeners();
-  }
-
   @override
   void dispose() {
     pageController.dispose();

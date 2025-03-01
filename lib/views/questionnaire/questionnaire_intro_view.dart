@@ -13,23 +13,23 @@ class QuestionnaireIntroScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor,
         elevation: 0,
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: 17,
               vertical: 20,
             ),
-            child: TextButton(
-              onPressed: () {},
-              child: const Text(
-                "Skip for now >>>",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.buttonColor,
-                ),
-              ),
-            ),
+            // child: TextButton(
+            //   onPressed: () {},
+            //   child: const Text(
+            //     "Skip for now >>>",
+            //     style: TextStyle(
+            //       fontSize: 14,
+            //       fontWeight: FontWeight.w600,
+            //       color: AppColors.buttonColor,
+            //     ),
+            //   ),
+            // ),
           ),
         ],
       ),
@@ -63,7 +63,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(height: 20),
                     Text(
                       "You can fill in or change this step later, by pressing the 'skip for now' button.",
                       textAlign: TextAlign.center,
@@ -85,7 +85,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.questionnaire1);
+                    Navigator.pushNamed(context, AppRoutes.questionnairePage);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonColor,
@@ -103,7 +103,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
           ],
         ),
       ),
