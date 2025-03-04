@@ -6,6 +6,7 @@ import '../viewmodels/questionnaire/questionnaire_viewmodel.dart';
 import '../viewmodels/questionnaire/feeling_page_viewmodel.dart';
 import '../viewmodels/questionnaire/mood_page_viewmodel.dart';
 import '../viewmodels/questionnaire/emotion_page_viewmodel.dart';
+import '../viewmodels/main/profile_page_viewmodel.dart';
 
 class AppProviders {
   static MultiProvider init({required Widget child}) {
@@ -16,6 +17,7 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => FeelingViewModel()),
         ChangeNotifierProvider(create: (_) => MoodViewModel()),
         ChangeNotifierProvider(create: (_) => EmotionViewModel()),
+        ChangeNotifierProvider(create: (_) => ProfileViewModel()),
       ],
       child: child,
     );
