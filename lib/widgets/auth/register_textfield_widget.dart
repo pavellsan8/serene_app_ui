@@ -59,12 +59,24 @@ class CustomTextField extends StatelessWidget {
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hintText,
-            border: const OutlineInputBorder(),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue),
+            hintStyle: TextStyle(color: Colors.grey.shade400),
+            border: UnderlineInputBorder(
+              borderRadius:
+                  BorderRadius.circular(8), 
+              borderSide:
+                  const BorderSide(color: Colors.grey), 
             ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue, width: 2),
+            enabledBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: AppColors.buttonColor),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: AppColors.buttonColor, width: 2),
+            ),
+            errorBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.red),
             ),
             errorText: validator != null ? validator!(controller.text) : null,
           ),
