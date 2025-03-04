@@ -5,8 +5,8 @@ import '../../utils/colors.dart';
 import '../../viewmodels/auth/register_viewmodel.dart';
 import '../../widgets/auth/register_textfield_widget.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class RegisterPasswordScreen extends StatelessWidget {
+  const RegisterPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class RegisterScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "Come join us",
+                            "Setup your password",
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
@@ -42,7 +42,7 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           const Text(
-                            "Please register first so we can help with your mental health.",
+                            "Set your password so that your account is safe",
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.fontColor,
@@ -50,32 +50,35 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           CustomTextField(
-                            label: "What's your name?",
-                            hintText: "Enter your name here",
-                            controller: viewModel.nameController,
+                            label: "What's your password?",
+                            hintText: "Enter your password here",
+                            controller: viewModel.passwordController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) {
-                                return null;
-                              }
-                              return viewModel.isNameValid
+                              if (!viewModel.isSubmitted) return null;
+                              return viewModel.isPasswordValid
                                   ? null
-                                  : "At least 5 characters required";
+                                  : "At least 6 characters required";
                             },
                           ),
                           const SizedBox(height: 20),
                           CustomTextField(
-                            label: "What's your email address?",
-                            hintText: "Enter your email here",
-                            controller: viewModel.emailController,
+                            label: "Confirm your password?",
+                            hintText: "Enter your new password here",
+                            controller: viewModel.confirmPasswordController,
+                            obscureText: true,
                             onChanged: (_) {},
                             validator: (value) {
                               if (!viewModel.isSubmitted) {
                                 return null;
                               }
-                              return viewModel.isEmailValid
-                                  ? null
-                                  : "Invalid email address";
+                              if (value == null || value.isEmpty) {
+                                return "At least 6 characters required";
+                              }
+                              if (value != viewModel.passwordController.text) {
+                                return "Password did not match";
+                              }
+                              return null;
                             },
                           ),
                         ],
@@ -86,7 +89,7 @@ class RegisterScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => viewModel.validateStep1(context),
+                      onPressed: () => viewModel.validateStep2(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.buttonColor,
                         padding: const EdgeInsets.symmetric(vertical: 20),

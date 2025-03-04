@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/routes.dart';
-import '../../widgets/auth/register_textfield_widget.dart';
+import '../../widgets/auth/login_textfield_widget.dart';
 import '../../viewmodels/auth/login_viewmodel.dart';
 
 class LoginScreen extends StatelessWidget {
