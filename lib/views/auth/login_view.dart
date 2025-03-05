@@ -29,7 +29,6 @@ class LoginScreen extends StatelessWidget {
             builder: (context, viewModel, child) {
               return Column(
                 children: [
-                  // Scrollable content
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
@@ -83,10 +82,19 @@ class LoginScreen extends StatelessWidget {
                             onChanged: (_) {},
                             validator: (value) {
                               if (!viewModel.isSubmitted) return null;
-                              return viewModel.isEmailValid
+                              return viewModel.isPasswordValid
                                   ? null
-                                  : "Invalid email address";
+                                  : "At least 6 characters required";
                             },
+                            obscureText: viewModel.isPasswordObscured,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                viewModel.isPasswordObscured
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: viewModel.togglePasswordVisibility,
+                            ),
                           ),
                           const SizedBox(height: 10),
                           Row(
