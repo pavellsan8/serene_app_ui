@@ -52,12 +52,12 @@ class MoodPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         decoration: BoxDecoration(
           color: viewModel.selectedMood == option
-              ? AppColors.buttonColor.withOpacity(0.1)
+              ? AppColors.primaryColor.withOpacity(0.1)
               : Colors.grey.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
             color: viewModel.selectedMood == option
-                ? AppColors.buttonColor
+                ? AppColors.primaryColor
                 : Colors.grey.withOpacity(0.2),
             width: 1.0,
           ),
@@ -72,12 +72,12 @@ class MoodPage extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: viewModel.selectedMood == option
-                      ? AppColors.buttonColor
+                      ? AppColors.primaryColor
                       : Colors.grey,
                   width: 2.0,
                 ),
                 color: viewModel.selectedMood == option
-                    ? AppColors.buttonColor
+                    ? AppColors.primaryColor
                     : Colors.transparent,
               ),
               child: viewModel.selectedMood == option

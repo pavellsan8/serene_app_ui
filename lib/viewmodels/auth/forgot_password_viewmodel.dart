@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../utils/routes.dart';
 
-class RegisterViewModel extends ChangeNotifier {
-  final TextEditingController nameController = TextEditingController();
+class ForgotPasswordViewModel extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  bool isNameValid = true;
   bool isEmailValid = true;
+  bool isOtpValid = true;
   bool isPasswordValid = true;
   bool isConfirmPasswordValid = true;
   bool isPasswordObscured = true;
   bool isConfirmPasswordObscured = true;
   bool isSubmitted = false;
 
-  RegisterViewModel() {
-    nameController.addListener(updateFormValidity);
+  ForgotPasswordViewModel() {
     emailController.addListener(updateFormValidity);
+    otpController.addListener(updateFormValidity);
     passwordController.addListener(updateFormValidity);
     confirmPasswordController.addListener(updateFormValidity);
   }
@@ -27,26 +27,42 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void validateStep1(BuildContext context) {
+  void validateEmail(BuildContext context) {
     isSubmitted = true;
-    isNameValid = nameController.text.length >= 5;
     isEmailValid = emailController.text.contains("@") &&
         emailController.text.contains(".");
 
     notifyListeners();
 
-    if (isNameValid && isEmailValid) {
-      Navigator.pushNamed(context, AppRoutes.registerPassword);
+    if (isEmailValid) {
+      Navigator.pushNamed(context, AppRoutes.otpInput);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Harap isi nama dan email dengan benar!"),
+          content: Text("Please filled email correctly!"),
         ),
       );
     }
   }
 
-  void validateStep2(BuildContext context) {
+  void validateOtp(BuildContext context) {
+    isSubmitted = true;
+    isOtpValid = otpController.text.length == 6;
+
+    notifyListeners();
+
+    if (isOtpValid) {
+      Navigator.pushNamed(context, AppRoutes.passwordInput);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please fill in the OTP correctly!"),
+        ),
+      );
+    }
+  }
+
+  void validatePassword(BuildContext context) {
     isPasswordValid = passwordController.text.length >= 6;
     isConfirmPasswordValid =
         confirmPasswordController.text == passwordController.text;
@@ -56,14 +72,13 @@ class RegisterViewModel extends ChangeNotifier {
     if (isPasswordValid && isConfirmPasswordValid) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Registrasi berhasil!"),
+          content: Text("Successfully reset password!"),
         ),
       );
-      Navigator.pushNamed(context, AppRoutes.questionnaireIntro);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Harap isi password dengan benar dan cocok!"),
+          content: Text("Please check your password again!"),
         ),
       );
     }
@@ -80,14 +95,12 @@ class RegisterViewModel extends ChangeNotifier {
   }
 
   bool get isFormValid =>
-      nameController.text.isNotEmpty &&
       emailController.text.isNotEmpty &&
       passwordController.text.isNotEmpty &&
       confirmPasswordController.text.isNotEmpty;
 
   @override
   void dispose() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();

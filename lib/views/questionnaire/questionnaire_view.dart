@@ -67,7 +67,7 @@ class QuestionnaireScreen extends StatelessWidget {
                     height: 6,
                     decoration: BoxDecoration(
                       color: viewModel.currentPage >= index
-                          ? AppColors.buttonColor
+                          ? AppColors.primaryColor
                           : Colors.blue.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(4),
                     ),

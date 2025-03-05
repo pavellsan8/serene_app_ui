@@ -22,10 +22,10 @@ class EmotionChipWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.buttonColor : Colors.white,
+          color: isSelected ? AppColors.primaryColor : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? AppColors.buttonColor : Colors.grey.shade300,
+            color: isSelected ? AppColors.primaryColor : Colors.grey.shade300,
             width: 1,
           ),
         ),

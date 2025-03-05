@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                               "Login first so you can meet the experts who can help you.",
                               style: TextStyle(
                                 fontSize: 16,
-                                color: AppColors.fontColor,
+                                color: AppColors.fontBlackColor,
                               ),
                             ),
                           ),
@@ -98,12 +98,16 @@ class LoginScreen extends StatelessWidget {
                                     value: viewModel.rememberMe,
                                     onChanged: (value) =>
                                         viewModel.toggleRememberMe(),
+                                    activeColor: AppColors.primaryColor,
                                   ),
                                   const Text("Remember me"),
                                 ],
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.emailInput);
+                                },
                                 style: TextButton.styleFrom(
                                   foregroundColor: AppColors.fontBlueColor,
                                 ),
@@ -125,7 +129,7 @@ class LoginScreen extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.buttonColor,
+                              backgroundColor: AppColors.primaryColor,
                               padding: const EdgeInsets.symmetric(vertical: 20),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
