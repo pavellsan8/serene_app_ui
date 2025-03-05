@@ -6,6 +6,7 @@ class LoginViewModel extends ChangeNotifier {
 
   bool isEmailValid = true;
   bool isPasswordValid = true;
+  bool isPasswordObscured = true;
   bool isSubmitted = false;
   bool rememberMe = false;
 
@@ -32,21 +33,20 @@ class LoginViewModel extends ChangeNotifier {
 
     notifyListeners();
 
-    // if (isEmailValid && isPasswordValid) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text("Login Successful: ${emailController.text}")),
-    //   );
-    // } else {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text("Harap isi semua field dengan benar!")),
-    //   );
-    // }
-
     if (isEmailValid && isPasswordValid) {
-      print("Login Successful: ${emailController.text}");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login Successful: ${emailController.text}")),
+      );
     } else {
-      print("Harap isi semua field dengan benar!");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Harap isi semua field dengan benar!")),
+      );
     }
+  }
+
+  void togglePasswordVisibility() {
+    isPasswordObscured = !isPasswordObscured;
+    notifyListeners();
   }
 
   bool get isFormValid =>

@@ -32,7 +32,7 @@ class MeterPainter extends CustomPainter {
 
     // 2. Gambar nilai meter (garis warna utama)
     final Paint paintValue = Paint()
-      ..color = AppColors.buttonColor
+      ..color = AppColors.primaryColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;

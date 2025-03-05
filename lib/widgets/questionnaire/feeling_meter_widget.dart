@@ -39,7 +39,7 @@ class FeelingMeterWidget extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       decoration: BoxDecoration(
                         color: selectedValue == i
-                            ? AppColors.buttonColor.withOpacity(0.2)
+                            ? AppColors.primaryColor.withOpacity(0.2)
                             : Colors.transparent,
                         shape: BoxShape.circle,
                       ),

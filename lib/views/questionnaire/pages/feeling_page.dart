@@ -30,7 +30,7 @@ class FeelingPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.buttonColor,
+                  color: AppColors.primaryColor,
                 ),
               ),
               const SizedBox(height: 16),
