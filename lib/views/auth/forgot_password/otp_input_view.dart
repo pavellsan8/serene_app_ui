@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../utils/colors.dart';
-import '../../viewmodels/auth/register_viewmodel.dart';
-import '../../widgets/auth/register_textfield_widget.dart';
+import '../../../utils/colors.dart';
+import '../../../viewmodels/auth/forgot_password_viewmodel.dart';
+import '../../../widgets/auth/otp_textfield_widget.dart';
 
-class RegisterPasswordScreen extends StatelessWidget {
-  const RegisterPasswordScreen({super.key});
+class OtpInputScreen extends StatelessWidget {
+  const OtpInputScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => RegisterViewModel(),
+      create: (context) => ForgotPasswordViewModel(),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -24,7 +24,7 @@ class RegisterPasswordScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Consumer<RegisterViewModel>(
+          child: Consumer<ForgotPasswordViewModel>(
             builder: (context, viewModel, child) {
               return Column(
                 children: [
@@ -34,7 +34,7 @@ class RegisterPasswordScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "Setup your password",
+                            "Verify OTP",
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
@@ -42,44 +42,34 @@ class RegisterPasswordScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           const Text(
-                            "Set your password so that your account is safe",
+                            "Enter the 6-digit verification code sent to your email", // ${viewModel.emailController.text}
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.fontColor,
+                              color: AppColors.fontBlackColor,
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          CustomTextField(
-                            label: "What's your password?",
-                            hintText: "Enter your password here",
-                            controller: viewModel.passwordController,
-                            onChanged: (_) {},
-                            validator: (value) {
-                              if (!viewModel.isSubmitted) return null;
-                              return viewModel.isPasswordValid
-                                  ? null
-                                  : "At least 6 characters required";
-                            },
+                          const SizedBox(height: 30),
+                          CustomOtpField(
+                            controller: viewModel.otpController,
+                            onCompleted: (pin) =>
+                                viewModel.validateOtp(context),
                           ),
                           const SizedBox(height: 20),
-                          CustomTextField(
-                            label: "Confirm your password?",
-                            hintText: "Enter your new password here",
-                            controller: viewModel.confirmPasswordController,
-                            obscureText: true,
-                            onChanged: (_) {},
-                            validator: (value) {
-                              if (!viewModel.isSubmitted) {
-                                return null;
-                              }
-                              if (value == null || value.isEmpty) {
-                                return "At least 6 characters required";
-                              }
-                              if (value != viewModel.passwordController.text) {
-                                return "Password did not match";
-                              }
-                              return null;
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("Didn't receive the code? "),
+                              GestureDetector(
+                                // onTap: viewModel.resendOtp,
+                                child: const Text(
+                                  "Resend OTP",
+                                  style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -89,16 +79,16 @@ class RegisterPasswordScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => viewModel.validateStep2(context),
+                      onPressed: () => viewModel.validateOtp(context),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.buttonColor,
+                        backgroundColor: AppColors.primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
                       child: const Text(
-                        "Continue",
+                        "Verify",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
