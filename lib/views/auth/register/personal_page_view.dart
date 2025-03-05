@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../utils/colors.dart';
-import '../../viewmodels/auth/register_viewmodel.dart';
-import '../../widgets/auth/register_textfield_widget.dart';
+import '../../../utils/colors.dart';
+import '../../../viewmodels/auth/register_viewmodel.dart';
+import '../../../widgets/auth/register_textfield_widget.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -45,19 +45,17 @@ class RegisterScreen extends StatelessWidget {
                             "Please register first so we can help with your mental health.",
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.fontColor,
+                              color: AppColors.fontBlackColor,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 30),
                           CustomTextField(
                             label: "What's your name?",
                             hintText: "Enter your name here",
                             controller: viewModel.nameController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) {
-                                return null;
-                              }
+                              if (!viewModel.isSubmitted) return null;
                               return viewModel.isNameValid
                                   ? null
                                   : "At least 5 characters required";
@@ -88,7 +86,7 @@ class RegisterScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () => viewModel.validateStep1(context),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.buttonColor,
+                        backgroundColor: AppColors.primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),

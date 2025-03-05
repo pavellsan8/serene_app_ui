@@ -12,6 +12,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor,
+        automaticallyImplyLeading: false,
         elevation: 0,
         actions: const [
           Padding(
@@ -88,7 +89,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                     Navigator.pushNamed(context, AppRoutes.questionnairePage);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.buttonColor,
+                    backgroundColor: AppColors.primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),

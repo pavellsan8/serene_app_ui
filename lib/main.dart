@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:serene_app/utils/providers.dart'; 
+import 'package:serene_app/utils/providers.dart';
 import 'utils/routes.dart';
 
 void main() {

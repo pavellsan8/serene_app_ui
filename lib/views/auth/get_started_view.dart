@@ -15,7 +15,6 @@ class GetStartedScreen extends StatefulWidget {
 
 class _GetStartedScreenState extends State<GetStartedScreen>
     with SingleTickerProviderStateMixin {
-  // List of onboarding data
   final List<Map<String, String>> onboardingData = [
     {
       'image': 'assets/images/auth/welcome_1.png',
@@ -92,7 +91,7 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: authViewModel.currentPage == index
-                            ? AppColors.buttonColor
+                            ? AppColors.primaryColor
                             : Colors.grey.shade300,
                       ),
                     ),
@@ -141,7 +140,7 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                         Navigator.pushNamed(context, AppRoutes.login);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.buttonColor,
+                        backgroundColor: AppColors.primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),

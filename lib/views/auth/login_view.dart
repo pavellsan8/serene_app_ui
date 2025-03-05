@@ -29,7 +29,6 @@ class LoginScreen extends StatelessWidget {
             builder: (context, viewModel, child) {
               return Column(
                 children: [
-                  // Scrollable content
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
@@ -58,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                               "Login first so you can meet the experts who can help you.",
                               style: TextStyle(
                                 fontSize: 16,
-                                color: AppColors.fontColor,
+                                color: AppColors.fontBlackColor,
                               ),
                             ),
                           ),
@@ -83,10 +82,19 @@ class LoginScreen extends StatelessWidget {
                             onChanged: (_) {},
                             validator: (value) {
                               if (!viewModel.isSubmitted) return null;
-                              return viewModel.isEmailValid
+                              return viewModel.isPasswordValid
                                   ? null
-                                  : "Invalid email address";
+                                  : "At least 6 characters required";
                             },
+                            obscureText: viewModel.isPasswordObscured,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                viewModel.isPasswordObscured
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: viewModel.togglePasswordVisibility,
+                            ),
                           ),
                           const SizedBox(height: 10),
                           Row(
@@ -98,12 +106,16 @@ class LoginScreen extends StatelessWidget {
                                     value: viewModel.rememberMe,
                                     onChanged: (value) =>
                                         viewModel.toggleRememberMe(),
+                                    activeColor: AppColors.primaryColor,
                                   ),
                                   const Text("Remember me"),
                                 ],
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.emailInput);
+                                },
                                 style: TextButton.styleFrom(
                                   foregroundColor: AppColors.fontBlueColor,
                                 ),
@@ -125,7 +137,7 @@ class LoginScreen extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.buttonColor,
+                              backgroundColor: AppColors.primaryColor,
                               padding: const EdgeInsets.symmetric(vertical: 20),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
