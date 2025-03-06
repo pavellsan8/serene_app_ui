@@ -100,17 +100,7 @@ class LoginScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: viewModel.rememberMe,
-                                    onChanged: (value) =>
-                                        viewModel.toggleRememberMe(),
-                                    activeColor: AppColors.primaryColor,
-                                  ),
-                                  const Text("Remember me"),
-                                ],
-                              ),
+                              const Spacer(),
                               TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(
