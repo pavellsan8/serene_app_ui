@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../services/auth/register_service.dart';
 import '../../utils/routes.dart';
 
 class RegisterViewModel extends ChangeNotifier {
@@ -7,6 +9,7 @@ class RegisterViewModel extends ChangeNotifier {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final RegisterService _registerService = RegisterService();
 
   bool isNameValid = true;
   bool isEmailValid = true;
@@ -15,6 +18,7 @@ class RegisterViewModel extends ChangeNotifier {
   bool isPasswordObscured = true;
   bool isConfirmPasswordObscured = true;
   bool isSubmitted = false;
+  bool isLoading = false;
 
   RegisterViewModel() {
     nameController.addListener(updateFormValidity);
@@ -36,7 +40,11 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
 
     if (isNameValid && isEmailValid) {
-      Navigator.pushNamed(context, AppRoutes.registerPassword);
+      Navigator.pushNamed(
+        context,
+        AppRoutes.registerPassword,
+        arguments: this,
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -46,7 +54,7 @@ class RegisterViewModel extends ChangeNotifier {
     }
   }
 
-  void validateStep2(BuildContext context) {
+  Future<void> validateStep2(BuildContext context) async {
     isPasswordValid = passwordController.text.length >= 6;
     isConfirmPasswordValid =
         confirmPasswordController.text == passwordController.text;
@@ -54,11 +62,47 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
 
     if (isPasswordValid && isConfirmPasswordValid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Registrasi berhasil!"),
-        ),
-      );
+      try {
+        isLoading = true;
+        notifyListeners();
+
+        final response = await _registerService.registerUser(
+          nameController.text,
+          emailController.text,
+          passwordController.text,
+        );
+
+        isLoading = false;
+        notifyListeners();
+
+        if (!context.mounted) return;
+
+        if (response.containsKey('success') && response['success'] == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(response["message"]),
+            ),
+          );
+
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoutes.login, (route) => false);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(response['message']),
+            ),
+          );
+        }
+      } catch (e) {
+        isLoading = false;
+        notifyListeners();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error: ${e.toString()}"),
+          ),
+        );
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

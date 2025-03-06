@@ -10,8 +10,12 @@ class PasswordInputScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ForgotPasswordViewModel(),
+    final viewModel =
+        ModalRoute.of(context)!.settings.arguments as ForgotPasswordViewModel;
+
+    return ChangeNotifierProvider.value(
+      // create: (context) => ForgotPasswordViewModel(),
+      value: viewModel,
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(

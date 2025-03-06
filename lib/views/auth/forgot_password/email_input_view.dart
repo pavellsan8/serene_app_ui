@@ -71,7 +71,9 @@ class EmailInputScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => viewModel.validateEmail(context),
+                      onPressed: viewModel.isLoading
+                          ? null 
+                          : () => viewModel.validateEmail(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 20),
@@ -79,13 +81,16 @@ class EmailInputScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: const Text(
-                        "Continue",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
+                      child: viewModel.isLoading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white) 
+                          : const Text(
+                              "Continue",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
                     ),
                   ),
                 ],

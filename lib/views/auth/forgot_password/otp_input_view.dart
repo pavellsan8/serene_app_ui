@@ -10,8 +10,12 @@ class OtpInputScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ForgotPasswordViewModel(),
+    final viewModel =
+        ModalRoute.of(context)!.settings.arguments as ForgotPasswordViewModel;
+
+    return ChangeNotifierProvider.value(
+      value: viewModel,
+      // create: (context) => ForgotPasswordViewModel(),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -26,6 +30,9 @@ class OtpInputScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Consumer<ForgotPasswordViewModel>(
             builder: (context, viewModel, child) {
+              // if (serverOtp != null && viewModel.serverOtp == null) {
+              //   viewModel.serverOtp = serverOtp;
+              // }
               return Column(
                 children: [
                   Expanded(
