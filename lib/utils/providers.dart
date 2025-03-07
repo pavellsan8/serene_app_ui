@@ -17,7 +17,7 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => FeelingViewModel()),
         ChangeNotifierProvider(create: (_) => MoodViewModel()),
         ChangeNotifierProvider(create: (_) => EmotionViewModel()),
-        ChangeNotifierProvider(create: (_) => ProfileViewModel()),
+        ChangeNotifierProvider(create: (_) => UserProfileViewModel()),
       ],
       child: child,
     );

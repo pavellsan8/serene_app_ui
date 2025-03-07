@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/routes.dart';
 import '../viewmodels/auth/get_started_viewmodel.dart';
+import '../viewmodels/main/profile_page_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => UserProfileViewModel()),
       ],
       child: const MyApp(),
     ),
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.main,
+      initialRoute: AppRoutes.login,
       routes: AppRoutes.getRoutes(),
     );
   }

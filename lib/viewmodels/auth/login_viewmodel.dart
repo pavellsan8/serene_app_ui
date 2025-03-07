@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:serene_app/models/auth/login_model.dart';
 
 import '../../services/auth/login_service.dart';
+import '../../utils/routes.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
@@ -50,7 +51,11 @@ class LoginViewModel extends ChangeNotifier {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response.message)),
       );
-      // Navigator.pushNamed(context, AppRoutes.home, arguments: this,);
+      Navigator.pushNamed(
+        context,
+        AppRoutes.main,
+        arguments: this,
+      );
     } catch (e) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

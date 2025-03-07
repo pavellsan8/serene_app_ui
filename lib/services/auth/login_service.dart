@@ -23,11 +23,13 @@ class LoginService {
       if (loginResponse.data != null) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString("email", request.email);
-        await prefs.setString("access_token", loginResponse.data!.accessToken);
         await prefs.setString(
-            "refresh_token", loginResponse.data!.refreshToken);
+            "access_token", loginResponse.data?.accessToken ?? "");
+        await prefs.setString(
+            "refresh_token", loginResponse.data?.refreshToken ?? "");
 
         print('===== SAVED TOKEN DATA =====');
+        print('email: ${prefs.getString("email")}');
         print('access_token: ${prefs.getString("access_token")}');
         print('refresh_token: ${prefs.getString("refresh_token")}');
         print('============================');

@@ -17,7 +17,9 @@ class ProfileInfoCard extends StatelessWidget {
     return Card(
       color: const Color(0xFF455A64),
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       margin: const EdgeInsets.symmetric(
         vertical: 5,
         horizontal: 16,
@@ -26,10 +28,17 @@ class ProfileInfoCard extends StatelessWidget {
         leading: Icon(icon, color: Colors.grey),
         title: Text(
           title,
-          style:
-              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        subtitle: Text(subtitle, style: const TextStyle(color: Colors.white70)),
+        subtitle: Text(
+          subtitle,
+          style: const TextStyle(
+            color: Colors.white70,
+          ),
+        ),
       ),
     );
   }

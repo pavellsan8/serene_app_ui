@@ -1,15 +1,44 @@
 import 'package:flutter/material.dart';
-import '../../models/main/profile_page_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileViewModel extends ChangeNotifier {
-  final ProfileModel _profile = ProfileModel(
-    name: "Alexander Graham",
-    email: "alex.graham@gmail.com",
-    dateOfBirth: "24 September 1999",
-    phoneNumber: "+62 456-789-1012",
-    profileImageUrl: "https://via.placeholder.com/150",
-    moods: ["Peaceful", "Pessimistic", "Joyful", "Sad", "Overwhelmed"],
-  );
+import '../../models/main/user_profile_model.dart';
+import '../../services/profile/user_profile_service.dart';
 
-  ProfileModel get profile => _profile;
+class UserProfileViewModel extends ChangeNotifier {
+  final GetUserProfileService _userProfileService = GetUserProfileService();
+
+  UserData? userData;
+  bool isLoading = false;
+  String? errorMessage;
+
+  Future<void> fetchUserProfile() async {
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await Future.delayed(
+        const Duration(milliseconds: 500),
+      ); // Small delay for safety
+
+      String? email = prefs.getString("email");
+      print('Retrieved email: $email');
+
+      if (email == null) {
+        errorMessage = "No email found.";
+        isLoading = false;
+        notifyListeners();
+        return;
+      }
+
+      final response = await _userProfileService.fetchUserProfile(email);
+      userData = response.data;
+    } catch (e) {
+      errorMessage = "Failed to fetch user data: $e";
+    }
+
+    isLoading = false;
+    notifyListeners();
+  }
 }
