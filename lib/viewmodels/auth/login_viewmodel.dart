@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:serene_app/models/auth/login_model.dart';
+
+import '../../services/auth/login_service.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final LoginService _loginService = LoginService();
 
   bool isEmailValid = true;
   bool isPasswordValid = true;
   bool isPasswordObscured = true;
   bool isSubmitted = false;
   bool rememberMe = false;
+  bool isLoading = false;
 
   LoginViewModel() {
     emailController.addListener(updateFormValidity);
@@ -16,6 +21,9 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   void updateFormValidity() {
+    isEmailValid = emailController.text.contains("@") &&
+        emailController.text.contains(".");
+    isPasswordValid = passwordController.text.length >= 6;
     notifyListeners();
   }
 
@@ -24,24 +32,34 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submit(BuildContext context) {
+  Future<void> submit(BuildContext context) async {
     isSubmitted = true;
 
-    isEmailValid = emailController.text.contains("@") &&
-        emailController.text.contains(".");
-    isPasswordValid = passwordController.text.length >= 6;
+    isLoading = true;
+    updateFormValidity();
 
-    notifyListeners();
-
-    if (isEmailValid && isPasswordValid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Login Successful: ${emailController.text}")),
+    try {
+      final request = LoginRequest(
+        email: emailController.text,
+        password: passwordController.text,
       );
-    } else {
+      final response = await _loginService.loginUser(request);
+
+      if (!context.mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Harap isi semua field dengan benar!")),
+        SnackBar(content: Text(response.message)),
+      );
+      // Navigator.pushNamed(context, AppRoutes.home, arguments: this,);
+    } catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login Failed: $e")),
       );
     }
+
+    isLoading = false;
+    notifyListeners();
   }
 
   void togglePasswordVisibility() {

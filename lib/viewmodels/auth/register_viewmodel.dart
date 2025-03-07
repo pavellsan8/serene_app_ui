@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:serene_app/models/auth/register_model.dart';
+
+import '../../services/auth/register_service.dart';
 import '../../utils/routes.dart';
 
 class RegisterViewModel extends ChangeNotifier {
@@ -7,6 +10,7 @@ class RegisterViewModel extends ChangeNotifier {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final RegisterService _registerService = RegisterService();
 
   bool isNameValid = true;
   bool isEmailValid = true;
@@ -15,6 +19,8 @@ class RegisterViewModel extends ChangeNotifier {
   bool isPasswordObscured = true;
   bool isConfirmPasswordObscured = true;
   bool isSubmitted = false;
+  bool isSubmitted2 = false;
+  bool isLoading = false;
 
   RegisterViewModel() {
     nameController.addListener(updateFormValidity);
@@ -24,46 +30,67 @@ class RegisterViewModel extends ChangeNotifier {
   }
 
   void updateFormValidity() {
+    isNameValid = nameController.text.length >= 5;
+    isEmailValid = emailController.text.contains("@") &&
+        emailController.text.contains(".");
+    isPasswordValid = passwordController.text.length >= 6;
+    isConfirmPasswordValid =
+        confirmPasswordController.text == passwordController.text;
     notifyListeners();
   }
 
   void validateStep1(BuildContext context) {
     isSubmitted = true;
-    isNameValid = nameController.text.length >= 5;
-    isEmailValid = emailController.text.contains("@") &&
-        emailController.text.contains(".");
+    updateFormValidity();
 
-    notifyListeners();
-
-    if (isNameValid && isEmailValid) {
-      Navigator.pushNamed(context, AppRoutes.registerPassword);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Harap isi nama dan email dengan benar!"),
-        ),
-      );
-    }
+    Navigator.pushNamed(
+      context,
+      AppRoutes.registerPassword,
+      arguments: this,
+    );
   }
 
-  void validateStep2(BuildContext context) {
-    isPasswordValid = passwordController.text.length >= 6;
-    isConfirmPasswordValid =
-        confirmPasswordController.text == passwordController.text;
+  Future<void> validateStep2(BuildContext context) async {
+    isSubmitted2 = true;
+    updateFormValidity();
 
-    notifyListeners();
+    try {
+      isLoading = true;
+      notifyListeners();
 
-    if (isPasswordValid && isConfirmPasswordValid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Registrasi berhasil!"),
-        ),
+      final requestData = RegisterRequest(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
       );
-      Navigator.pushNamed(context, AppRoutes.questionnaireIntro);
-    } else {
+
+      final response = await _registerService.registerUser(requestData);
+
+      isLoading = false;
+      notifyListeners();
+
+      if (!context.mounted) return;
+
+      if (response.status == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response.message)),
+        );
+        Navigator.pushNamed(
+          context,
+          AppRoutes.login,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response.message)),
+        );
+      }
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Harap isi password dengan benar dan cocok!"),
+        SnackBar(
+          content: Text("Error: ${e.toString()}"),
         ),
       );
     }
