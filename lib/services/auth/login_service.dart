@@ -22,6 +22,7 @@ class LoginService {
 
       if (loginResponse.data != null) {
         final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("email", request.email);
         await prefs.setString("access_token", loginResponse.data!.accessToken);
         await prefs.setString(
             "refresh_token", loginResponse.data!.refreshToken);
@@ -43,7 +44,7 @@ class LoginService {
     final refreshToken = prefs.getString("refresh_token");
 
     if (refreshToken == null) {
-      return null; 
+      return null;
     }
 
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/refresh-token");
@@ -65,7 +66,7 @@ class LoginService {
         return null;
       }
     } catch (e) {
-      return null; 
+      return null;
     }
   }
 }
