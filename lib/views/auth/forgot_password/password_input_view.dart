@@ -10,8 +10,11 @@ class PasswordInputScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ForgotPasswordViewModel(),
+    final viewModel =
+        ModalRoute.of(context)!.settings.arguments as ForgotPasswordViewModel;
+
+    return ChangeNotifierProvider.value(
+      value: viewModel,
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -50,12 +53,12 @@ class PasswordInputScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 30),
                           CustomTextField(
-                            label: "What's your new password?",
-                            hintText: "Enter your new password here",
+                            label: "What's your password?",
+                            hintText: "Enter your password here",
                             controller: viewModel.passwordController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) return null;
+                              if (!viewModel.isSubmitted2) return null;
                               return viewModel.isPasswordValid
                                   ? null
                                   : "At least 6 characters required";
@@ -73,12 +76,12 @@ class PasswordInputScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           CustomTextField(
-                            label: "Confirm your new password?",
-                            hintText: "Enter your new password again here",
+                            label: "Confirm your password?",
+                            hintText: "Enter your password again here",
                             controller: viewModel.confirmPasswordController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) {
+                              if (!viewModel.isSubmitted2) {
                                 return null;
                               }
                               if (value == null || value.isEmpty) {

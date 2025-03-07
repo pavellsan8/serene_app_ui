@@ -68,10 +68,15 @@ class LoginScreen extends StatelessWidget {
                             controller: viewModel.emailController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) return null;
+                              if (!viewModel.isSubmitted) {
+                                return null;
+                              }
+                              if (viewModel.emailController.text.isEmpty) {
+                                return "Please enter your email address";
+                              }
                               return viewModel.isEmailValid
                                   ? null
-                                  : "Invalid email address";
+                                  : "Please enter a valid email address";
                             },
                           ),
                           const SizedBox(height: 12),
@@ -100,17 +105,7 @@ class LoginScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: viewModel.rememberMe,
-                                    onChanged: (value) =>
-                                        viewModel.toggleRememberMe(),
-                                    activeColor: AppColors.primaryColor,
-                                  ),
-                                  const Text("Remember me"),
-                                ],
-                              ),
+                              const Spacer(),
                               TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(

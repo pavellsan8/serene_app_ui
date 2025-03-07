@@ -24,13 +24,15 @@ class _GetStartedScreenState extends State<GetStartedScreen>
     },
     {
       'image': 'assets/images/auth/welcome_2.png',
-      'title': 'Meet the experts',
-      'description': 'Consult your complaint with an expert in the field.',
+      'title': 'Explore Healing Content',
+      'description':
+          'Enjoy soothing music, inspiring videos, and insightful books to support your mental well-being.',
     },
     {
       'image': 'assets/images/auth/welcome_3.png',
-      'title': 'Experts around the world',
-      'description': 'Experts from around the world are here for you.',
+      'title': 'Your Personal Companion',
+      'description':
+          'Get support anytime through an intelligent chatbot ready to listen and help you find peace.',
     },
   ];
 
@@ -48,14 +50,11 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                 onHorizontalDragEnd: (details) {
                   if (details.primaryVelocity! > 0) {
                     if (authViewModel.currentPage > 0) {
-                      authViewModel
-                          .goToPage(authViewModel.currentPage - 1);
+                      authViewModel.goToPage(authViewModel.currentPage - 1);
                     }
                   } else if (details.primaryVelocity! < 0) {
-                    if (authViewModel.currentPage <
-                        onboardingData.length - 1) {
-                      authViewModel
-                          .goToPage(authViewModel.currentPage + 1);
+                    if (authViewModel.currentPage < onboardingData.length - 1) {
+                      authViewModel.goToPage(authViewModel.currentPage + 1);
                     }
                   }
                 },
@@ -73,8 +72,6 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                 ),
               ),
             ),
-
-            // Enhanced page indicator
             Padding(
               padding: const EdgeInsets.only(bottom: 24),
               child: Row(
@@ -99,38 +96,10 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                 ),
               ),
             ),
-
-            // Buttons stay at the bottom
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
               child: Column(
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: ElevatedButton.icon(
-                      onPressed: authViewModel.isLoading
-                          ? null
-                          : () {
-                              authViewModel.signInWithGoogle();
-                            },
-                      icon: Image.asset(
-                        'assets/icons/icon_google.png',
-                        height: 24,
-                      ),
-                      label: authViewModel.isLoading
-                          ? const CircularProgressIndicator()
-                          : const Text("Continue with Google"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
@@ -140,13 +109,47 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                         Navigator.pushNamed(context, AppRoutes.login);
                       },
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: const BorderSide(
+                            color: AppColors.primaryColor,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        "Sign In",
+                        style: TextStyle(color: AppColors.fontBlueColor),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    "Don't have an account?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.register);
+                      },
+                      style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
                       child: const Text(
-                        "Continue with Email",
+                        "Sign Up",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),

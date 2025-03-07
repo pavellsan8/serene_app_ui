@@ -16,6 +16,8 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   floating_frosted_bottom_bar: ^0.0.1
   pin_code_fields: ^7.4.0
+  http: ^1.2.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
