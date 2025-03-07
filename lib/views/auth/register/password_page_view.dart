@@ -10,8 +10,12 @@ class RegisterPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => RegisterViewModel(),
+    final viewModel =
+        ModalRoute.of(context)!.settings.arguments as RegisterViewModel;
+
+    return ChangeNotifierProvider.value(
+      // create: (context) => RegisterViewModel(),
+      value: viewModel,
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -55,7 +59,7 @@ class RegisterPasswordScreen extends StatelessWidget {
                             controller: viewModel.passwordController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) return null;
+                              if (!viewModel.isSubmitted2) return null;
                               return viewModel.isPasswordValid
                                   ? null
                                   : "At least 6 characters required";
@@ -78,7 +82,7 @@ class RegisterPasswordScreen extends StatelessWidget {
                             controller: viewModel.confirmPasswordController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) {
+                              if (!viewModel.isSubmitted2) {
                                 return null;
                               }
                               if (value == null || value.isEmpty) {

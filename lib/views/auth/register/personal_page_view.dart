@@ -58,7 +58,7 @@ class RegisterScreen extends StatelessWidget {
                               if (!viewModel.isSubmitted) return null;
                               return viewModel.isNameValid
                                   ? null
-                                  : "At least 5 characters required";
+                                  : "Please enter at least 5 characters";
                             },
                           ),
                           const SizedBox(height: 20),
@@ -71,9 +71,12 @@ class RegisterScreen extends StatelessWidget {
                               if (!viewModel.isSubmitted) {
                                 return null;
                               }
+                              if (viewModel.emailController.text.isEmpty) {
+                                return "Please enter your email address";
+                              }
                               return viewModel.isEmailValid
                                   ? null
-                                  : "Invalid email address";
+                                  : "Please enter a valid email address";
                             },
                           ),
                         ],

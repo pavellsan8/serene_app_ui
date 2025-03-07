@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+
+import '../../models/auth/forgot_password_model.dart';
+import '../../services/auth/email_input_service.dart';
+import '../../services/auth/password_input_service.dart';
 import '../../utils/routes.dart';
 
 class ForgotPasswordViewModel extends ChangeNotifier {
@@ -8,6 +12,10 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+  final EmailOtpInputService _emailOtpInputService = EmailOtpInputService();
+  final ResetPasswordInputService _resetPasswordInputService =
+      ResetPasswordInputService();
+
   bool isEmailValid = true;
   bool isOtpValid = true;
   bool isPasswordValid = true;
@@ -15,6 +23,11 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   bool isPasswordObscured = true;
   bool isConfirmPasswordObscured = true;
   bool isSubmitted = false;
+  bool isSubmitted2 = false;
+  bool isLoading = false;
+
+  String? serverOtp;
+  String? errorMessage;
 
   ForgotPasswordViewModel() {
     emailController.addListener(updateFormValidity);
@@ -24,64 +37,145 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   }
 
   void updateFormValidity() {
-    notifyListeners();
-  }
-
-  void validateEmail(BuildContext context) {
-    isSubmitted = true;
     isEmailValid = emailController.text.contains("@") &&
         emailController.text.contains(".");
-
-    notifyListeners();
-
-    if (isEmailValid) {
-      Navigator.pushNamed(context, AppRoutes.otpInput);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please filled email correctly!"),
-        ),
-      );
-    }
-  }
-
-  void validateOtp(BuildContext context) {
-    isSubmitted = true;
-    isOtpValid = otpController.text.length == 6;
-
-    notifyListeners();
-
-    if (isOtpValid) {
-      Navigator.pushNamed(context, AppRoutes.passwordInput);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please fill in the OTP correctly!"),
-        ),
-      );
-    }
-  }
-
-  void validatePassword(BuildContext context) {
     isPasswordValid = passwordController.text.length >= 6;
     isConfirmPasswordValid =
         confirmPasswordController.text == passwordController.text;
+    notifyListeners();
+  }
 
+  Future<void> validateEmail(BuildContext context) async {
+    isSubmitted = true;
+    updateFormValidity();
+
+    isLoading = true;
     notifyListeners();
 
-    if (isPasswordValid && isConfirmPasswordValid) {
+    try {
+      final request = EmailOtpRequest(email: emailController.text);
+      final response = await _emailOtpInputService.sendOtp(request);
+      if (!context.mounted) return;
+
+      serverOtp = response.otpCode.toString().trim();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.message),
+        ),
+      );
+
+      Navigator.pushNamed(
+        context,
+        AppRoutes.otpInput,
+        arguments: this,
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Successfully reset password!"),
+          content: Text("Failed to send OTP. Please try again."),
         ),
+      );
+    }
+
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void validateOtp(BuildContext context) {
+    final userOtp = otpController.text.trim();
+    // print("User OTP: $userOtp, Server OTP: $serverOtp");
+
+    isOtpValid = userOtp == serverOtp;
+    notifyListeners();
+
+    if (isOtpValid) {
+      Navigator.pushNamed(
+        context,
+        AppRoutes.passwordInput,
+        arguments: this,
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please check your password again!"),
+          content: Text("Invalid OTP! Please check and try again."),
         ),
       );
     }
+  }
+
+  Future<void> validatePassword(BuildContext context) async {
+    isSubmitted2 = true;
+    updateFormValidity();
+
+    try {
+      final request = ResetPasswordRequest(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      final response = await _resetPasswordInputService.resetPassword(request);
+
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.message),
+        ),
+      );
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRoutes.login,
+        (route) => false,
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Password reset failed: ${e.toString()}"),
+        ),
+      );
+    }
+  }
+
+  Future<void> resendOtp(BuildContext context) async {
+    if (!isEmailValid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter a valid email before resending OTP!"),
+        ),
+      );
+      return;
+    }
+
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      final request = EmailOtpRequest(email: emailController.text);
+      final response = await _emailOtpInputService.sendOtp(request);
+      if (!context.mounted) return;
+
+      serverOtp = response.otpCode.toString().trim();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.message),
+        ),
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Failed to resend OTP. Please try again."),
+        ),
+      );
+    }
+
+    isLoading = false;
+    notifyListeners();
   }
 
   void togglePasswordVisibility() {
@@ -94,14 +188,10 @@ class ForgotPasswordViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get isFormValid =>
-      emailController.text.isNotEmpty &&
-      passwordController.text.isNotEmpty &&
-      confirmPasswordController.text.isNotEmpty;
-
   @override
   void dispose() {
     emailController.dispose();
+    otpController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
