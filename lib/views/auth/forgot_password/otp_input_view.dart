@@ -15,7 +15,6 @@ class OtpInputScreen extends StatelessWidget {
 
     return ChangeNotifierProvider.value(
       value: viewModel,
-      // create: (context) => ForgotPasswordViewModel(),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -30,9 +29,6 @@ class OtpInputScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Consumer<ForgotPasswordViewModel>(
             builder: (context, viewModel, child) {
-              // if (serverOtp != null && viewModel.serverOtp == null) {
-              //   viewModel.serverOtp = serverOtp;
-              // }
               return Column(
                 children: [
                   Expanded(
@@ -67,7 +63,7 @@ class OtpInputScreen extends StatelessWidget {
                             children: [
                               const Text("Didn't receive the code? "),
                               GestureDetector(
-                                // onTap: viewModel.resendOtp,
+                                onTap: () => viewModel.resendOtp(context),
                                 child: const Text(
                                   "Resend OTP",
                                   style: TextStyle(

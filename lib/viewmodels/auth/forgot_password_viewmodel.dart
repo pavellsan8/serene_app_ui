@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../models/auth/forgot_password_model.dart';
 import '../../services/auth/email_input_service.dart';
 import '../../services/auth/password_input_service.dart';
 import '../../utils/routes.dart';
@@ -12,6 +13,8 @@ class ForgotPasswordViewModel extends ChangeNotifier {
       TextEditingController();
 
   final EmailOtpInputService _emailOtpInputService = EmailOtpInputService();
+  final ResetPasswordInputService _resetPasswordInputService =
+      ResetPasswordInputService();
 
   bool isEmailValid = true;
   bool isOtpValid = true;
@@ -20,6 +23,7 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   bool isPasswordObscured = true;
   bool isConfirmPasswordObscured = true;
   bool isSubmitted = false;
+  bool isSubmitted2 = false;
   bool isLoading = false;
 
   String? serverOtp;
@@ -33,37 +37,30 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   }
 
   void updateFormValidity() {
+    isEmailValid = emailController.text.contains("@") &&
+        emailController.text.contains(".");
+    isPasswordValid = passwordController.text.length >= 6;
+    isConfirmPasswordValid =
+        confirmPasswordController.text == passwordController.text;
     notifyListeners();
   }
 
   Future<void> validateEmail(BuildContext context) async {
     isSubmitted = true;
-    isEmailValid = emailController.text.contains("@") &&
-        emailController.text.contains(".");
-
-    notifyListeners();
-
-    if (!isEmailValid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please enter a valid email address!"),
-        ),
-      );
-      return;
-    }
+    updateFormValidity();
 
     isLoading = true;
     notifyListeners();
 
     try {
-      final response =
-          await _emailOtpInputService.sendOtp(emailController.text);
+      final request = EmailOtpRequest(email: emailController.text);
+      final response = await _emailOtpInputService.sendOtp(request);
       if (!context.mounted) return;
 
-      serverOtp = response["otp_code"].toString().trim();
+      serverOtp = response.otpCode.toString().trim();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response["message"]),
+          content: Text(response.message),
         ),
       );
 
@@ -87,7 +84,6 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   }
 
   void validateOtp(BuildContext context) {
-    isSubmitted = true;
     final userOtp = otpController.text.trim();
     // print("User OTP: $userOtp, Server OTP: $serverOtp");
 
@@ -110,48 +106,76 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   }
 
   Future<void> validatePassword(BuildContext context) async {
-    isPasswordValid = passwordController.text.length >= 6;
-    isConfirmPasswordValid =
-        confirmPasswordController.text == passwordController.text;
+    isSubmitted2 = true;
+    updateFormValidity();
 
-    notifyListeners();
+    try {
+      final request = ResetPasswordRequest(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      final response = await _resetPasswordInputService.resetPassword(request);
 
-    if (isPasswordValid && isConfirmPasswordValid) {
-      try {
-        final resetPasswordService = ResetPasswordInputService();
+      if (!context.mounted) return;
 
-        final response = await resetPasswordService.resetPassword(
-          emailController.text,
-          passwordController.text,
-        );
-
-        if (!context.mounted) return;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content:
-                Text(response["message"] ?? "Successfully reset password!"),
-          ),
-        );
-
-        Navigator.pushNamedAndRemoveUntil(
-            context, AppRoutes.login, (route) => false);
-      } catch (e) {
-        if (!context.mounted) return;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Password reset failed: ${e.toString()}"),
-          ),
-        );
-      }
-    } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please check your password again!"),
+        SnackBar(
+          content: Text(response.message),
+        ),
+      );
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppRoutes.login,
+        (route) => false,
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Password reset failed: ${e.toString()}"),
         ),
       );
     }
+  }
+
+  Future<void> resendOtp(BuildContext context) async {
+    if (!isEmailValid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter a valid email before resending OTP!"),
+        ),
+      );
+      return;
+    }
+
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      final request = EmailOtpRequest(email: emailController.text);
+      final response = await _emailOtpInputService.sendOtp(request);
+      if (!context.mounted) return;
+
+      serverOtp = response.otpCode.toString().trim();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.message),
+        ),
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Failed to resend OTP. Please try again."),
+        ),
+      );
+    }
+
+    isLoading = false;
+    notifyListeners();
   }
 
   void togglePasswordVisibility() {

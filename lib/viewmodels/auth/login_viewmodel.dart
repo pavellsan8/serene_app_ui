@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:serene_app/models/auth/login_model.dart';
 
 import '../../services/auth/login_service.dart';
 
@@ -20,6 +21,9 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   void updateFormValidity() {
+    isEmailValid = emailController.text.contains("@") &&
+        emailController.text.contains(".");
+    isPasswordValid = passwordController.text.length >= 6;
     notifyListeners();
   }
 
@@ -31,32 +35,20 @@ class LoginViewModel extends ChangeNotifier {
   Future<void> submit(BuildContext context) async {
     isSubmitted = true;
 
-    isEmailValid = emailController.text.contains("@") &&
-        emailController.text.contains(".");
-    isPasswordValid = passwordController.text.length >= 6;
-
-    notifyListeners();
-
-    if (!isEmailValid || !isPasswordValid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Harap isi semua field dengan benar!")),
-      );
-      return;
-    }
-
     isLoading = true;
-    notifyListeners();
+    updateFormValidity();
 
     try {
-      final response = await _loginService.loginUser(
-        emailController.text,
-        passwordController.text,
+      final request = LoginRequest(
+        email: emailController.text,
+        password: passwordController.text,
       );
+      final response = await _loginService.loginUser(request);
 
       if (!context.mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("${response["message"]}")),
+        SnackBar(content: Text(response.message)),
       );
       // Navigator.pushNamed(context, AppRoutes.home, arguments: this,);
     } catch (e) {

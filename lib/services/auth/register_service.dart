@@ -1,34 +1,25 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../../models/auth/register_model.dart';
 import '../../utils/api_url.dart';
 
 class RegisterService {
-  Future<Map<String, dynamic>> registerUser(
-      String name, String email, String password) async {
+  Future<RegisterResponse> registerUser(RegisterRequest request) async {
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/register-user");
     try {
       final response = await http.post(
         url,
-        body: jsonEncode(
-          {
-            "name": name,
-            "email": email,
-            "password": password,
-          },
-        ),
         headers: {
           "Content-Type": "application/json",
         },
+        body: jsonEncode(request.toJson()),
       );
 
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else {
-        throw Exception("Failed to post API request");
-      }
+      final responseData = jsonDecode(response.body);
+      return RegisterResponse.fromJson(responseData);
     } catch (e) {
-      throw Exception("Error: $e");
+      throw Exception("Failed to register: $e");
     }
   }
 }

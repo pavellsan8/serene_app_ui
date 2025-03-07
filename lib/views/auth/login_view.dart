@@ -68,10 +68,15 @@ class LoginScreen extends StatelessWidget {
                             controller: viewModel.emailController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted) return null;
+                              if (!viewModel.isSubmitted) {
+                                return null;
+                              }
+                              if (viewModel.emailController.text.isEmpty) {
+                                return "Please enter your email address";
+                              }
                               return viewModel.isEmailValid
                                   ? null
-                                  : "Invalid email address";
+                                  : "Please enter a valid email address";
                             },
                           ),
                           const SizedBox(height: 12),

@@ -1,29 +1,23 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../../models/auth/forgot_password_model.dart';
 import '../../utils/api_url.dart';
 
 class EmailOtpInputService {
-  Future<Map<String, dynamic>> sendOtp(String email) async {
+  Future<EmailOtpResponse> sendOtp(EmailOtpRequest request) async {
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/email-otp-verification");
     try {
       final response = await http.post(
         url,
-        body: jsonEncode(
-          {
-            "email": email,
-          },
-        ),
         headers: {
           "Content-Type": "application/json",
         },
+        body: jsonEncode(request.toJson()),
       );
 
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else {
-        throw Exception("Failed to send OTP");
-      }
+      final responseData = jsonDecode(response.body);
+      return EmailOtpResponse.fromJson(responseData);
     } catch (e) {
       throw Exception("Error: $e");
     }

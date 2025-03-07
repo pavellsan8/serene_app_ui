@@ -58,9 +58,12 @@ class EmailInputScreen extends StatelessWidget {
                               if (!viewModel.isSubmitted) {
                                 return null;
                               }
+                              if (viewModel.emailController.text.isEmpty) {
+                                return "Please enter your email address";
+                              }
                               return viewModel.isEmailValid
                                   ? null
-                                  : "Invalid email address";
+                                  : "Please enter a valid email address";
                             },
                           ),
                         ],
@@ -72,7 +75,7 @@ class EmailInputScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: viewModel.isLoading
-                          ? null 
+                          ? null
                           : () => viewModel.validateEmail(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
@@ -82,8 +85,14 @@ class EmailInputScreen extends StatelessWidget {
                         ),
                       ),
                       child: viewModel.isLoading
-                          ? const CircularProgressIndicator(
-                              color: Colors.white) 
+                          ? const SizedBox(
+                              width: 20, 
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2, 
+                              ),
+                            )
                           : const Text(
                               "Continue",
                               style: TextStyle(

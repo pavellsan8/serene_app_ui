@@ -1,30 +1,24 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../../models/auth/forgot_password_model.dart';
 import '../../utils/api_url.dart';
 
 class ResetPasswordInputService {
-  Future<Map<String, dynamic>> resetPassword(String email, String password) async {
+  Future<ResetPasswordResponse> resetPassword(
+      ResetPasswordRequest request) async {
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/reset-password");
     try {
       final response = await http.post(
         url,
-        body: jsonEncode(
-          {
-            "email": email,
-            "password": password,
-          },
-        ),
         headers: {
           "Content-Type": "application/json",
         },
+        body: jsonEncode(request.toJson()),
       );
 
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      } else {
-        throw Exception("Failed to reset password");
-      }
+      final responseData = jsonDecode(response.body);
+      return ResetPasswordResponse.fromJson(responseData);
     } catch (e) {
       throw Exception("Error: $e");
     }
