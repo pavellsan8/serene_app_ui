@@ -8,29 +8,35 @@ import '../viewmodels/auth/get_started_viewmodel.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  final keys = prefs.getKeys();
+  // Initialize SharedPreferences safely
+  SharedPreferences? prefs;
+  try {
+    prefs = await SharedPreferences.getInstance();
+  } catch (e) {
+    debugPrint("Error initializing SharedPreferences: $e");
+  }
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthViewModel()),
-      ],
-      child: const MyApp(),
-    ),
+    MyApp(prefs: prefs),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final SharedPreferences? prefs;
+
+  const MyApp({super.key, this.prefs});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splashScreen,
-      routes: AppRoutes.getRoutes(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.login,
+        routes: AppRoutes.getRoutes(),
+      ),
     );
   }
 }

@@ -112,7 +112,9 @@ class RegisterPasswordScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => viewModel.validateStep2(context),
+                      onPressed: viewModel.isLoading
+                          ? null
+                          : () => viewModel.validateStep2(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 20),
@@ -120,13 +122,22 @@ class RegisterPasswordScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: const Text(
-                        "Continue",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
+                      child: viewModel.isLoading
+                          ? const SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text(
+                              "Continue",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
                     ),
                   ),
                 ],
