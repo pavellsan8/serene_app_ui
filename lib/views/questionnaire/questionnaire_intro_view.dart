@@ -56,20 +56,20 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Greetings! please take a few more steps so we can give you the right content!",
+                      "Greetings! Please take a few more steps so we can give you the right content!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 20),
                     Text(
-                      "You can fill in or change this step later, by pressing the 'skip for now' button.",
+                      "Your answers are extremely helpful in assisting us in determining the content.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: Colors.black54,
                       ),
@@ -80,7 +80,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
             ),
             const SizedBox(height: 100),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SizedBox(
                 width: double.infinity,
                 height: 48,

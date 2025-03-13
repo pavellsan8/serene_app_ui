@@ -5,10 +5,11 @@ class MainScreenViewModel extends ChangeNotifier {
 
   void initController(TickerProvider vsync) {
     tabController = TabController(length: 5, vsync: vsync);
+    notifyListeners();
   }
 
   void changeTab(int index) {
-    tabController.index = index;
+    tabController.animateTo(index);
     notifyListeners();
   }
 

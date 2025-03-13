@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../viewmodels/main/profile_page_viewmodel.dart';
 import '../../../widgets/main/profile_card_widget.dart';
+import '../../../widgets/main/emotion_chip_widget.dart';
 import '../../../utils/colors.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,10 +14,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final emotionList = [
+    "Peaceful",
+    "Pessimistic",
+    "Joyful",
+    "Sad",
+    "Overwhelmed",
+  ];
+
   @override
   void initState() {
     super.initState();
-    // Fetch user profile when the widget is initialized
     Future.microtask(() {
       Provider.of<UserProfileViewModel>(context, listen: false)
           .fetchUserProfile();
@@ -47,13 +55,21 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Text(
                         "No user data available.",
                         style: TextStyle(
-                            color: AppColors.fontBlackColor, fontSize: 18),
+                          color: AppColors.fontBlackColor,
+                          fontSize: 18,
+                        ),
                       ),
                     )
                   : Column(
                       children: [
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 50),
+                        const CircleAvatar(
+                          radius: 40,
+                          backgroundImage: AssetImage('assets/images/logo.png'),
+                        ),
                         const SizedBox(height: 16),
+
+                        // User Name
                         Text(
                           profileViewModel.userData!.name,
                           style: const TextStyle(
@@ -63,37 +79,44 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 32),
-                            child: Wrap(
-                              alignment: WrapAlignment.center,
-                              spacing: 8,
-                              children: [
-                                Container(
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 17),
+                          child: Stack(
+                            children: [
+                              Wrap(
+                                alignment: WrapAlignment.center,
+                                runSpacing: 10,
+                                spacing: 8,
+                                children: emotionList
+                                    .map((emotion) =>
+                                        EmotionChipWidget(label: emotion))
+                                    .toList(),
+                              ),
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: Container(
+                                  height: 36,
+                                  width: 32,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
+                                    shape: BoxShape.circle,
                                     color: Colors.white,
-                                    border: Border.all(
-                                      color: AppColors.primaryColor,
-                                    ),
+                                    border: Border.all(color: Colors.grey),
                                   ),
-                                  margin: const EdgeInsets.symmetric(
-                                    horizontal: 2,
-                                    vertical: 5,
-                                  ),
-                                  child: IconButton(
-                                    icon: const Icon(
-                                      Icons.settings,
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.settings_outlined,
                                       color: Colors.black,
+                                      size: 18,
                                     ),
-                                    onPressed: () {},
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
+
                         const SizedBox(height: 20),
                         Expanded(
                           child: Container(
@@ -118,11 +141,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   subtitle: profileViewModel.userData!.phoneNum,
                                 ),
                                 const SizedBox(height: 20),
-                                const ProfileInfoCard(
-                                  icon: Icons.person_add,
-                                  title: "Add account",
-                                  subtitle: "Login or add another account",
-                                ),
                                 const ProfileInfoCard(
                                   icon: Icons.logout,
                                   title: "Log out",

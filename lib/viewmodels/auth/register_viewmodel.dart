@@ -43,20 +43,28 @@ class RegisterViewModel extends ChangeNotifier {
     isSubmitted = true;
     updateFormValidity();
 
-    Navigator.pushNamed(
-      context,
-      AppRoutes.registerPassword,
-      arguments: this,
-    );
+    if (!isNameValid || !isEmailValid) {
+      return;
+    } else {
+      Navigator.pushNamed(
+        context,
+        AppRoutes.registerPassword,
+        arguments: this,
+      );
+    }
   }
 
   Future<void> validateStep2(BuildContext context) async {
     isSubmitted2 = true;
     updateFormValidity();
 
+    if (!isPasswordValid || !isConfirmPasswordValid) {
+      return;
+    }
+
     try {
       isLoading = true;
-      notifyListeners();
+      notifyListeners(); 
 
       final requestData = RegisterRequest(
         name: nameController.text,

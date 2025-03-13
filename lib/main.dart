@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/routes.dart';
-import '../viewmodels/auth/get_started_viewmodel.dart';
-import '../viewmodels/main/profile_page_viewmodel.dart';
+import '../utils/providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  final keys = prefs.getKeys();
+  // Initialize SharedPreferences safely
+  SharedPreferences? prefs;
+  try {
+    prefs = await SharedPreferences.getInstance();
+  } catch (e) {
+    debugPrint("Error initializing SharedPreferences: $e");
+  }
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthViewModel()),
-        ChangeNotifierProvider(create: (_) => UserProfileViewModel()),
-      ],
-      child: const MyApp(),
+    AppProviders.init(
+      child: MyApp(prefs: prefs),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final SharedPreferences? prefs;
+
+  const MyApp({super.key, this.prefs});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.main,
       routes: AppRoutes.getRoutes(),
     );
   }

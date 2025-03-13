@@ -13,7 +13,8 @@ class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  // ignore: library_private_types_in_public_api
+  _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
@@ -24,12 +25,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     super.initState();
     viewModel = MainScreenViewModel();
     viewModel.initController(this);
-  }
-
-  @override
-  void dispose() {
-    viewModel.dispose();
-    super.dispose();
   }
 
   @override

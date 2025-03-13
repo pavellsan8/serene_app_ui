@@ -22,26 +22,34 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   void updateFormValidity() {
-    isEmailValid = emailController.text.contains("@") &&
-        emailController.text.contains(".");
-    isPasswordValid = passwordController.text.length >= 6;
-    notifyListeners();
-  }
+    final emailText = emailController.text.trim();
+    final passwordText = passwordController.text;
 
-  void toggleRememberMe() {
-    rememberMe = !rememberMe;
+    isEmailValid = emailText.isNotEmpty &&
+        emailText.contains("@") &&
+        emailText.contains(".");
+    isPasswordValid = passwordText.isNotEmpty && passwordText.length >= 6;
+
     notifyListeners();
   }
 
   Future<void> submit(BuildContext context) async {
+    if (isLoading) return;
+
     isSubmitted = true;
+    notifyListeners();
+
+    updateFormValidity();
+    if (!isEmailValid || !isPasswordValid) {
+      return;
+    }
 
     isLoading = true;
-    updateFormValidity();
+    notifyListeners();
 
     try {
       final request = LoginRequest(
-        email: emailController.text,
+        email: emailController.text.trim(),
         password: passwordController.text,
       );
       final response = await _loginService.loginUser(request);
@@ -51,20 +59,23 @@ class LoginViewModel extends ChangeNotifier {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response.message)),
       );
-      Navigator.pushNamed(
-        context,
-        AppRoutes.main,
-        arguments: this,
-      );
+
+      if (response.status == 200) {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.questionnaireIntro,
+          arguments: this,
+        );
+      }
     } catch (e) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Login Failed: $e")),
+        SnackBar(content: Text("Login Failed: ${e.toString()}")),
       );
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
-
-    isLoading = false;
-    notifyListeners();
   }
 
   void togglePasswordVisibility() {

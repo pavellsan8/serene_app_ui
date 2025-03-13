@@ -9,7 +9,7 @@ class ResetPasswordInputService {
       ResetPasswordRequest request) async {
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/reset-password");
     try {
-      final response = await http.post(
+      final response = await http.put(
         url,
         headers: {
           "Content-Type": "application/json",
