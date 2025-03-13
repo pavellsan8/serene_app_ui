@@ -13,7 +13,8 @@ class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  // ignore: library_private_types_in_public_api
+  _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
@@ -24,12 +25,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     super.initState();
     viewModel = MainScreenViewModel();
     viewModel.initController(this);
-  }
-
-  @override
-  void dispose() {
-    viewModel.dispose();
-    super.dispose();
   }
 
   @override
@@ -51,10 +46,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 labelColor: Colors.blue,
                 unselectedLabelColor: Colors.grey,
                 tabs: const [
-                  Tab(icon: Icon(Icons.home, size: 30)),
-                  Tab(icon: Icon(Icons.music_note, size: 30)),
-                  Tab(icon: Icon(Icons.video_library, size: 30)),
-                  Tab(icon: Icon(Icons.library_books, size: 30)),
+                  Tab(icon: Icon(Icons.home_rounded, size: 30)),
+                  Tab(icon: Icon(Icons.music_note_rounded, size: 30)),
+                  Tab(icon: Icon(Icons.video_library_rounded, size: 30)),
+                  Tab(icon: Icon(Icons.library_books_rounded, size: 30)),
                   Tab(icon: Icon(Icons.person, size: 30)),
                 ],
                 onTap: viewModel.changeTab,
