@@ -22,7 +22,11 @@ class FeelingPage extends StatelessWidget {
             children: [
               const Text(
                 "We'd love to know how you're doing right now. Please tell us from 1 to 5 how do you feel right now.",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Montserrat',
+                ),
               ),
               const SizedBox(height: 48),
               Text(
@@ -42,7 +46,11 @@ class FeelingPage extends StatelessWidget {
               const Text(
                 "Well done! From this meter you can know whether it is good or bad, but with our help you can improve it even better",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Montserrat',
+                ),
               ),
               const Spacer(),
               ContinueButton(onPressed: onContinue),

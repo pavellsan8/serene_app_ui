@@ -41,6 +41,7 @@ class PasswordInputScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -49,6 +50,7 @@ class PasswordInputScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.fontBlackColor,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 30),
@@ -135,6 +137,7 @@ class PasswordInputScreen extends StatelessWidget {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                     ),

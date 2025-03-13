@@ -24,8 +24,9 @@ class MoodPage extends StatelessWidget {
           const Text(
             "In one word, which of the following best describes how you've felt over the past month?",
             style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'Montserrat',
             ),
           ),
           const SizedBox(height: 40),
@@ -96,6 +97,7 @@ class MoodPage extends StatelessWidget {
                 fontWeight: viewModel.selectedMood == option
                     ? FontWeight.w600
                     : FontWeight.w400,
+                fontFamily: 'Montserrat',
               ),
             ),
           ],

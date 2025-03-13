@@ -14,7 +14,6 @@ class RegisterPasswordScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as RegisterViewModel;
 
     return ChangeNotifierProvider.value(
-      // create: (context) => RegisterViewModel(),
       value: viewModel,
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
@@ -42,6 +41,7 @@ class RegisterPasswordScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -50,6 +50,8 @@ class RegisterPasswordScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.fontBlackColor,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 30),
@@ -136,6 +138,7 @@ class RegisterPasswordScreen extends StatelessWidget {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                     ),

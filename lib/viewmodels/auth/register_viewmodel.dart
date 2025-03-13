@@ -85,7 +85,7 @@ class RegisterViewModel extends ChangeNotifier {
         );
         Navigator.pushNamed(
           context,
-          AppRoutes.login,
+          AppRoutes.questionnaireIntro,
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
