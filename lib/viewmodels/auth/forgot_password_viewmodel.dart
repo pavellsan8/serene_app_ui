@@ -107,7 +107,8 @@ class ForgotPasswordViewModel extends ChangeNotifier {
 
   Future<void> validatePassword(BuildContext context) async {
     isSubmitted2 = true;
-    updateFormValidity();
+    isLoading = true;
+    notifyListeners();
 
     try {
       final request = ResetPasswordRequest(
@@ -138,6 +139,9 @@ class ForgotPasswordViewModel extends ChangeNotifier {
         ),
       );
     }
+
+    isLoading = false;
+    notifyListeners();
   }
 
   Future<void> resendOtp(BuildContext context) async {
