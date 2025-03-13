@@ -65,6 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
+            fontFamily: 'Montserrat',
           ),
         ),
         const SizedBox(height: 10),
@@ -77,6 +78,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             hintStyle: TextStyle(
               color: Colors.grey.shade400,
               fontWeight: FontWeight.w400,
+              fontFamily: 'Montserrat',
             ),
             border: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(8),

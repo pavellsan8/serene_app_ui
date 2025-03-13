@@ -39,7 +39,8 @@ class CustomOtpField extends StatelessWidget {
           color: Colors.black.withOpacity(0.05),
           blurRadius: 2,
         )
-      ], onChanged: (String value) {},
+      ],
+      onChanged: (String value) {},
     );
   }
 }
