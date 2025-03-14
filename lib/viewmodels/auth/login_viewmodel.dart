@@ -63,7 +63,7 @@ class LoginViewModel extends ChangeNotifier {
       if (response.status == 200) {
         Navigator.pushNamed(
           context,
-          AppRoutes.questionnaireIntro,
+          AppRoutes.homePage,
           arguments: this,
         );
       }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
+import '../../../viewmodels/auth/logout_viewmodel.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
@@ -92,7 +94,10 @@ class DrawerMenu extends StatelessWidget {
           _buildDrawerItem(
             icon: Icons.logout_rounded,
             text: 'Logout',
-            onTap: () {},
+            onTap: () async {
+              final loginViewModel = context.read<LogoutViewModel>();
+              await loginViewModel.logout(context);
+            },
           ),
           const SizedBox(height: 16),
         ],

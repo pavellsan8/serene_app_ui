@@ -58,7 +58,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ? Center(
                   child: Text(
                     profileViewModel.errorMessage!,
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                    ),
                   ),
                 )
               : profileViewModel.userData == null
