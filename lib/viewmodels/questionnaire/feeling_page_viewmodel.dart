@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FeelingViewModel extends ChangeNotifier {
-  int _selectedValue = 3;
+  int _selectedValue = 1;
 
   int get selectedValue => _selectedValue;
 

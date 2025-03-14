@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:serene_app/utils/colors.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../../widgets/questionnaire/continue_btn_widget.dart';
-import '../../../widgets/questionnaire/feeling_meter_widget.dart';
 import '../../../viewmodels/questionnaire/feeling_page_viewmodel.dart';
+import '../../../utils/colors.dart';
 
 class FeelingPage extends StatelessWidget {
   final VoidCallback onContinue;
@@ -33,16 +33,59 @@ class FeelingPage extends StatelessWidget {
                 viewModel.selectedValue.toString(),
                 style: const TextStyle(
                   fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryColor,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.fontBlackColor,
                 ),
               ),
-              const SizedBox(height: 16),
-              FeelingMeterWidget(
-                selectedValue: viewModel.selectedValue,
-                onValueChanged: viewModel.updateFeelingValue,
+              Expanded(
+                flex: 2,
+                child: SfRadialGauge(
+                  enableLoadingAnimation: true,
+                  axes: <RadialAxis>[
+                    RadialAxis(
+                      minimum: 1,
+                      maximum: 5,
+                      startAngle: 180,
+                      endAngle: 0,
+                      showTicks: false,
+                      showLabels: true,
+                      showLastLabel: true,
+                      canScaleToFit: true,
+                      axisLineStyle: const AxisLineStyle(
+                        thickness: 30,
+                        color: AppColors.backgroundMeterColor,
+                        // cornerStyle: CornerStyle.bothCurve,
+                      ),
+                      ranges: <GaugeRange>[
+                        GaugeRange(
+                          startValue: 1,
+                          endValue: viewModel.selectedValue.toDouble(),
+                          color: AppColors.primaryColor,
+                          startWidth: 30,
+                          endWidth: 30,
+                        ),
+                      ],
+                      pointers: <GaugePointer>[
+                        MarkerPointer(
+                          value: viewModel.selectedValue.toDouble().clamp(1, 5),
+                          markerType: MarkerType.circle,
+                          color: AppColors.primaryColor,
+                          markerHeight: 35,
+                          markerWidth: 35,
+                          enableDragging: true,
+                          enableAnimation: true,
+                          animationType: AnimationType.ease,
+                          animationDuration: 250,
+                          onValueChanged: (value) {
+                            viewModel.updateFeelingValue(value.round());
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 64),
+              // const SizedBox(height: 30),
               const Text(
                 "Well done! From this meter you can know whether it is good or bad, but with our help you can improve it even better",
                 textAlign: TextAlign.center,
@@ -52,7 +95,10 @@ class FeelingPage extends StatelessWidget {
                   fontFamily: 'Montserrat',
                 ),
               ),
-              const Spacer(),
+              Expanded(
+                flex: 1,
+                child: Container(),
+              ),
               ContinueButton(onPressed: onContinue),
             ],
           ),
