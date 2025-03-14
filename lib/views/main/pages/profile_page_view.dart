@@ -26,17 +26,28 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<UserProfileViewModel>(context, listen: false)
-          .fetchUserProfile();
+      if (mounted) {
+        Provider.of<UserProfileViewModel>(context, listen: false)
+            .fetchUserProfile();
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    String getInitials(String name) {
+      List<String> nameParts = name.split(" ");
+      String initials = nameParts.map((e) => e[0]).take(2).join();
+      return initials.toUpperCase();
+    }
+
     final profileViewModel = Provider.of<UserProfileViewModel>(context);
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
       body: profileViewModel.isLoading
           ? const Center(
               child: CircularProgressIndicator(
@@ -63,13 +74,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   : Column(
                       children: [
                         const SizedBox(height: 50),
-                        const CircleAvatar(
-                          radius: 40,
-                          backgroundImage: AssetImage('assets/images/logo.png'),
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.white,
+                          child: Text(
+                            getInitials('Your Name'),
+                            style: const TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
-                        const SizedBox(height: 16),
-
-                        // User Name
+                        const SizedBox(height: 20),
                         Text(
                           profileViewModel.userData!.name,
                           style: const TextStyle(
@@ -78,8 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: AppColors.fontBlackColor,
                           ),
                         ),
-                        const SizedBox(height: 10),
-
+                        const SizedBox(height: 30),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 17),
                           child: Stack(
@@ -89,8 +106,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 runSpacing: 10,
                                 spacing: 8,
                                 children: emotionList
-                                    .map((emotion) =>
-                                        EmotionChipWidget(label: emotion))
+                                    .map(
+                                      (emotion) =>
+                                          EmotionChipWidget(label: emotion),
+                                    )
                                     .toList(),
                               ),
                               Positioned(
@@ -116,7 +135,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             ],
                           ),
                         ),
-
                         const SizedBox(height: 20),
                         Expanded(
                           child: Container(

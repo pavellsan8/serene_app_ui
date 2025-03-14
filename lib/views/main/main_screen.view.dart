@@ -7,7 +7,7 @@ import '../../views/main/pages/home_page_view.dart';
 import '../../views/main/pages/music_page_view.dart';
 import '../../views/main/pages/video_page_view.dart';
 import '../../views/main/pages/book_page_view.dart';
-import '../../views/main/pages/profile_page_view.dart';
+// import '../../views/main/pages/profile_page_view.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   Tab(icon: Icon(Icons.music_note_rounded, size: 30)),
                   Tab(icon: Icon(Icons.video_library_rounded, size: 30)),
                   Tab(icon: Icon(Icons.library_books_rounded, size: 30)),
-                  Tab(icon: Icon(Icons.person, size: 30)),
+                  // Tab(icon: Icon(Icons.person, size: 30)),
                 ],
                 onTap: viewModel.changeTab,
               ),
@@ -62,7 +62,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   MusicPage(),
                   VideoPage(),
                   BookPage(),
-                  ProfilePage(),
+                  // ProfilePage(),
                 ],
               ),
             ),

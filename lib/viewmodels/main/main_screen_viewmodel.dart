@@ -4,8 +4,10 @@ class MainScreenViewModel extends ChangeNotifier {
   late TabController tabController;
 
   void initController(TickerProvider vsync) {
-    tabController = TabController(length: 5, vsync: vsync);
-    notifyListeners();
+    tabController = TabController(
+      length: 4, 
+      vsync: vsync,
+    );
   }
 
   void changeTab(int index) {
