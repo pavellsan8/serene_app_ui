@@ -45,8 +45,9 @@ class EmotionsPage extends StatelessWidget {
           const Text(
             "You can take whatever you like, what you want to know or whatever, and feel free to take it!",
             style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'Montserrat',
             ),
           ),
           const SizedBox(height: 32),

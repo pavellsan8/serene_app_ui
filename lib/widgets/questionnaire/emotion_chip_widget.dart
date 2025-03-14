@@ -20,7 +20,10 @@ class EmotionChipWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => viewModel.toggleEmotion(emotion),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 10,
+        ),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryColor : Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -34,6 +37,7 @@ class EmotionChipWidget extends StatelessWidget {
           style: TextStyle(
             color: isSelected ? Colors.white : Colors.black,
             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),

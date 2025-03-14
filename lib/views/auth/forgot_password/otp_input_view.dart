@@ -21,7 +21,10 @@ class OtpInputScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -41,14 +44,16 @@ class OtpInputScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 10),
                           const Text(
-                            "Enter the 6-digit verification code sent to your email", // ${viewModel.emailController.text}
+                            "Enter the 6-digit verification code sent to your email",
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.fontBlackColor,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 30),
@@ -61,7 +66,13 @@ class OtpInputScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text("Didn't receive the code? "),
+                              const Text(
+                                "Didn't receive the code? ",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Montserrat',
+                                ),
+                              ),
                               GestureDetector(
                                 onTap: () => viewModel.resendOtp(context),
                                 child: const Text(
@@ -69,6 +80,7 @@ class OtpInputScreen extends StatelessWidget {
                                   style: TextStyle(
                                     color: AppColors.primaryColor,
                                     fontWeight: FontWeight.bold,
+                                    fontFamily: 'Montserrat',
                                   ),
                                 ),
                               ),

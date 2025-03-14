@@ -28,7 +28,8 @@ class ContinueButton extends StatelessWidget {
           style: TextStyle(
             color: Colors.white,
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),
