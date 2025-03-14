@@ -62,6 +62,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Colors.black87,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     SizedBox(height: 20),
@@ -72,6 +73,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: Colors.black54,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                   ],
@@ -99,6 +101,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
+                      fontFamily: 'Montserrat',
                     ),
                   ),
                 ),

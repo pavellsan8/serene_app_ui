@@ -46,7 +46,8 @@ class LoginScreen extends StatelessWidget {
                               "Let's start with us",
                               style: TextStyle(
                                 fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                           ),
@@ -58,6 +59,8 @@ class LoginScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 color: AppColors.fontBlackColor,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                           ),
@@ -114,7 +117,13 @@ class LoginScreen extends StatelessWidget {
                                 style: TextButton.styleFrom(
                                   foregroundColor: AppColors.fontBlueColor,
                                 ),
-                                child: const Text("Forgot your password?"),
+                                child: const Text(
+                                  "Forgot your password?",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Montserrat',
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -158,6 +167,8 @@ class LoginScreen extends StatelessWidget {
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Montserrat',
                                         ),
                                       ),
                               );
@@ -168,7 +179,13 @@ class LoginScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("Don't have an account? "),
+                            const Text(
+                              "Don't have an account?",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
                             TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(
@@ -177,7 +194,13 @@ class LoginScreen extends StatelessWidget {
                               style: TextButton.styleFrom(
                                 foregroundColor: AppColors.fontBlueColor,
                               ),
-                              child: const Text("Sign Up"),
+                              child: const Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Montserrat',
+                                ),
+                              ),
                             ),
                           ],
                         ),

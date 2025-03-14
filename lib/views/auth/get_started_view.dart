@@ -97,7 +97,10 @@ class _GetStartedScreenState extends State<GetStartedScreen>
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 16,
+              ),
               child: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -120,21 +123,26 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                       ),
                       child: const Text(
                         "Sign In",
-                        style: TextStyle(color: AppColors.fontBlueColor),
+                        style: TextStyle(
+                          color: AppColors.fontBlueColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Montserrat',
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   const Text(
                     "Don't have an account?",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Montserrat',
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     height: 48,
@@ -150,7 +158,12 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                       ),
                       child: const Text(
                         "Sign Up",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Montserrat',
+                        ),
                       ),
                     ),
                   ),

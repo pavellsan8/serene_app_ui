@@ -38,6 +38,7 @@ class EmailInputScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -46,6 +47,7 @@ class EmailInputScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.fontBlackColor,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                           const SizedBox(height: 30),
@@ -86,11 +88,11 @@ class EmailInputScreen extends StatelessWidget {
                       ),
                       child: viewModel.isLoading
                           ? const SizedBox(
-                              width: 20, 
+                              width: 20,
                               height: 20,
                               child: CircularProgressIndicator(
                                 color: Colors.white,
-                                strokeWidth: 2, 
+                                strokeWidth: 2,
                               ),
                             )
                           : const Text(
@@ -98,6 +100,7 @@ class EmailInputScreen extends StatelessWidget {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                     ),
