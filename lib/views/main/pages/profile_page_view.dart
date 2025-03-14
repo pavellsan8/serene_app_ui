@@ -5,10 +5,15 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        "Profile Page",
-        style: TextStyle(fontSize: 24),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
+      body: const Center(
+        child: Text(
+          "Profile Page",
+          style: TextStyle(fontSize: 24),
+        ),
       ),
     );
   }

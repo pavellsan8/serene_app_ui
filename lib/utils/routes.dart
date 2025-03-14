@@ -12,11 +12,16 @@ import '../views/auth/forgot_password/password_input_view.dart';
 import '../views/questionnaire/questionnaire_intro_view.dart';
 import '../views/questionnaire/questionnaire_view.dart';
 
-import '../views/main/main_screen.view.dart';
+// import '../views/main/main_screen.view.dart';
+import '../views/main/pages/home_page_view.dart';
+import '../views/main/pages/music_page_view.dart';
+import '../views/main/pages/video_page_view.dart';
+import '../views/main/pages/book_page_view.dart';
+import '../views/main/pages/profile_page_view.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash';
-  
+
   static const String getStarted = '/get_started';
   static const String login = '/login';
   static const String register = '/register';
@@ -29,6 +34,11 @@ class AppRoutes {
   static const String questionnairePage = '/questionnaire_section';
 
   static const String main = '/main';
+  static const String homePage = '/home_page';
+  static const String musicPage = '/music_page';
+  static const String videoPage = '/video_page';
+  static const String bookPage = '/book_page';
+  static const String profilePage = '/profile_page';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -45,7 +55,12 @@ class AppRoutes {
       questionnaireIntro: (context) => const QuestionnaireIntroScreen(),
       questionnairePage: (context) => const QuestionnaireScreen(),
 
-      main:(context) => const MainScreen(),
+      // main:(context) => const MainScreen(),
+      homePage: (context) => const HomePage(),
+      musicPage: (context) => const MusicPage(),
+      videoPage: (context) => const VideoPage(),
+      bookPage: (context) => const BookPage(),
+      profilePage: (context) => const ProfilePage(),
     };
   }
 }
