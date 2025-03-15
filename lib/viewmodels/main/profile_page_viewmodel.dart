@@ -19,7 +19,7 @@ class UserProfileViewModel extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       await Future.delayed(
-        const Duration(milliseconds: 100),
+        const Duration(milliseconds: 10),
       ); // Small delay for safety
 
       String? email = prefs.getString("email");

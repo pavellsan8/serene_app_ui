@@ -31,12 +31,14 @@ class ProfileInfoCard extends StatelessWidget {
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
           ),
         ),
         subtitle: Text(
           subtitle,
           style: const TextStyle(
             color: Colors.white70,
+            fontFamily: 'Montserrat',
           ),
         ),
       ),

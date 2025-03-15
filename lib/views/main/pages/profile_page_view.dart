@@ -5,6 +5,7 @@ import '../../../viewmodels/main/profile_page_viewmodel.dart';
 import '../../../widgets/main/profile_card_widget.dart';
 import '../../../widgets/main/emotion_chip_widget.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/routes.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -46,7 +47,14 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false, 
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () {
+            Navigator.pushNamed(
+                context, AppRoutes.homePage); 
+          },
+        ),
       ),
       body: profileViewModel.isLoading
           ? const Center(
@@ -99,6 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: AppColors.fontBlackColor,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                         const SizedBox(height: 30),

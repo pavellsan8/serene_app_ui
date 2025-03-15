@@ -13,7 +13,11 @@ class EmotionChipWidget extends StatelessWidget {
     return Chip(
       label: Text(
         label,
-        style: const TextStyle(fontSize: 14, color: Colors.black),
+        style: const TextStyle(
+          fontSize: 14,
+          color: Colors.black,
+          fontFamily: 'Montserrat',
+        ),
       ),
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
