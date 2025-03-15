@@ -17,6 +17,7 @@ import '../views/main/pages/home_page_view.dart';
 import '../views/main/pages/music_page_view.dart';
 import '../views/main/pages/video_page_view.dart';
 import '../views/main/pages/book_page_view.dart';
+import '../views/main/pages/chatbot_page_view.dart';
 import '../views/main/pages/profile_page_view.dart';
 
 class AppRoutes {
@@ -38,6 +39,7 @@ class AppRoutes {
   static const String musicPage = '/music_page';
   static const String videoPage = '/video_page';
   static const String bookPage = '/book_page';
+  static const String chatbotPage = '/chatbot_page';
   static const String profilePage = '/profile_page';
 
   static Map<String, WidgetBuilder> getRoutes() {
@@ -60,6 +62,7 @@ class AppRoutes {
       musicPage: (context) => const MusicPage(),
       videoPage: (context) => const VideoPage(),
       bookPage: (context) => const BookPage(),
+      chatbotPage: (context) => const ChatbotPage(),
       profilePage: (context) => const ProfilePage(),
     };
   }
