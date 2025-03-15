@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/routes.dart';
-import '../viewmodels/auth/get_started_viewmodel.dart';
+import '../utils/providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +16,9 @@ void main() async {
   }
 
   runApp(
-    MyApp(prefs: prefs),
+    AppProviders.init(
+      child: MyApp(prefs: prefs),
+    ),
   );
 }
 
@@ -28,15 +29,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthViewModel()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.splashScreen,
-        routes: AppRoutes.getRoutes(),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.splashScreen,
+      routes: AppRoutes.getRoutes(),
     );
   }
 }

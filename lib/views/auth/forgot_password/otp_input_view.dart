@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
-import '../../../viewmodels/auth/forgot_password_viewmodel.dart';
+import '../../../viewmodels/auth/forgot_password/otp_input_viewmodel.dart';
 import '../../../widgets/auth/otp_textfield_widget.dart';
 
 class OtpInputScreen extends StatelessWidget {
@@ -10,11 +10,14 @@ class OtpInputScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel =
-        ModalRoute.of(context)!.settings.arguments as ForgotPasswordViewModel;
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
-    return ChangeNotifierProvider.value(
-      value: viewModel,
+    return ChangeNotifierProvider(
+      create: (context) => OtpInputViewModel(
+        email: args['email'],
+        serverOtp: args['serverOtp'],
+      ),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -30,7 +33,7 @@ class OtpInputScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Consumer<ForgotPasswordViewModel>(
+          child: Consumer<OtpInputViewModel>(
             builder: (context, viewModel, child) {
               return Column(
                 children: [
