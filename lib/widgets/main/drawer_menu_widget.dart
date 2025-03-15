@@ -78,6 +78,13 @@ class DrawerMenu extends StatelessWidget {
                   },
                 ),
                 _buildDrawerItem(
+                  icon: Icons.chat_outlined,
+                  text: 'Chatbot',
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.chatbotPage);
+                  },
+                ),
+                _buildDrawerItem(
                   icon: Icons.favorite_outline_rounded,
                   text: 'Favorites',
                   onTap: () {},
