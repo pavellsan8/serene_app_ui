@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
-import '../../../viewmodels/auth/forgot_password_viewmodel.dart';
+import '../../../viewmodels/auth/forgot_password/email_input_viewmodel.dart';
 import '../../../widgets/auth/register_textfield_widget.dart';
 
 class EmailInputScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class EmailInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ForgotPasswordViewModel(),
+      create: (context) => EmailInputViewModel(),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -24,7 +24,7 @@ class EmailInputScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Consumer<ForgotPasswordViewModel>(
+          child: Consumer<EmailInputViewModel>(
             builder: (context, viewModel, child) {
               return Column(
                 children: [

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
-import '../../../viewmodels/auth/forgot_password_viewmodel.dart';
+import '../../../viewmodels/auth/forgot_password/password_input_viewmodel.dart';
 import '../../../widgets/auth/register_textfield_widget.dart';
 
 class PasswordInputScreen extends StatelessWidget {
@@ -10,11 +10,12 @@ class PasswordInputScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel =
-        ModalRoute.of(context)!.settings.arguments as ForgotPasswordViewModel;
+    final Map<String, dynamic> args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final String email = args['email'] as String;
 
-    return ChangeNotifierProvider.value(
-      value: viewModel,
+    return ChangeNotifierProvider(
+      create: (_) => PasswordInputViewmodel(email: email),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
@@ -27,7 +28,7 @@ class PasswordInputScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Consumer<ForgotPasswordViewModel>(
+          child: Consumer<PasswordInputViewmodel>(
             builder: (context, viewModel, child) {
               return Column(
                 children: [
