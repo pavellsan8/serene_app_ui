@@ -57,10 +57,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               body: (context, controller) => TabBarView(
                 controller: viewModel.tabController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  HomePage(),
-                  MusicPage(),
-                  VideoPage(),
+                children: [
+                  const HomePage(),
+                  const MusicPage(),
+                  const VideoPage(),
                   BookPage(),
                   // ProfilePage(),
                 ],
