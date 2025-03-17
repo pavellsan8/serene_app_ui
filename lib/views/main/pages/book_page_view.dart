@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
 import '../../../widgets/main/search_bar_widget.dart';
-import '../../../widgets/main/recomended_book_card_widget.dart';
+import '../../../widgets/main/recommended_book_card_widget.dart';
 import '../../../widgets/main/regular_book_card_widget.dart';
+import '../../../viewmodels/main/book_page_viewmodel.dart';
+import '../../../models/main/book_page_model.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({super.key});
@@ -15,53 +18,29 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   final TextEditingController searchController = TextEditingController();
-  // Set to store favorite book titles
-  final Set<String> _favoriteBooks = {};
 
-  final List<Map<String, String>> books = [
-    {
-      'title': 'The Human Side of Postmortems1',
-      'description': 'Managing Stress and Cognitive Biases',
-      'author': 'Dave Zwieback',
-      'image': 'https://www.dbooks.org/img/books/144936585Xs.jpg'
-    },
-    {
-      'title': 'The Human Side of Postmortems',
-      'description': 'Managing Stress and Cognitive Biases',
-      'author': 'Dave Zwieback',
-      'image': 'https://www.dbooks.org/img/books/144936585Xs.jpg'
-    },
-    {
-      'title': 'The Human Side of Postmortems',
-      'description': 'Managing Stress and Cognitive Biases',
-      'author': 'Dave Zwieback',
-      'image': 'https://www.dbooks.org/img/books/144936585Xs.jpg'
-    },
-    {
-      'title': 'The Human Side of Postmortems',
-      'description': 'Managing Stress and Cognitive Biases',
-      'author': 'Dave Zwieback',
-      'image': 'https://www.dbooks.org/img/books/144936585Xs.jpg'
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    // Schedule the initialization for after the first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadData();
+    });
+  }
 
-  void _handleBookTap(Map<String, String> book) {
-    print("Navigating to: ${book['title']}");
+  Future<void> _loadData() async {
+    final viewModel = Provider.of<BookPageViewModel>(context, listen: false);
+    await viewModel.initialize();
+  }
+
+  void _handleBookTap(Book book) {
+    print("Navigating to: ${book.id}");
     // Add navigation logic here
   }
 
-  void _handleFavoriteTap(Map<String, String> book) {
-    final title = book['title']!;
-    setState(() {
-      // Toggle favorite state
-      if (_favoriteBooks.contains(title)) {
-        _favoriteBooks.remove(title);
-        print("Removed from favorites: $title");
-      } else {
-        _favoriteBooks.add(title);
-        print("Added to favorites: $title");
-      }
-    });
+  void _handleFavoriteTap(Book book) {
+    final viewModel = Provider.of<BookPageViewModel>(context, listen: false);
+    viewModel.toggleFavorite(book.id);
   }
 
   @override
@@ -84,37 +63,70 @@ class _BookPageState extends State<BookPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 20,
+      body: Consumer<BookPageViewModel>(
+        builder: (context, viewModel, child) {
+          if (viewModel.state == BookPageState.loading &&
+              viewModel.allBooks.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (viewModel.state == BookPageState.error) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Error: ${viewModel.errorMessage}'),
+                  ElevatedButton(
+                    onPressed: () => viewModel.refreshBooks(),
+                    child: const Text('Retry'),
+                  ),
+                ],
               ),
-              child: SearchBarWidget(
-                controller: searchController,
-                onChanged: (value) {
-                  print("Searching: $value");
-                },
+            );
+          }
+
+          return RefreshIndicator(
+            onRefresh: viewModel.refreshBooks,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 20,
+                    ),
+                    child: SearchBarWidget(
+                      controller: searchController,
+                      onChanged: (value) {
+                        viewModel.searchBooks(value);
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  RecommendedBooksWidget(
+                    books: viewModel.allBooks,
+                    onBookTap: _handleBookTap,
+                  ),
+                  const SizedBox(height: 30),
+                  AllBooksGridWidget(
+                    books: viewModel.allBooks,
+                    onBookTap: _handleBookTap,
+                    onFavoriteTap: _handleFavoriteTap,
+                    favoriteBooks: viewModel.favoriteBooks,
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
             ),
-            const SizedBox(height: 8),
-            RecommendedBooksWidget(
-              books: books,
-              onBookTap: _handleBookTap,
-            ),
-            const SizedBox(height: 30),
-            AllBooksGridWidget(
-              books: books,
-              onBookTap: _handleBookTap,
-              onFavoriteTap: _handleFavoriteTap,
-              favoriteBooks: _favoriteBooks,
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
+          );
+        },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 }
