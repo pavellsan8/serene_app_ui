@@ -78,6 +78,34 @@ class DrawerMenu extends StatelessWidget {
                   },
                 ),
                 _buildDrawerItem(
+                  icon: Icons.music_note_rounded,
+                  text: 'Music',
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.musicPage);
+                  },
+                ),
+                _buildDrawerItem(
+                  icon: Icons.video_collection_outlined,
+                  text: 'Video',
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.videoPage);
+                  },
+                ),
+                _buildDrawerItem(
+                  icon: Icons.menu_book_rounded,
+                  text: 'Books',
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.bookPage);
+                  },
+                ),
+                _buildDrawerItem(
+                  icon: Icons.chat_outlined,
+                  text: 'Chatbot',
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.chatbotPage);
+                  },
+                ),
+                _buildDrawerItem(
                   icon: Icons.favorite_outline_rounded,
                   text: 'Favorites',
                   onTap: () {},
