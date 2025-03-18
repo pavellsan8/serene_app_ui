@@ -14,7 +14,7 @@ class ChatbotPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primaryColor,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 0),
           child: IconButton(
             icon: const Icon(
               Icons.arrow_back_rounded,
