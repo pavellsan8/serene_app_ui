@@ -4,15 +4,17 @@ import 'package:serene_app/models/auth/login_model.dart';
 import '../../services/auth/login_service.dart';
 
 class LoginViewModel extends ChangeNotifier {
+  // textfield controller login page
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  // login service
   final LoginService _loginService = LoginService();
 
   bool isEmailValid = true;
   bool isPasswordValid = true;
   bool isPasswordObscured = true;
   bool isSubmitted = false;
-  bool rememberMe = false;
   bool isLoading = false;
 
   LoginViewModel() {
@@ -20,6 +22,7 @@ class LoginViewModel extends ChangeNotifier {
     passwordController.addListener(updateFormValidity);
   }
 
+  // validasi form login
   void updateFormValidity() {
     final emailText = emailController.text.trim();
     final passwordText = passwordController.text;
@@ -32,6 +35,7 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // submit button function
   Future<void> submit(BuildContext context) async {
     if (isLoading) return;
 
@@ -47,19 +51,20 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
+      // request body API
       final request = LoginRequest(
         email: emailController.text.trim(),
         password: passwordController.text,
       );
-      final response = await _loginService.loginUser(request);
 
+      final response = await _loginService.loginUser(request);
       if (!context.mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(response.message)),
-      );
-
+      // response API 200
       if (response.status == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response.message)),
+        );
         // Navigator.pushNamed(context, AppRoutes.home, arguments: this);
       }
     } catch (e) {
@@ -78,9 +83,7 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get isFormValid =>
-      emailController.text.isNotEmpty && passwordController.text.isNotEmpty;
-
+  // membersihkan resource atau melepaskan controller saat widget dihapus dari widget tree
   @override
   void dispose() {
     emailController.dispose();

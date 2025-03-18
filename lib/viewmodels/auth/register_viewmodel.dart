@@ -5,11 +5,14 @@ import '../../services/auth/register_service.dart';
 import '../../utils/routes.dart';
 
 class RegisterViewModel extends ChangeNotifier {
+  // textfield controller
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  // register service API
   final RegisterService _registerService = RegisterService();
 
   bool isNameValid = true;
@@ -29,6 +32,7 @@ class RegisterViewModel extends ChangeNotifier {
     confirmPasswordController.addListener(updateFormValidity);
   }
 
+  // form validation register pages
   void updateFormValidity() {
     isNameValid = nameController.text.length >= 5;
     isEmailValid = emailController.text.contains("@") &&
@@ -39,6 +43,7 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // validation first page
   void validateStep1(BuildContext context) {
     isSubmitted = true;
     updateFormValidity();
@@ -54,6 +59,7 @@ class RegisterViewModel extends ChangeNotifier {
     }
   }
 
+  // validation second page
   Future<void> validateStep2(BuildContext context) async {
     isSubmitted2 = true;
     updateFormValidity();
@@ -76,7 +82,6 @@ class RegisterViewModel extends ChangeNotifier {
 
       isLoading = false;
       notifyListeners();
-
       if (!context.mounted) return;
 
       if (response.status == 200) {
@@ -113,12 +118,6 @@ class RegisterViewModel extends ChangeNotifier {
     isConfirmPasswordObscured = !isConfirmPasswordObscured;
     notifyListeners();
   }
-
-  bool get isFormValid =>
-      nameController.text.isNotEmpty &&
-      emailController.text.isNotEmpty &&
-      passwordController.text.isNotEmpty &&
-      confirmPasswordController.text.isNotEmpty;
 
   @override
   void dispose() {

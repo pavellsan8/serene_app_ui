@@ -1,41 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:serene_app/utils/routes.dart';
-import 'package:serene_app/utils/colors.dart';
+import 'package:provider/provider.dart';
 
+import 'package:serene_app/utils/colors.dart';
+import 'package:serene_app/viewmodels/splash_screen/splash_screen_viewmodel.dart';
+
+// Stateful widget karena ada animasinya
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  // Untuk manage animasinya
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+// Agar animasinya lebih efisien
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _fadeAnimation;
-  late Animation<double> _scaleAnimation;
+  late AnimationController animationController;
+  late Animation<double> fadeAnimation;
+  late Animation<double> scaleAnimation;
 
   @override
   void initState() {
     super.initState();
 
     // Set up animation controller
-    _animationController = AnimationController(
+    animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );
 
-    // Create entrance animations
-    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
+    // Create entrance animations (scaling)
+    scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
       CurvedAnimation(
-        parent: _animationController,
+        parent: animationController,
         curve: Curves.easeOutBack,
       ),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    // Create entrance animations (fading)
+    fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
-        parent: _animationController,
+        parent: animationController,
         curve: const Interval(
           0.0,
           0.5,
@@ -45,20 +51,27 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     // Start entrance animation immediately
-    _animationController.forward();
+    animationController.forward();
 
-    // Delayed navigation with smooth exit transition
+    // Create a new animation controller for the exit animation
     Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {
-      // Create a new animation controller for the exit animation
-      _animationController.reverse().then((_) {
-        Navigator.pushReplacementNamed(context, AppRoutes.getStarted);
-      });
+      navigateToNextPage();
     });
   }
 
+  Future<void> navigateToNextPage() async {
+    final splashViewModel = context.read<SplashViewModel>();
+    final nextPage = await splashViewModel.checkLoginStatus();
+
+    animationController.reverse().then((_) {
+      Navigator.pushReplacementNamed(context, nextPage);
+    });
+  }
+
+  // Clean animationController to free memory after used
   @override
   void dispose() {
-    _animationController.dispose();
+    animationController.dispose();
     super.dispose();
   }
 
@@ -67,13 +80,13 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: AnimatedBuilder(
-        animation: _animationController,
+        animation: animationController,
         builder: (context, child) {
           return Center(
             child: FadeTransition(
-              opacity: _fadeAnimation,
+              opacity: fadeAnimation,
               child: ScaleTransition(
-                scale: _scaleAnimation,
+                scale: scaleAnimation,
                 child: Image.asset('assets/images/logo.png', width: 150),
               ),
             ),
