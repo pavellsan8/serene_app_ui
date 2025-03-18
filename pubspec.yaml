@@ -19,6 +19,7 @@ dependencies:
   http: ^1.2.0
   shared_preferences: ^2.2.3
   syncfusion_flutter_gauges: ^28.2.11
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   flutter_test:
