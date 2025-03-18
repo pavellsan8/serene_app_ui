@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/routes.dart';
+
 class QuestionnaireViewModel extends ChangeNotifier {
   final PageController pageController = PageController();
   int currentPage = 0;
-  int selectedFeelingValue = 3;
   String? selectedMoodOption;
   final List<String> selectedEmotions = [];
 
-  void goToNextPage() {
+  void goToNextPage(BuildContext context) {
     if (currentPage < 2) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -16,7 +17,7 @@ class QuestionnaireViewModel extends ChangeNotifier {
       currentPage++;
       notifyListeners();
     } else {
-      // Handle completion
+      Navigator.pushNamed(context, AppRoutes.completeQuizPage);
     }
   }
 

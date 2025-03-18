@@ -11,10 +11,11 @@ import '../views/auth/forgot_password/password_input_view.dart';
 
 import '../views/questionnaire/questionnaire_intro_view.dart';
 import '../views/questionnaire/questionnaire_view.dart';
+import '../views/questionnaire/pages/complete_page.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash';
-  
+
   static const String getStarted = '/get_started';
   static const String login = '/login';
   static const String register = '/register';
@@ -25,6 +26,7 @@ class AppRoutes {
 
   static const String questionnaireIntro = '/questionnaire_intro';
   static const String questionnairePage = '/questionnaire_section';
+  static const String completeQuizPage = '/complete_question';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -40,6 +42,7 @@ class AppRoutes {
 
       questionnaireIntro: (context) => const QuestionnaireIntroScreen(),
       questionnairePage: (context) => const QuestionnaireScreen(),
+      completeQuizPage: (context) => const CompletePage(),
     };
   }
 }
