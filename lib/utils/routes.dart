@@ -11,9 +11,9 @@ import '../views/auth/forgot_password/password_input_view.dart';
 
 import '../views/questionnaire/questionnaire_intro_view.dart';
 import '../views/questionnaire/questionnaire_view.dart';
+import '../views/questionnaire/pages/complete_page.dart';
 
-// import '../views/main/main_screen.view.dart';
-import '../views/main/pages/home_page_view.dart';
+import '../views/main/home_page_view.dart';
 import '../views/main/pages/music_page_view.dart';
 import '../views/main/pages/video_page_view.dart';
 import '../views/main/pages/book_page_view.dart';
@@ -33,8 +33,8 @@ class AppRoutes {
 
   static const String questionnaireIntro = '/questionnaire_intro';
   static const String questionnairePage = '/questionnaire_section';
+  static const String completeQuizPage = '/complete_question';
 
-  static const String main = '/main';
   static const String homePage = '/home_page';
   static const String musicPage = '/music_page';
   static const String videoPage = '/video_page';
@@ -56,8 +56,8 @@ class AppRoutes {
 
       questionnaireIntro: (context) => const QuestionnaireIntroScreen(),
       questionnairePage: (context) => const QuestionnaireScreen(),
+      completeQuizPage: (context) => const CompletePage(),
 
-      // main:(context) => const MainScreen(),
       homePage: (context) => const HomePage(),
       musicPage: (context) => const MusicPage(),
       videoPage: (context) => const VideoPage(),

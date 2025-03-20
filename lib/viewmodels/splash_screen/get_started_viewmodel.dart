@@ -7,16 +7,18 @@ class AuthViewModel extends ChangeNotifier {
 
   int get currentPage => _currentPage;
 
+  // Sliding page
   void goToPage(int page) {
     _currentPage = page;
     pageController.animateToPage(
       page,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 250),
       curve: Curves.easeInOut,
     );
     notifyListeners();
   }
 
+  // Indicator slider
   void onPageChanged(int index) {
     _currentPage = index;
     notifyListeners();

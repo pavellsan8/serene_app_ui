@@ -1,3 +1,4 @@
+// Login request body
 class LoginRequest {
   final String email;
   final String password;
@@ -15,6 +16,7 @@ class LoginRequest {
   }
 }
 
+// Login response body
 class LoginResponse {
   final int status;
   final String message;
@@ -35,6 +37,7 @@ class LoginResponse {
   }
 }
 
+// Login data from body 
 class LoginData {
   final String email;
   final String accessToken;

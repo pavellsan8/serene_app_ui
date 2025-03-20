@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/routes.dart';
 
 class QuestionnaireViewModel extends ChangeNotifier {
   final PageController pageController = PageController();
   int currentPage = 0;
-  int selectedFeelingValue = 3;
   String? selectedMoodOption;
   final List<String> selectedEmotions = [];
 
@@ -17,7 +17,7 @@ class QuestionnaireViewModel extends ChangeNotifier {
       currentPage++;
       notifyListeners();
     } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.main);
+      Navigator.pushNamed(context, AppRoutes.completeQuizPage);
     }
   }
 

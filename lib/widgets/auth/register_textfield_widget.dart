@@ -16,6 +16,7 @@ class CustomLabel extends StatelessWidget {
           fontSize: 16,
           fontWeight: FontWeight.w600,
           color: AppColors.fontBlackColor,
+          fontFamily: 'Montserrat',
         ),
       ),
     );
@@ -81,19 +82,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
               fontFamily: 'Montserrat',
             ),
             border: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(0),
               borderSide: const BorderSide(color: Colors.grey),
             ),
             enabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(0),
               borderSide: const BorderSide(color: Colors.blue),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(0),
               borderSide: const BorderSide(color: Colors.blue, width: 2),
             ),
             errorBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(0),
               borderSide: const BorderSide(color: Colors.red),
             ),
             errorText: widget.validator != null
