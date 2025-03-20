@@ -1,3 +1,4 @@
+// Register request body
 class RegisterRequest {
   final String name;
   final String email;
@@ -18,6 +19,7 @@ class RegisterRequest {
   }
 }
 
+// Register response body
 class RegisterResponse {
   final int status;
   final String message;

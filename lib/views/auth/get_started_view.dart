@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../viewmodels/auth/get_started_viewmodel.dart';
+import '../../viewmodels/splash_screen/get_started_viewmodel.dart';
 import '../../widgets/auth/onboarding_widget.dart';
 import '../../utils/colors.dart';
 import '../../utils/routes.dart';

@@ -8,30 +8,26 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize SharedPreferences safely
-  SharedPreferences? prefs;
-  try {
-    prefs = await SharedPreferences.getInstance();
-  } catch (e) {
-    debugPrint("Error initializing SharedPreferences: $e");
-  }
+  final prefs = await SharedPreferences.getInstance();
 
   runApp(
     AppProviders.init(
-      child: MyApp(prefs: prefs),
+      child: const SereneApp(),
+      prefs: prefs,
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class SereneApp extends StatelessWidget {
   final SharedPreferences? prefs;
 
-  const MyApp({super.key, this.prefs});
+  const SereneApp({super.key, this.prefs});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homePage,
+      initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.getRoutes(),
     );
   }
