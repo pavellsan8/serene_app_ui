@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,6 +8,7 @@ import '../../utils/api_url.dart';
 
 class LoginService {
   Future<LoginResponse> loginUser(LoginRequest request) async {
+    // Login url endpoint
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/login-user");
     try {
       final response = await http.post(
@@ -14,25 +16,28 @@ class LoginService {
         headers: {
           "Content-Type": "application/json",
         },
+        // Login body param input
         body: jsonEncode(request.toJson()),
       );
 
       final responseData = jsonDecode(response.body);
-      final loginResponse = LoginResponse.fromJson(responseData);
 
+      // Login response body output
+      final loginResponse = LoginResponse.fromJson(responseData);
       if (loginResponse.data != null) {
         final prefs = await SharedPreferences.getInstance();
+
+        // simpan data email, access token dan refresh token
         await prefs.setString("email", request.email);
         await prefs.setString(
             "access_token", loginResponse.data?.accessToken ?? "");
         await prefs.setString(
             "refresh_token", loginResponse.data?.refreshToken ?? "");
 
-        print('===== SAVED TOKEN DATA =====');
-        print('email: ${prefs.getString("email")}');
-        print('access_token: ${prefs.getString("access_token")}');
-        print('refresh_token: ${prefs.getString("refresh_token")}');
-        print('============================');
+        debugPrint('===== SAVED TOKEN DATA =====');
+        debugPrint('access_token: ${prefs.getString("access_token")}');
+        debugPrint('refresh_token: ${prefs.getString("refresh_token")}');
+        debugPrint('============================');
       }
 
       return loginResponse;
@@ -54,8 +59,12 @@ class LoginService {
     try {
       final response = await http.post(
         url,
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"refresh_token": refreshToken}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          "refresh_token": refreshToken,
+        }),
       );
 
       if (response.statusCode == 200) {

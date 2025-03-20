@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/colors.dart';
+
 class EmotionChipWidget extends StatelessWidget {
   final String label;
 
@@ -11,6 +13,7 @@ class EmotionChipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
+      backgroundColor: Colors.white,
       label: Text(
         label,
         style: const TextStyle(
@@ -19,10 +22,11 @@ class EmotionChipWidget extends StatelessWidget {
           fontFamily: 'Montserrat',
         ),
       ),
-      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: const BorderSide(color: Colors.grey),
+        side: const BorderSide(
+          color: AppColors.fontBlueColor,
+        ),
       ),
     );
   }

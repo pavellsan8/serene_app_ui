@@ -4,7 +4,7 @@ import '../../services/auth/logout_service.dart';
 import '../../utils/routes.dart';
 
 class LogoutViewModel extends ChangeNotifier {
-  final LogoutService _logoutService = LogoutService();
+  final LogoutService logoutService = LogoutService();
   bool isLoading = false;
 
   Future<void> logout(BuildContext context) async {
@@ -14,7 +14,7 @@ class LogoutViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await _logoutService.logoutUser();
+      final response = await logoutService.logoutUser();
       if (!context.mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../viewmodels/main/profile_page_viewmodel.dart';
+import '../../../viewmodels/auth/logout_viewmodel.dart';
 import '../../../widgets/main/profile_card_widget.dart';
 import '../../../widgets/main/emotion_chip_widget.dart';
 import '../../../utils/colors.dart';
@@ -43,16 +44,18 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     final profileViewModel = Provider.of<UserProfileViewModel>(context);
+    final logoutViewModel = Provider.of<LogoutViewModel>(context);
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        automaticallyImplyLeading: false, 
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.backgroundColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
+          color: AppColors.primaryColor,
           onPressed: () {
-            Navigator.pushNamed(
-                context, AppRoutes.homePage); 
+            Navigator.pushNamed(context, AppRoutes.homePage);
           },
         ),
       ),
@@ -88,10 +91,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const SizedBox(height: 50),
                         CircleAvatar(
-                          radius: 50,
+                          radius: 40,
                           backgroundColor: Colors.white,
                           child: Text(
-                            getInitials('Your Name'),
+                            getInitials(profileViewModel.userData!.name),
                             style: const TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
@@ -110,50 +113,27 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontFamily: 'Montserrat',
                           ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 17),
-                          child: Stack(
-                            children: [
-                              Wrap(
-                                alignment: WrapAlignment.center,
-                                runSpacing: 10,
-                                spacing: 8,
-                                children: emotionList
-                                    .map(
-                                      (emotion) =>
-                                          EmotionChipWidget(label: emotion),
-                                    )
-                                    .toList(),
-                              ),
-                              Positioned(
-                                right: 0,
-                                bottom: 0,
-                                child: Container(
-                                  height: 36,
-                                  width: 32,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                    border: Border.all(color: Colors.grey),
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            runSpacing: 10,
+                            spacing: 8,
+                            children: emotionList
+                                .map(
+                                  (emotion) => EmotionChipWidget(
+                                    label: emotion,
                                   ),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.settings_outlined,
-                                      color: Colors.black,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                                )
+                                .toList(),
                           ),
                         ),
                         const SizedBox(height: 20),
                         Expanded(
                           child: Container(
                             decoration: const BoxDecoration(
-                              color: Color(0xFF37474F),
+                              color: AppColors.primaryColor,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(25),
                                 topRight: Radius.circular(25),
@@ -166,17 +146,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                   icon: Icons.email,
                                   title: "Email address",
                                   subtitle: profileViewModel.userData!.email,
+                                  onTap: null,
                                 ),
                                 ProfileInfoCard(
-                                  icon: Icons.phone,
-                                  title: "Phone number",
-                                  subtitle: profileViewModel.userData!.phoneNum,
-                                ),
-                                const SizedBox(height: 20),
-                                const ProfileInfoCard(
                                   icon: Icons.logout,
                                   title: "Log out",
                                   subtitle: "Change your account",
+                                  onTap: logoutViewModel.isLoading
+                                      ? null
+                                      : () {
+                                          logoutViewModel.logout(context);
+                                        },
+                                  trailing: logoutViewModel.isLoading
+                                      ? const SizedBox(
+                                          width: 20,
+                                          height: 20,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2,
+                                          ),
+                                        )
+                                      : null,
                                 ),
                               ],
                             ),

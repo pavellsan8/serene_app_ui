@@ -4,12 +4,16 @@ class ProfileInfoCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final String subtitle;
+  final VoidCallback? onTap;
+  final Widget? trailing;
 
   const ProfileInfoCard({
     super.key,
     required this.icon,
     required this.title,
     required this.subtitle,
+    this.onTap,
+    this.trailing,
   });
 
   @override
@@ -24,22 +28,28 @@ class ProfileInfoCard extends StatelessWidget {
         vertical: 5,
         horizontal: 16,
       ),
-      child: ListTile(
-        leading: Icon(icon, color: Colors.grey),
-        title: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Montserrat',
+      child: InkWell(
+        onTap: onTap,
+        child: ListTile(
+          leading: Icon(icon, color: Colors.grey),
+          title: Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat',
+              fontSize: 14,
+            ),
           ),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: const TextStyle(
-            color: Colors.white70,
-            fontFamily: 'Montserrat',
+          subtitle: Text(
+            subtitle,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontFamily: 'Montserrat',
+              fontSize: 12,
+            ),
           ),
+          trailing: trailing,
         ),
       ),
     );

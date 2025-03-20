@@ -6,6 +6,7 @@ import '../../utils/api_url.dart';
 
 class RegisterService {
   Future<RegisterResponse> registerUser(RegisterRequest request) async {
+    // register url API
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/register-user");
     try {
       final response = await http.post(
@@ -13,6 +14,7 @@ class RegisterService {
         headers: {
           "Content-Type": "application/json",
         },
+        // request parameters data
         body: jsonEncode(request.toJson()),
       );
 

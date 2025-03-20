@@ -19,11 +19,11 @@ class UserProfileViewModel extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       await Future.delayed(
-        const Duration(milliseconds: 10),
+        const Duration(milliseconds: 1),
       ); // Small delay for safety
 
       String? email = prefs.getString("email");
-      print('Retrieved email: $email');
+      debugPrint('Retrieved email: $email');
 
       if (email == null) {
         errorMessage = "No email found.";
