@@ -47,13 +47,13 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Our Service",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                     fontFamily: 'Mmontserrat',
@@ -71,31 +71,31 @@ class HomePage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-                childAspectRatio: 0.9,
+                childAspectRatio: 0.8,
                 children: [
                   CardItem(
-                    title: "Soothing Music",
+                    title: "Serehear",
                     icon: Icons.music_note_rounded,
                     color: Colors.blue.shade400,
                     route: AppRoutes.musicPage,
                     description: "Listen to calming music for relaxation",
                   ),
                   CardItem(
-                    title: "Therapy Videos",
+                    title: "Serewatch",
                     icon: Icons.video_library_rounded,
                     color: Colors.green.shade400,
                     route: AppRoutes.videoPage,
                     description: "Watch therapy and meditation videos",
                   ),
                   CardItem(
-                    title: "Book Reading",
+                    title: "Sereread",
                     icon: Icons.book_rounded,
                     color: Colors.orange.shade400,
                     route: AppRoutes.bookPage,
                     description: "Read books about mental health",
                   ),
                   CardItem(
-                    title: "Chatbot",
+                    title: "Serebot",
                     icon: Icons.chat_bubble_rounded,
                     color: Colors.red.shade400,
                     route: AppRoutes.chatbotPage,

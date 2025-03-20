@@ -42,17 +42,17 @@ class CardItem extends StatelessWidget {
                 color: color,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             Text(
               title,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: Colors.black,
                 fontFamily: 'Montserrat',
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(

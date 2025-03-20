@@ -17,40 +17,43 @@ class SplashViewModel extends ChangeNotifier {
     final refreshToken = prefs.getString("refresh_token");
 
     debugPrint("🔑 Access Token: $accessToken");
+    debugPrint("🔑 Refresh Token: $refreshToken");
 
-    // Cek jika kedua token tidak ada
+    // Jika kedua token tidak ada, arahkan ke Get Started
     if ((accessToken == null || accessToken.isEmpty) &&
         (refreshToken == null || refreshToken.isEmpty)) {
       debugPrint("🚪 No token found, redirecting to Get Started...");
       return AppRoutes.getStarted;
     }
 
-    // Cek apakah access token expired
-    bool isTokenExpired =
-        accessToken == null || JwtDecoder.isExpired(accessToken);
-
-    if (!isTokenExpired) {
-      return AppRoutes.homePage; // ganti ke AppRoutes.home
-    }
-    debugPrint("🔄 Access token expired, checking refresh token...");
-
     bool isRefreshTokenExpired =
         refreshToken == null || JwtDecoder.isExpired(refreshToken);
+
     // Jika refresh token expired, langsung ke login
-    if (!isRefreshTokenExpired) {
+    if (isRefreshTokenExpired) {
       debugPrint("⚠️ Refresh token expired, redirecting to Login...");
       return AppRoutes.login;
     }
 
-    // Coba refresh token
-    final newToken = await loginService.refreshToken();
+    // Cek apakah access token expired
+    bool isAccessTokenExpired =
+        accessToken == null || JwtDecoder.isExpired(accessToken);
 
-    if (newToken != null) {
-      debugPrint("✅ Token refreshed successfully, proceeding to Home...");
+    if (!isAccessTokenExpired) {
+      debugPrint("✅ Access token valid, redirecting to Home...");
       return AppRoutes.homePage;
     } else {
-      debugPrint("❌ Failed to refresh token, redirecting to Login...");
-      return AppRoutes.login;
+      debugPrint("🔄 Access token expired, attempting refresh...");
+      final newToken = await loginService.refreshToken();
+
+      if (newToken != null && !JwtDecoder.isExpired(newToken)) {
+        debugPrint("✅ Token refreshed successfully, proceeding to Home...");
+        await prefs.setString("access_token", newToken);
+        return AppRoutes.homePage;
+      } else {
+        debugPrint("❌ Failed to refresh token, redirecting to Login...");
+        return AppRoutes.login;
+      }
     }
   }
 }
