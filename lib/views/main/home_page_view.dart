@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/main/drawer_menu_widget.dart';
 import '../../utils/colors.dart';
 import '../../utils/routes.dart';
 import '../../widgets/main/card_item_widget.dart';
@@ -12,52 +11,98 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        elevation: 0,
-        title: Image.asset(
-          'assets/images/logo.png',
-          height: 40,
-          fit: BoxFit.contain,
-        ),
-        centerTitle: true,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(
-              Icons.menu_rounded,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-          ),
-        ),
-      ),
-      drawer: const DrawerMenu(),
       body: SingleChildScrollView(
         controller: ScrollController(),
         child: Column(
           children: [
-            ClipPath(
-              clipper: BottomCurveClipper(),
-              child: Image.asset(
-                'assets/images/logo.png',
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+            Stack(
+              children: [
+                ClipPath(
+                  // clipper: BottomCurveClipper(),
+                  child: Image.asset(
+                    'assets/images/home/home_ilustration.jpg',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const Positioned(
+                  top: 20,
+                  left: 10,
+                  right: 100,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Embrace a sense of peace in every step you take.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        'Give yourself the time to truly feel the serenity within.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 25,
+                  right: 15,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.profilePage,
+                      );
+                    },
+                    child: const CircleAvatar(
+                      radius: 25,
+                      backgroundColor: AppColors.backgroundColor,
+                      child: Icon(
+                        Icons.person_outline_rounded,
+                        size: 32,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  "Our Service",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                    fontFamily: 'Mmontserrat',
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      "Choose the best way to calm your mind!",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Calm it with our chatbot, whether through music, reading, or relaxing videos.",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -71,7 +116,7 @@ class HomePage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-                childAspectRatio: 0.8,
+                childAspectRatio: 1,
                 children: [
                   CardItem(
                     title: "Serehear",
@@ -110,28 +155,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-}
-
-class BottomCurveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height - 50); // Mulai dari kiri bawah
-
-    // Membuat lengkungan dari kiri ke kanan
-    path.lineTo(0, size.height * 0.9); // Mulai turun dari kiri
-
-    path.quadraticBezierTo(
-      size.width * 0.5, size.height * 1.1, // Titik tengah (puncak naik)
-      size.width, size.height * 0.9, // Kembali ke kanan
-    );
-
-    path.lineTo(size.width, 0); // Tutup ke kanan atas
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }

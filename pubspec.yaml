@@ -33,6 +33,7 @@ flutter:
     - assets/images/
     - assets/images/auth/
     - assets/images/questionnaire/
+    - assets/images/home/
     - assets/icons/
 
   fonts:
