@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
-import '../../../widgets/main/search_bar_widget.dart';
-import '../../../widgets/main/recommended_book_card_widget.dart';
-import '../../../widgets/main/regular_book_card_widget.dart';
+import '../../../widgets/main/book/search_bar_widget.dart';
+import '../../../widgets/main/book/recommended_card_widget.dart';
+import '../../../widgets/main/book/regular_card_widget.dart';
 import '../../../viewmodels/main/book_page_viewmodel.dart';
 import '../../../models/main/book_page_model.dart';
 

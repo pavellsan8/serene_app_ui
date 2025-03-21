@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/main/book_page_model.dart';
+import '../../../../models/main/book_page_model.dart';
 
 class RecommendedBooksWidget extends StatelessWidget {
   final List<Book> books;

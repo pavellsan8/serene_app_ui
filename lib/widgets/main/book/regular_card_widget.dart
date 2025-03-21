@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/main/book_page_model.dart';
-import '../../utils/colors.dart';
+import '../../../../models/main/book_page_model.dart';
+import '../../../utils/colors.dart';
 
 class AllBooksGridWidget extends StatelessWidget {
   final List<Book> books;
