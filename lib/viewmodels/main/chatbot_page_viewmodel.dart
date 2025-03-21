@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../widgets/main/chat_bubble_widget.dart';
+import '../../widgets/main/chatbot/chat_bubble_widget.dart';
 
 class ChatbotViewModel extends ChangeNotifier {
   final TextEditingController messageController = TextEditingController();

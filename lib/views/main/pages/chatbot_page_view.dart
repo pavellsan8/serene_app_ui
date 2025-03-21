@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
-import '../../../widgets/main/chat_input_widget.dart';
+import '../../../widgets/main/chatbot/chat_input_widget.dart';
 import '../../../viewmodels/main/chatbot_page_viewmodel.dart';
 
 class ChatbotPage extends StatelessWidget {
