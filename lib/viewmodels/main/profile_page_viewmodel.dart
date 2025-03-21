@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/main/user_profile_model.dart';
-import '../../services/profile/user_profile_service.dart';
+import '../../services/main/user_profile_service.dart';
 
 class UserProfileViewModel extends ChangeNotifier {
   final GetUserProfileService _userProfileService = GetUserProfileService();

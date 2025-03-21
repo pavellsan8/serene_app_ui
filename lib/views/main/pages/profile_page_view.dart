@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../../viewmodels/main/profile_page_viewmodel.dart';
 import '../../../viewmodels/auth/logout_viewmodel.dart';
-import '../../../widgets/main/profile_card_widget.dart';
-import '../../../widgets/main/emotion_chip_widget.dart';
+import '../../../widgets/main/profile/profile_card_widget.dart';
+import '../../../widgets/main/profile/emotion_chip_widget.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
 
