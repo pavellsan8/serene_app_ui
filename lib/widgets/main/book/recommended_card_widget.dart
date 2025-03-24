@@ -21,14 +21,14 @@ class RecommendedBooksWidget extends StatelessWidget {
           child: Text(
             'Recommended Books',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: 210,
+          height: 220,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -66,7 +66,7 @@ class RecommendedBooksWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 12,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
@@ -74,7 +74,7 @@ class RecommendedBooksWidget extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 10,
+                          fontSize: 12,
                           color: Colors.grey[600],
                         ),
                       ),

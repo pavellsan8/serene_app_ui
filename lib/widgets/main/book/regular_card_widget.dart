@@ -27,7 +27,7 @@ class AllBooksGridWidget extends StatelessWidget {
           child: Text(
             'All Books',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -45,6 +45,7 @@ class AllBooksGridWidget extends StatelessWidget {
           ),
           itemCount: books.length,
           itemBuilder: (context, index) {
+
             final book = books[index];
             final isFavorite = favoriteBooks.contains(book.id);
 
@@ -55,6 +56,7 @@ class AllBooksGridWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
+                color: AppColors.cardItemBgColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,7 +113,7 @@ class AllBooksGridWidget extends StatelessWidget {
                                       : Icons.bookmark_outline_rounded,
                                   key: ValueKey<bool>(isFavorite),
                                   color: AppColors.primaryColor,
-                                  size: 24,
+                                  size: 28,
                                 ),
                               ),
                             ),
@@ -130,27 +132,27 @@ class AllBooksGridWidget extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 14,
+                              fontSize: 18,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            book.description ?? 'No description',
+                            book.subtitle ?? 'No description',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: Colors.grey[600],
                             ),
                           ),
-                          const SizedBox(height: 2),
+                          const SizedBox(height: 10),
                           Text(
                             book.authors ?? 'Unknown Author',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
-                              color: Colors.grey[600],
+                              color: Colors.black,
                             ),
                           ),
                         ],

@@ -11,7 +11,7 @@ enum BookPageState {
 }
 
 class BookPageViewModel extends ChangeNotifier {
-  final BookService _bookService = BookService();
+  final BookService bookService = BookService();
 
   // State management
   BookPageState _state = BookPageState.initial;
@@ -48,7 +48,7 @@ class BookPageViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final BookResponse response = await _bookService.getBookData();
+      final BookResponse response = await bookService.getBookData();
       _allBooks = response.data ?? [];
       _state = BookPageState.loaded;
     } catch (e) {

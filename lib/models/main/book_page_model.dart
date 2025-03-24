@@ -23,14 +23,14 @@ class BookResponse {
 class Book {
   final String id;
   final String? title;
-  final String? description;
+  final String? subtitle;
   final String? authors;
   final String? image;
 
   Book({
     required this.id,
     this.title,
-    this.description,
+    this.subtitle,
     this.authors,
     this.image,
   });
@@ -39,7 +39,7 @@ class Book {
     return Book(
       id: json['id'] ?? '',
       title: json['title'],
-      description: json['description'],
+      subtitle: json['subtitle'],
       authors: json['authors'],
       image: json['image'],
     );
@@ -49,7 +49,7 @@ class Book {
     return Book(
       id: map['title'] ?? '', 
       title: map['title'],
-      description: map['description'],
+      subtitle: map['subtitle'],
       authors: map['authors'],
       image: map['image'],
     );
