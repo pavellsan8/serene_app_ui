@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(height: 30),
                           Image.asset(
                             'assets/images/auth/login.png',
-                            height: 150,
+                            height: 200,
                           ),
                           const SizedBox(height: 25),
                           const Align(
@@ -145,7 +145,7 @@ class LoginScreen extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.primaryColor,
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 20),
+                                      const EdgeInsets.symmetric(vertical: 15),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
