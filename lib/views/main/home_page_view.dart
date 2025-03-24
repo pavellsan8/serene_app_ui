@@ -125,6 +125,8 @@ class HomePage extends StatelessWidget {
                 children: [
                   CardItem(
                     title: "Sere" "bot",
+                    width: 70,
+                    height: 70,
                     path: "assets/images/home/menu/serebot.png",
                     color: Colors.red.shade400,
                     route: AppRoutes.chatbotPage,
@@ -132,6 +134,8 @@ class HomePage extends StatelessWidget {
                   ),
                   CardItem(
                     title: "Sere" "hear",
+                    width: 60,
+                    height: 70,
                     path: "assets/images/home/menu/serehear.png",
                     color: Colors.blue.shade400,
                     route: AppRoutes.musicPage,
@@ -139,6 +143,8 @@ class HomePage extends StatelessWidget {
                   ),
                   CardItem(
                     title: "Sere" "watch",
+                    width: 70,
+                    height: 70,
                     path: "assets/images/home/menu/serewatch.png",
                     color: Colors.green.shade400,
                     route: AppRoutes.videoPage,
@@ -146,6 +152,8 @@ class HomePage extends StatelessWidget {
                   ),
                   CardItem(
                     title: "Sere" "read",
+                    width: 60,
+                    height: 70,
                     path: "assets/images/home/menu/sereread.png",
                     color: Colors.orange.shade400,
                     route: AppRoutes.bookPage,

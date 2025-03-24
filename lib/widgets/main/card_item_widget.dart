@@ -5,6 +5,8 @@ import '../../utils/colors.dart';
 class CardItem extends StatelessWidget {
   final String title;
   final String path;
+  final double width;
+  final double height;
   final Color color;
   final String route;
   final String description;
@@ -13,6 +15,8 @@ class CardItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.path,
+    required this.width,
+    required this.height,
     required this.color,
     required this.route,
     required this.description,
@@ -36,17 +40,17 @@ class CardItem extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: Image.asset(
                 path,
-                height: 50,
-                width: 50,
+                width: width,
+                height: height,
               ),
             ),
-            const SizedBox(height: 12),
+            // const SizedBox(height: 12),
             Text.rich(
               TextSpan(
                 text: 'Sere',
                 style: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   color: AppColors.primaryColor,
                   fontFamily: 'Montserrat',
                 ),
@@ -81,6 +85,7 @@ class CardItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+            const SizedBox(height: 10),
           ],
         ),
       ),

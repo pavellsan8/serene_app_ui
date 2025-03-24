@@ -108,7 +108,7 @@ class _CompletePageState extends State<CompletePage>
                         child: Text(
                           "You have successfully finished the questionnaire.",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             color: Colors.black87,
                             fontWeight: FontWeight.w600,
                             height: 1.5,
