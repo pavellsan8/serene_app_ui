@@ -16,14 +16,14 @@ class FeelingPage extends StatelessWidget {
     return Consumer<FeelingViewModel>(
       builder: (context, viewModel, child) {
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
                 "We'd love to know how you're doing right now. Please tell us from 1 to 5 how do you feel right now.",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Montserrat',
                 ),
@@ -85,7 +85,7 @@ class FeelingPage extends StatelessWidget {
                   ],
                 ),
               ),
-              // const SizedBox(height: 30),
+              const SizedBox(height: 30),
               const Text(
                 "Well done! From this meter you can know whether it is good or bad, but with our help you can improve it even better",
                 textAlign: TextAlign.center,
