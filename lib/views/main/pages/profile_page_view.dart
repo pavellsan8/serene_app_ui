@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../viewmodels/main/profile_page_viewmodel.dart';
 import '../../../viewmodels/auth/logout_viewmodel.dart';
 import '../../../widgets/main/profile/profile_card_widget.dart';
-import '../../../widgets/main/profile/emotion_chip_widget.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
 
@@ -16,14 +15,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final emotionList = [
-    "Peaceful",
-    "Pessimistic",
-    "Joyful",
-    "Sad",
-    "Overwhelmed",
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -47,13 +38,22 @@ class _ProfilePageState extends State<ProfilePage> {
     final logoutViewModel = Provider.of<LogoutViewModel>(context);
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.backgroundColor,
+        title: const Text(
+          "Profile",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded),
-          color: AppColors.primaryColor,
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          color: AppColors.fontBlackColor,
           onPressed: () {
             Navigator.pushNamed(context, AppRoutes.homePage);
           },
@@ -88,89 +88,171 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     )
                   : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 50),
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Colors.white,
-                          child: Text(
-                            getInitials(profileViewModel.userData!.name),
-                            style: const TextStyle(
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat',
-                              color: Colors.black,
+                        Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              top: BorderSide(
+                                color: Colors.grey.shade400,
+                                width: 0.5,
+                              ),
+                              bottom: BorderSide(
+                                color: Colors.grey.shade400,
+                                width: 0.5,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          profileViewModel.userData!.name,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.fontBlackColor,
-                            fontFamily: 'Montserrat',
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 17),
-                          child: Wrap(
-                            alignment: WrapAlignment.center,
-                            runSpacing: 10,
-                            spacing: 8,
-                            children: emotionList
-                                .map(
-                                  (emotion) => EmotionChipWidget(
-                                    label: emotion,
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Expanded(
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              color: AppColors.primaryColor,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25),
-                              ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 30,
                             ),
                             child: Column(
                               children: [
-                                const SizedBox(height: 20),
-                                ProfileInfoCard(
-                                  icon: Icons.email,
-                                  title: "Email address",
-                                  subtitle: profileViewModel.userData!.email,
-                                  onTap: null,
-                                ),
-                                ProfileInfoCard(
-                                  icon: Icons.logout,
-                                  title: "Log out",
-                                  subtitle: "Change your account",
-                                  onTap: logoutViewModel.isLoading
-                                      ? null
-                                      : () {
-                                          logoutViewModel.logout(context);
-                                        },
-                                  trailing: logoutViewModel.isLoading
-                                      ? const SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                            strokeWidth: 2,
+                                Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 40,
+                                      backgroundColor:
+                                          AppColors.backgroundColor,
+                                      child: Text(
+                                        getInitials(
+                                            profileViewModel.userData!.name),
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Montserrat',
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          profileViewModel.userData!.name,
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.fontBlackColor,
+                                            fontFamily: 'Montserrat',
                                           ),
-                                        )
-                                      : null,
+                                        ),
+                                        Text(
+                                          profileViewModel.userData!.email,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.subtitleTextColor,
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ),
+                        ),
+                        const SizedBox(height: 5),
+                        Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.grey.shade400,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 0,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 10),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Text(
+                                    "Playlists",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.fontBlackColor,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                ),
+                                ProfileInfoCard(
+                                  icon: Icons.video_library_outlined,
+                                  title: "Favorites Videos",
+                                  subtitle: "Playlist of video that you like",
+                                  onTap: null,
+                                ),
+                                ProfileInfoCard(
+                                  icon: Icons.music_note_outlined,
+                                  title: "Favorites Musics",
+                                  subtitle: "Playlist of music that you like",
+                                  onTap: null,
+                                ),
+                                ProfileInfoCard(
+                                  icon: Icons.book_outlined,
+                                  title: "Favorites Books",
+                                  subtitle: "Playlist of book that you like",
+                                  onTap: null,
+                                ),
+                                SizedBox(height: 10),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            "Others",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.fontBlackColor,
+                              fontFamily: 'Montserrat',
+                            ),
+                          ),
+                        ),
+                        const ProfileInfoCard(
+                          icon: Icons.info_outline_rounded,
+                          title: "About Us",
+                          subtitle: "Get to know us better",
+                          onTap: null,
+                        ),
+                        ProfileInfoCard(
+                          icon: Icons.logout,
+                          title: "Log out",
+                          subtitle: "Change your account",
+                          onTap: logoutViewModel.isLoading
+                              ? null
+                              : () {
+                                  logoutViewModel.logout(context);
+                                },
+                          trailing: logoutViewModel.isLoading
+                              ? const SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : null,
                         ),
                       ],
                     ),

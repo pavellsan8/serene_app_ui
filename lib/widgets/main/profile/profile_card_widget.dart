@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/colors.dart';
+
 class ProfileInfoCard extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -18,35 +20,43 @@ class ProfileInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLogout = title == "Log out";
+
     return Card(
-      color: const Color(0xFF455A64),
-      elevation: 2,
+      color: Colors.white,
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
-      ),
-      margin: const EdgeInsets.symmetric(
-        vertical: 5,
-        horizontal: 16,
       ),
       child: InkWell(
         onTap: onTap,
         child: ListTile(
-          leading: Icon(icon, color: Colors.grey),
+          leading: Icon(
+            icon,
+            color: isLogout
+                ? Colors.red
+                : AppColors.subtitleTextColor,
+          ),
           title: Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: isLogout
+                  ? Colors.red
+                  : Colors.black,
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
           subtitle: Text(
             subtitle,
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: isLogout
+                  ? Colors.red
+                  : AppColors
+                      .subtitleTextColor,
               fontFamily: 'Montserrat',
-              fontSize: 12,
+              fontSize: 14,
             ),
           ),
           trailing: trailing,
