@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/colors.dart';
+
 class CardItem extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String path;
   final Color color;
   final String route;
   final String description;
@@ -10,7 +12,7 @@ class CardItem extends StatelessWidget {
   const CardItem({
     super.key,
     required this.title,
-    required this.icon,
+    required this.path,
     required this.color,
     required this.route,
     required this.description,
@@ -24,7 +26,7 @@ class CardItem extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.cardItemBgColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
@@ -32,36 +34,48 @@ class CardItem extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.15),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                size: 28,
-                color: color,
+              child: Image.asset(
+                path,
+                height: 50,
+                width: 50,
               ),
             ),
-            const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontFamily: 'Montserrat',
+            const SizedBox(height: 12),
+            Text.rich(
+              TextSpan(
+                text: 'Sere',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryColor,
+                  fontFamily: 'Montserrat',
+                ),
+                children: [
+                  TextSpan(
+                    text: title.substring(
+                      4,
+                    ),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 description,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
-                  color: Colors.grey.shade600,
+                  color: Colors.black,
                   fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w500,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
