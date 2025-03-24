@@ -31,11 +31,13 @@ class ChatMessage extends StatelessWidget {
           ],
           ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width *
-                  0.75, // Maksimal 75% dari layar
+              maxWidth: MediaQuery.of(context).size.width * 0.75,
             ),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 10,
+              ),
               decoration: BoxDecoration(
                 color: isUser ? AppColors.primaryColor : Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(20),
@@ -44,6 +46,7 @@ class ChatMessage extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: isUser ? Colors.white : Colors.black87,
+                  fontSize: 14,
                 ),
               ),
             ),

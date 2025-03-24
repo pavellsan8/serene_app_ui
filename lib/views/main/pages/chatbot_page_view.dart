@@ -41,20 +41,23 @@ class _ChatbotPageContent extends StatelessWidget {
             },
           ),
         ),
-        title: const Row(
+        title: Row(
           children: [
             CircleAvatar(
               radius: 20,
               backgroundColor: AppColors.backgroundColor,
-              child: Icon(Icons.smart_toy, color: AppColors.primaryColor),
+              child: Image.asset(
+                "assets/images/home/menu/serebot.png",
+                width: 20,
+              ),
             ),
-            SizedBox(width: 15),
-            Text(
+            const SizedBox(width: 15),
+            const Text(
               "Serebot",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 fontFamily: 'Montserrat',
               ),
             ),
