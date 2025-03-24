@@ -17,14 +17,14 @@ class MoodPage extends StatelessWidget {
     final moodOptions = ['Happy', 'Depressed', 'Tired', 'Anxious', 'Empty'];
 
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
             "In one word, which of the following best describes how you've felt over the past month?",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: FontWeight.w600,
               fontFamily: 'Montserrat',
             ),

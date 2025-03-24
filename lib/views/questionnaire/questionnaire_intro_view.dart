@@ -70,7 +70,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                       "Your answers are extremely helpful in assisting us in determining the content.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Colors.black54,
                         fontFamily: 'Montserrat',
@@ -101,6 +101,7 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
+                      fontWeight: FontWeight.w600,
                       fontFamily: 'Montserrat',
                     ),
                   ),

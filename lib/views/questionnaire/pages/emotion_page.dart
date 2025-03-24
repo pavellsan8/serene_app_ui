@@ -38,14 +38,14 @@ class EmotionsPage extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
             "You can take whatever you like, what you want to know or whatever, and feel free to take it!",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: FontWeight.w600,
               fontFamily: 'Montserrat',
             ),
@@ -53,8 +53,8 @@ class EmotionsPage extends StatelessWidget {
           const SizedBox(height: 32),
           Expanded(
             child: Wrap(
-              spacing: 8,
-              runSpacing: 10,
+              spacing: 10,
+              runSpacing: 15,
               children: emotionOptions
                   .map((emotion) => EmotionChipWidget(
                         emotion: emotion,
