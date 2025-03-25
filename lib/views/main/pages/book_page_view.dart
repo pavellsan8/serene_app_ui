@@ -29,45 +29,32 @@ class _BookPageState extends State<BookPage> {
   }
 
   Future<void> _loadData() async {
-    final viewModel = Provider.of<BookPageViewModel>(context, listen: false);
-    await viewModel.initialize();
+    await Provider.of<BookPageViewModel>(context, listen: false).initialize();
   }
 
   void _handleBookTap(Book book) {
-    print("Navigating to: ${book.id}");
+    debugPrint("Navigating to: ${book.id}");
     // Add navigation logic here
   }
 
   void _handleFavoriteTap(Book book) {
-    final viewModel = Provider.of<BookPageViewModel>(context, listen: false);
-    viewModel.toggleFavorite(book.id);
+    Provider.of<BookPageViewModel>(context, listen: false)
+        .toggleFavorite(book.id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.primaryColor,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 0),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_rounded,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.homePage);
-            },
-          ),
-        ),
-      ),
+      backgroundColor: AppColors.backgroundColor,
       body: Consumer<BookPageViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.state == BookPageState.loading &&
               viewModel.allBooks.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
+              ),
+            );
           }
 
           if (viewModel.state == BookPageState.error) {
@@ -90,6 +77,86 @@ class _BookPageState extends State<BookPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Stack(
+                    children: [
+                      ClipPath(
+                        child: SizedBox(
+                          height: 250,
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/images/home/detail/book_ilustration.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 50,
+                        left: 20,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.homePage,
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.arrow_back_ios_outlined,
+                                size: 32,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(width: 10),
+                              RichText(
+                                text: const TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Sere',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Montserrat',
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'Read',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: 'Montserrat',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const Positioned(
+                        top: 110,
+                        left: 20,
+                        right: 250,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 5),
+                            Text(
+                              'Let go of stress and begin a new chapter.',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 15,

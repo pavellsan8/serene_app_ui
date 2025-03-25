@@ -45,7 +45,6 @@ class AllBooksGridWidget extends StatelessWidget {
           ),
           itemCount: books.length,
           itemBuilder: (context, index) {
-
             final book = books[index];
             final isFavorite = favoriteBooks.contains(book.id);
 
@@ -56,7 +55,7 @@ class AllBooksGridWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                color: AppColors.cardItemBgColor,
+                color: Colors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

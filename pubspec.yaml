@@ -35,6 +35,7 @@ flutter:
     - assets/images/questionnaire/
     - assets/images/home/
     - assets/images/home/menu/
+    - assets/images/home/detail/
     - assets/icons/
 
   fonts:
