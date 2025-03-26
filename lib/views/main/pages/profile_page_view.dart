@@ -44,16 +44,16 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text(
           "Profile",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             fontFamily: 'Montserrat',
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.primaryColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          color: AppColors.fontBlackColor,
+          color: Colors.white,
           onPressed: () {
             Navigator.pushNamed(context, AppRoutes.homePage);
           },
@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Container(
                           width: double.infinity,
-                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          // margin: const EdgeInsets.symmetric(vertical: 5),
                           decoration: BoxDecoration(
                             border: Border(
                               top: BorderSide(
@@ -116,8 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   children: [
                                     CircleAvatar(
                                       radius: 40,
-                                      backgroundColor:
-                                          AppColors.backgroundColor,
+                                      backgroundColor: AppColors.backgroundColor,
                                       child: Text(
                                         getInitials(
                                             profileViewModel.userData!.name),

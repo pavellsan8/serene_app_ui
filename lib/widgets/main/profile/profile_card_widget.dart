@@ -57,6 +57,7 @@ class ProfileInfoCard extends StatelessWidget {
                       .subtitleTextColor,
               fontFamily: 'Montserrat',
               fontSize: 14,
+              fontWeight: FontWeight.w500,
             ),
           ),
           trailing: trailing,
