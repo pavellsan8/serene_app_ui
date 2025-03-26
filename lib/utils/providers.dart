@@ -14,6 +14,11 @@ import '../viewmodels/questionnaire/questionnaire_viewmodel.dart';
 import '../viewmodels/questionnaire/feeling_page_viewmodel.dart';
 import '../viewmodels/questionnaire/mood_page_viewmodel.dart';
 import '../viewmodels/questionnaire/emotion_page_viewmodel.dart';
+
+import '../viewmodels/main/book_page_viewmodel.dart';
+import '../viewmodels/main/music_page_viewmodel.dart';
+import '../viewmodels/main/video_page_viewmodel.dart';
+
 import '../viewmodels/auth/logout_viewmodel.dart';
 
 class AppProviders {
@@ -33,11 +38,13 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => RegisterViewModel()),
         ChangeNotifierProvider(create: (_) => EmailInputViewModel()),
-        
         ChangeNotifierProvider(create: (_) => QuestionnaireViewModel()),
         ChangeNotifierProvider(create: (_) => FeelingViewModel()),
         ChangeNotifierProvider(create: (_) => MoodViewModel()),
         ChangeNotifierProvider(create: (_) => EmotionViewModel()),
+        ChangeNotifierProvider(create: (_) => BookPageViewModel()),
+        ChangeNotifierProvider(create: (_) => MusicPageViewModel()),
+        ChangeNotifierProvider(create: (_) => VideoPageViewModel()),
         ChangeNotifierProvider(create: (_) => LogoutViewModel()),
       ],
       child: child,

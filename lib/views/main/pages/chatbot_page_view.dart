@@ -45,10 +45,10 @@ class _ChatbotPageContent extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 20,
-              backgroundColor: AppColors.backgroundColor,
+              backgroundColor: Colors.white,
               child: Image.asset(
                 "assets/images/home/menu/serebot.png",
-                width: 20,
+                width: 22,
               ),
             ),
             const SizedBox(width: 15),
@@ -97,7 +97,6 @@ class _ChatbotPageContent extends StatelessWidget {
                     },
                   ),
           ),
-
           ChatbotInputArea(
             controller: viewModel.messageController,
             onSend: viewModel.sendMessage,

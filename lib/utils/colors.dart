@@ -7,4 +7,5 @@ class AppColors {
   static const Color fontBlueColor = Color(0xFF2878EF);
   static const Color backgroundMeterColor = Color.fromARGB(255, 193, 212, 255);
   static const Color cardItemBgColor = Color(0xFFCED9F0);
+  static const Color subtitleTextColor = Color(0xFF807777);
 }

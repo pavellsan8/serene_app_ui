@@ -46,7 +46,7 @@ class ChatMessage extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: isUser ? Colors.white : Colors.black87,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
             ),

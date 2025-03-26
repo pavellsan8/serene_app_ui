@@ -35,7 +35,7 @@ class ChatbotInputArea extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 hintText: "Type your message...",
-                hintStyle: TextStyle(color: Colors.grey.shade400),
+                hintStyle: const TextStyle(color: AppColors.subtitleTextColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
