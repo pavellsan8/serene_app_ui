@@ -17,6 +17,7 @@ import '../viewmodels/questionnaire/emotion_page_viewmodel.dart';
 
 import '../viewmodels/main/book_page_viewmodel.dart';
 import '../viewmodels/main/music_page_viewmodel.dart';
+import '../viewmodels/main/video_page_viewmodel.dart';
 
 import '../viewmodels/auth/logout_viewmodel.dart';
 
@@ -43,6 +44,7 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => EmotionViewModel()),
         ChangeNotifierProvider(create: (_) => BookPageViewModel()),
         ChangeNotifierProvider(create: (_) => MusicPageViewModel()),
+        ChangeNotifierProvider(create: (_) => VideoPageViewModel()),
         ChangeNotifierProvider(create: (_) => LogoutViewModel()),
       ],
       child: child,
