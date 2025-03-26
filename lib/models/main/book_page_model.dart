@@ -25,14 +25,24 @@ class Book {
   final String? title;
   final String? subtitle;
   final String? authors;
+  final String? description;
+  final String? page;
+  final String? year;
   final String? image;
+  final String? url;
+  final String? download;
 
   Book({
     required this.id,
     this.title,
     this.subtitle,
     this.authors,
+    this.description,
+    this.page,
+    this.year,
     this.image,
+    this.url,
+    this.download,
   });
 
   factory Book.fromJson(Map<String, dynamic> json) {
@@ -41,17 +51,12 @@ class Book {
       title: json['title'],
       subtitle: json['subtitle'],
       authors: json['authors'],
+      description: json['description'],
+      page: json['page'],
+      year: json['year'],
       image: json['image'],
-    );
-  }
-
-  factory Book.fromMap(Map<String, String> map) {
-    return Book(
-      id: map['title'] ?? '', 
-      title: map['title'],
-      subtitle: map['subtitle'],
-      authors: map['authors'],
-      image: map['image'],
+      url: json['url'],
+      download: json['download'],
     );
   }
 }

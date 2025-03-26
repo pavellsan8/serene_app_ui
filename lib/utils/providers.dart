@@ -36,14 +36,11 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => RegisterViewModel()),
         ChangeNotifierProvider(create: (_) => EmailInputViewModel()),
-
         ChangeNotifierProvider(create: (_) => QuestionnaireViewModel()),
         ChangeNotifierProvider(create: (_) => FeelingViewModel()),
         ChangeNotifierProvider(create: (_) => MoodViewModel()),
         ChangeNotifierProvider(create: (_) => EmotionViewModel()),
-
         ChangeNotifierProvider(create: (_) => BookPageViewModel()),
-        
         ChangeNotifierProvider(create: (_) => LogoutViewModel()),
       ],
       child: child,

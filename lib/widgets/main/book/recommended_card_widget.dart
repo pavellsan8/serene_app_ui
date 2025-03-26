@@ -28,7 +28,7 @@ class RecommendedBooksWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: 250,
+          height: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -51,7 +51,7 @@ class RecommendedBooksWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
                           book.image ?? '',
-                          height: 150,
+                          height: 200,
                           width: double.infinity,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) =>

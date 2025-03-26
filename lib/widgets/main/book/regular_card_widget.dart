@@ -6,15 +6,11 @@ import '../../../utils/colors.dart';
 class AllBooksGridWidget extends StatelessWidget {
   final List<Book> books;
   final Function(Book) onBookTap;
-  final Function(Book) onFavoriteTap;
-  final Set<String> favoriteBooks;
 
   const AllBooksGridWidget({
     Key? key,
     required this.books,
     required this.onBookTap,
-    required this.onFavoriteTap,
-    required this.favoriteBooks,
   }) : super(key: key);
 
   @override
@@ -22,31 +18,32 @@ class AllBooksGridWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: Text(
-            'All Books',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
+        // const Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 15),
+        //   child: Text(
+        //     'Recommended Books',
+        //     style: TextStyle(
+        //       fontSize: 24,
+        //       fontWeight: FontWeight.bold,
+        //       fontFamily: 'Montserrat',
+        //     ),
+        //   ),
+        // ),
+        // const SizedBox(height: 12),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.5,
+            crossAxisCount: 1,
+            childAspectRatio: 2.5,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
           itemCount: books.length,
           itemBuilder: (context, index) {
             final book = books[index];
-            final isFavorite = favoriteBooks.contains(book.id);
+            // final isFavorite = favoriteBooks.contains(book.id);
 
             return GestureDetector(
               onTap: () => onBookTap(book),
@@ -56,105 +53,71 @@ class AllBooksGridWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 color: Colors.white,
-                child: Column(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(8),
-                            topRight: Radius.circular(8),
-                          ),
-                          child: Image.network(
-                            book.image ?? '',
-                            height: 200,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Container(
-                              height: 150,
-                              width: double.infinity,
-                              color: Colors.grey[300],
-                              child: const Icon(Icons.book),
-                            ),
-                          ),
+                    // Image section
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        bottomLeft: Radius.circular(8),
+                      ),
+                      child: Image.network(
+                        book.image ?? '',
+                        height: 200,
+                        width: 120,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          height: 150,
+                          width: double.infinity,
+                          color: Colors.grey[300],
+                          child: const Icon(Icons.book),
                         ),
-                        Positioned(
-                          top: 7,
-                          right: 7,
-                          child: GestureDetector(
-                            onTap: () => onFavoriteTap(book),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
-                                shape: BoxShape.circle,
-                              ),
-                              padding: const EdgeInsets.all(5),
-                              child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 300),
-                                transitionBuilder: (Widget child,
-                                    Animation<double> animation) {
-                                  return ScaleTransition(
-                                    scale: animation,
-                                    child: FadeTransition(
-                                      opacity: animation,
-                                      child: FadeTransition(
-                                        opacity: animation,
-                                        child: child,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Icon(
-                                  isFavorite
-                                      ? Icons.bookmark_rounded
-                                      : Icons.bookmark_outline_rounded,
-                                  key: ValueKey<bool>(isFavorite),
-                                  color: AppColors.primaryColor,
-                                  size: 28,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            book.title ?? 'Unknown Title',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                    // Text section
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              book.title ?? 'Unknown Title',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                fontFamily: 'Montserrat',
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            book.subtitle ?? 'No description',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[600],
+                            const SizedBox(height: 6),
+                            Text(
+                              book.authors ?? 'Unknown Author',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: AppColors.subtitleTextColor,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Montserrat',
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            book.authors ?? 'Unknown Author',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
+                            const SizedBox(height: 6),
+                            Text(
+                              book.description ?? 'No description',
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: AppColors.subtitleTextColor,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
