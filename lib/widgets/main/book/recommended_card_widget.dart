@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../../models/main/book_page_model.dart';
+import '../../../utils/colors.dart';
 
 class RecommendedBooksWidget extends StatelessWidget {
   final List<Book> books;
@@ -17,7 +19,7 @@ class RecommendedBooksWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 0),
           child: Text(
             'Recommended Books',
             style: TextStyle(
@@ -31,7 +33,7 @@ class RecommendedBooksWidget extends StatelessWidget {
           height: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             itemCount: books.length > 5 ? 5 : books.length,
             itemBuilder: (context, index) {
               final book = books[index];
@@ -41,7 +43,7 @@ class RecommendedBooksWidget extends StatelessWidget {
                   width: 150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color: AppColors.backgroundColor,
                   ),
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   child: Column(

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../models/main/book_page_model.dart';
 import '../../../viewmodels/main/book_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
+import '../../../views/main/detail/book_detail_page_view.dart';
 import '../../../widgets/main/book/regular_card_widget.dart';
 
 class BookPage extends StatefulWidget {
@@ -20,22 +21,30 @@ class _BookPageState extends State<BookPage> {
       fetchData: () async {
         final viewModel =
             Provider.of<BookPageViewModel>(context, listen: false);
-        // Ensure that fetchBooks() returns a Future<List<Book>>
-        return await viewModel.fetchData(); // Correctly fetch data
+        return await viewModel.fetchData();
       },
       image: 'assets/images/home/detail/book_ilustration.jpg',
       feature: 'Read',
       subtitle: 'Let go of stress and begin a new chapter.',
       // Pass your custom widget to itemBuilder
       itemBuilder: (books) {
-        return AllBooksGridWidget(
+        return BooksGridWidget(
           books: books,
           onBookTap: (book) {
             debugPrint("book clicked");
-            // Handle book tap
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BookDetailPage(
+                  book: book,
+                  recommendedBooks: books,
+                ),
+              ),
+            );
           },
         );
       },
+      loadingBuilder: () => const BooksShimmerGridWidget(),
     );
   }
 }

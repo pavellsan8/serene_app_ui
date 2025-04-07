@@ -7,6 +7,7 @@ class GenericPage<T> extends StatefulWidget {
   final String feature; // Feature name for the page
   final String subtitle; // Subtitle for the page
   final Widget Function(List<T>) itemBuilder; // Custom item builder
+  final Widget Function()? loadingBuilder;
 
   const GenericPage({
     super.key,
@@ -15,6 +16,7 @@ class GenericPage<T> extends StatefulWidget {
     required this.feature,
     required this.subtitle,
     required this.itemBuilder, // Accept the custom widget builder function
+    this.loadingBuilder,
   });
 
   @override
@@ -40,11 +42,12 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
         future: futureData, // Use the futureData which is set only once
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
-            );
+            return widget.loadingBuilder?.call() ??
+                const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primaryColor,
+                  ),
+                );
           }
 
           if (snapshot.hasError) {
