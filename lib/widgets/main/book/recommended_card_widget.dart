@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../../models/main/book_page_model.dart';
+import '../../../utils/colors.dart';
 
 class RecommendedBooksWidget extends StatelessWidget {
   final List<Book> books;
@@ -17,31 +19,31 @@ class RecommendedBooksWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: 0),
           child: Text(
             'Recommended Books',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: 300,
+          height: 250,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            itemCount: books.length > 5 ? 5 : books.length,
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            itemCount: books.length > 10 ? 10 : books.length,
             itemBuilder: (context, index) {
               final book = books[index];
               return GestureDetector(
                 onTap: () => onBookTap(book),
                 child: Container(
-                  width: 150,
+                  width: 110,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color: AppColors.backgroundColor,
                   ),
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   child: Column(
@@ -50,14 +52,14 @@ class RecommendedBooksWidget extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          book.image ?? '',
-                          height: 200,
+                          book.thumbnail ?? '',
+                          height: 150,
                           width: double.infinity,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) =>
                               Container(
                             height: 150,
-                            width: 120,
+                            width: 100,
                             color: Colors.grey[300],
                             child: const Icon(Icons.book),
                           ),
@@ -70,7 +72,7 @@ class RecommendedBooksWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              book.title ?? 'Unknown Title',
+                              book.title,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -80,7 +82,7 @@ class RecommendedBooksWidget extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              book.authors ?? 'Unknown Author',
+                              book.authorsAsString,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

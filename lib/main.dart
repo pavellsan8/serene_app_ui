@@ -27,7 +27,7 @@ class SereneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splashScreen,
+      initialRoute: AppRoutes.musicPage,
       routes: AppRoutes.getRoutes(),
     );
   }

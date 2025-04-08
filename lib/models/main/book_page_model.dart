@@ -21,42 +21,41 @@ class BookResponse {
 }
 
 class Book {
-  final String id;
-  final String? title;
-  final String? subtitle;
-  final String? authors;
+  final String title;
+  final List<String>? authors;
   final String? description;
-  final String? page;
-  final String? year;
-  final String? image;
+  final int? pages;
+  final String? date;
+  final String? thumbnail;
   final String? url;
-  final String? download;
 
   Book({
-    required this.id,
-    this.title,
-    this.subtitle,
+    required this.title,
     this.authors,
     this.description,
-    this.page,
-    this.year,
-    this.image,
+    this.pages,
+    this.date,
+    this.thumbnail,
     this.url,
-    this.download,
   });
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
-      id: json['id'] ?? '',
       title: json['title'],
-      subtitle: json['subtitle'],
-      authors: json['authors'],
+      authors:
+          (json['author'] as List<dynamic>?)?.map((e) => e as String).toList(),
       description: json['description'],
-      page: json['page'],
-      year: json['year'],
-      image: json['image'],
-      url: json['url'],
-      download: json['download'],
+      pages: json['pages'],
+      date: json['published_date'],
+      thumbnail: json['thumbnail'],
+      url: json['web_reader'],
     );
+  }
+
+  String get authorsAsString {
+    if (authors == null || authors!.isEmpty) {
+      return 'Unknown Author';
+    }
+    return authors!.join(', ');
   }
 }

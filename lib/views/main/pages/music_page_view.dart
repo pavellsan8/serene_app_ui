@@ -35,6 +35,7 @@ class _MusicPageState extends State<MusicPage> {
           },
         );
       },
+      loadingBuilder: () => const MusicShimmerGridWidget(),
     );
   }
 }

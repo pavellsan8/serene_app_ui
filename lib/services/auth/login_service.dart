@@ -59,16 +59,14 @@ class LoginService {
       final response = await http.post(
         url,
         headers: {
+          "Authorization": "Bearer $refreshToken",
           "Content-Type": "application/json",
         },
-        body: jsonEncode({
-          "refresh_token": refreshToken,
-        }),
       );
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        final newAccessToken = responseData["access_token"];
+        final newAccessToken = responseData["data"]["access_token"];
 
         await prefs.setString("access_token", newAccessToken);
         return newAccessToken;
