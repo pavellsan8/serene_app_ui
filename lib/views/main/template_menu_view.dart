@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/colors.dart';
+import '../../utils/routes.dart';
 
 class GenericPage<T> extends StatefulWidget {
   final Future<List<T>> Function() fetchData; // Function to fetch data
@@ -101,7 +103,10 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                         left: 20,
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pop(context);
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.homePage,
+                            );
                           },
                           child: Row(
                             children: [

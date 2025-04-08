@@ -26,12 +26,10 @@ class _BookPageState extends State<BookPage> {
       image: 'assets/images/home/detail/book_ilustration.jpg',
       feature: 'Read',
       subtitle: 'Let go of stress and begin a new chapter.',
-      // Pass your custom widget to itemBuilder
       itemBuilder: (books) {
         return BooksGridWidget(
           books: books,
           onBookTap: (book) {
-            debugPrint("book clicked");
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -41,7 +39,7 @@ class _BookPageState extends State<BookPage> {
                 ),
               ),
             );
-          },
+                    },
         );
       },
       loadingBuilder: () => const BooksShimmerGridWidget(),

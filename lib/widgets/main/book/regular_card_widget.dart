@@ -45,12 +45,9 @@ class BooksGridWidget extends StatelessWidget {
                   children: [
                     // Image section
                     ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        bottomLeft: Radius.circular(8),
-                      ),
+                        borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        book.image ?? '',
+                        book.thumbnail ?? '',
                         height: 200,
                         width: 120,
                         fit: BoxFit.cover,
@@ -70,7 +67,7 @@ class BooksGridWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              book.title ?? 'Unknown Title',
+                              book.title,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -81,7 +78,7 @@ class BooksGridWidget extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              book.authors ?? 'Unknown Author',
+                              book.authorsAsString,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -139,77 +136,76 @@ class BooksShimmerGridWidget extends StatelessWidget {
 
             // Book cards shimmer
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
               child: Column(
-                children: List.generate(4, (index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        // Image shimmer
-                        Container(
-                          height: 140,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
+                children: List.generate(
+                  5,
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        children: [
+                          // Image shimmer
+                          Container(
+                            height: 150,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        // Text shimmer
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Title shimmer
-                                Container(
-                                  height: 16,
-                                  width: double.infinity,
-                                  color: Colors.grey[300],
-                                ),
-                                const SizedBox(height: 8),
-                                // Author shimmer
-                                Container(
-                                  height: 14,
-                                  width: 120,
-                                  color: Colors.grey[300],
-                                ),
-                                const SizedBox(height: 12),
-                                // Description lines shimmer
-                                Container(
-                                  height: 12,
-                                  width: double.infinity,
-                                  color: Colors.grey[300],
-                                ),
-                                const SizedBox(height: 6),
-                                Container(
-                                  height: 12,
-                                  width: double.infinity,
-                                  color: Colors.grey[300],
-                                ),
-                                const SizedBox(height: 6),
-                                Container(
-                                  height: 12,
-                                  width: 150,
-                                  color: Colors.grey[300],
-                                ),
-                              ],
+                          const SizedBox(width: 10),
+                          // Text shimmer
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Title shimmer
+                                  Container(
+                                    height: 16,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  // Author shimmer
+                                  Container(
+                                    height: 14,
+                                    width: 120,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  // Description lines shimmer
+                                  Container(
+                                    height: 12,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Container(
+                                    height: 12,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Container(
+                                    height: 12,
+                                    width: 150,
+                                    color: Colors.grey[300],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
+                        ],
+                      ),
+                    );
+                    // );
+                  },
+                ),
               ),
             ),
           ],
