@@ -45,7 +45,7 @@ class BooksGridWidget extends StatelessWidget {
                   children: [
                     // Image section
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8),
                       child: Image.network(
                         book.thumbnail ?? '',
                         height: 200,

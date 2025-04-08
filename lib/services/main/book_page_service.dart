@@ -8,7 +8,7 @@ class BookService {
   Future<BookResponse> getBookData({String? query}) async {
     String baseUrl = "${EnvConfig.baseUrl}/api/v1/get-book-list";
     String finalUrl =
-        "$baseUrl?query=${query?.isNotEmpty == true ? query : 'stress'}";
+        "$baseUrl?query=${query?.isNotEmpty == true ? query : 'anxious'}";
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? accessToken = prefs.getString("access_token");

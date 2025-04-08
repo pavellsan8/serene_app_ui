@@ -40,7 +40,7 @@ class RecommendedBooksWidget extends StatelessWidget {
               return GestureDetector(
                 onTap: () => onBookTap(book),
                 child: Container(
-                  width: 100,
+                  width: 110,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.backgroundColor,

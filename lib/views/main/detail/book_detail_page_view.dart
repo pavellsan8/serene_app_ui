@@ -67,7 +67,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   child: Image.network(
                     viewModel.getHighQualityThumbnail(widget.book.thumbnail),
                     height: 250,
-                    width: 150,
+                    width: 180,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -136,13 +136,26 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () async {
-                          final Uri url = Uri.parse(widget.book.url ?? '');
-                          if (await canLaunchUrl(url)) {
-                            debugPrint('URL: ${widget.book.url}');
-                            await launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          } else {
-                            debugPrint('Could not launch $url');
+                          String urlString = widget.book.url ?? '';
+                          if (urlString.isNotEmpty) {
+                            if (!urlString.startsWith('https://') &&
+                                !urlString.startsWith('http://')) {
+                              urlString = 'https://$urlString';
+                            }
+
+                            final Uri url = Uri.parse(urlString);
+                            try {
+                              bool launched = await launchUrl(
+                                url,
+                                mode: LaunchMode.externalApplication,
+                              );
+
+                              if (!launched) {
+                                debugPrint('Could not launch $url');
+                              }
+                            } catch (e) {
+                              debugPrint('Error launching URL: $e');
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -150,7 +163,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                         child: const Text(
                           'Read Now',
