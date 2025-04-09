@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,19 +25,12 @@ class LoginService {
       // Login response body output
       final loginResponse = LoginResponse.fromJson(responseData);
       if (loginResponse.data != null) {
-        final prefs = await SharedPreferences.getInstance();
-
         // simpan data email, access token dan refresh token
         await ApplicationStorage.saveEmail(request.email);
         await ApplicationStorage.saveAccessToken(
             loginResponse.data!.accessToken);
         await ApplicationStorage.saveRefreshToken(
             loginResponse.data!.refreshToken);
-
-        debugPrint('===== SAVED TOKEN DATA =====');
-        debugPrint('access_token: ${prefs.getString("access_token")}');
-        debugPrint('refresh_token: ${prefs.getString("refresh_token")}');
-        debugPrint('============================');
       }
 
       return loginResponse;

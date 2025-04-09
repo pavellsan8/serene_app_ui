@@ -57,8 +57,7 @@ class ApplicationStorage {
   // Get feeling rating
   static Future<int> getFeeling() async {
     final prefs = await SharedPreferences.getInstance();
-    final value = prefs.getInt(feelingKey) ?? 1; // Default to 1
-    // debugPrint('Retrieved feeling from SharedPreferences: $value');
+    final value = prefs.getInt(feelingKey) ?? 1;
     return value;
   }
 
@@ -66,7 +65,6 @@ class ApplicationStorage {
   static Future<String?> getMood() async {
     final prefs = await SharedPreferences.getInstance();
     final value = prefs.getString(moodKey);
-    // debugPrint('Retrieved mood from SharedPreferences: $value');
     return value;
   }
 
@@ -74,7 +72,6 @@ class ApplicationStorage {
   static Future<List<String>> getEmotions() async {
     final prefs = await SharedPreferences.getInstance();
     final value = prefs.getStringList(emotionsKey) ?? [];
-    // debugPrint('Retrieved emotions from SharedPreferences: $value');
     return value;
   }
 
@@ -82,7 +79,6 @@ class ApplicationStorage {
   static Future<String?> getEmail() async {
     final prefs = await SharedPreferences.getInstance();
     final value = prefs.getString(emailKey);
-    // debugPrint('Retrieved mood from SharedPreferences: $value');
     return value;
   }
 
@@ -96,6 +92,14 @@ class ApplicationStorage {
   static Future<String?> getRefreshToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(refreshTokenKey);
+  }
+
+  // Delete all questionnaire-related keys
+  static Future<void> clearQuestionnaireData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(feelingKey);
+    await prefs.remove(moodKey);
+    await prefs.remove(emotionsKey);
   }
 
   // Get all questionnaire data

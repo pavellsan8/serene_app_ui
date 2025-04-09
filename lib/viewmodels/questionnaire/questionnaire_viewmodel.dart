@@ -123,8 +123,8 @@ class QuestionnaireViewModel extends ChangeNotifier {
 
       questionnaireInputService.submitQuestionnaire(request);
 
-      // Dismiss loading dialog
-      // Navigator.pop(context);
+      // Clear the questionnaire data from SharedPreferences
+      await ApplicationStorage.clearQuestionnaireData();
 
       // Navigate to completion page after submission
       if (context.mounted) {
@@ -134,15 +134,14 @@ class QuestionnaireViewModel extends ChangeNotifier {
         );
       }
     } catch (e) {
-      // Handle any errors
-      Navigator.pop(context); // Dismiss loading dialog
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error submitting data: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error submitting data: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 
