@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../widgets/questionnaire/continue_btn_widget.dart';
 import '../../../widgets/questionnaire/emotion_chip_widget.dart';
 import '../../../viewmodels/questionnaire/emotion_page_viewmodel.dart';
+import '../../../utils/shared_preferences.dart';
 
 class EmotionsPage extends StatelessWidget {
   final VoidCallback onContinue;
@@ -53,7 +54,7 @@ class EmotionsPage extends StatelessWidget {
           const SizedBox(height: 32),
           Expanded(
             child: Wrap(
-              spacing: 10,
+              spacing: 5,
               runSpacing: 15,
               children: emotionOptions
                   .map((emotion) => EmotionChipWidget(
@@ -63,7 +64,13 @@ class EmotionsPage extends StatelessWidget {
                   .toList(),
             ),
           ),
-          ContinueButton(onPressed: onContinue),
+          ContinueButton(
+            onPressed: () {
+              // Save to SharedPreferences before continuing
+              ApplicationStorage.saveEmotions(emotionsViewModel.selectedEmotions);
+              onContinue();
+            },
+          ),
         ],
       ),
     );

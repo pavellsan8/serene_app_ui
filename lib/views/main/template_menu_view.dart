@@ -100,7 +100,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                       ),
                       Positioned(
                         top: 50,
-                        left: 20,
+                        left: 15,
                         child: GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(
@@ -111,8 +111,8 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                           child: Row(
                             children: [
                               const Icon(
-                                Icons.arrow_back_ios_outlined,
-                                size: 32,
+                                Icons.arrow_back_ios_new_rounded,
+                                size: 26,
                                 color: Colors.white,
                               ),
                               const SizedBox(width: 10),
@@ -123,7 +123,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                                       text: 'Sere',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         fontFamily: 'Montserrat',
                                       ),
@@ -132,7 +132,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                                       text: widget.feature,
                                       style: const TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         fontFamily: 'Montserrat',
                                       ),
@@ -147,7 +147,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                       Positioned(
                         top: 110,
                         left: 20,
-                        right: 250,
+                        right: 230,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
