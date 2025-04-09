@@ -53,7 +53,7 @@ class EmotionsPage extends StatelessWidget {
           const SizedBox(height: 32),
           Expanded(
             child: Wrap(
-              spacing: 10,
+              spacing: 5,
               runSpacing: 15,
               children: emotionOptions
                   .map((emotion) => EmotionChipWidget(

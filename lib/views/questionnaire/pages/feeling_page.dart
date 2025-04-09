@@ -39,48 +39,61 @@ class FeelingPage extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: SfRadialGauge(
-                  enableLoadingAnimation: true,
-                  axes: <RadialAxis>[
-                    RadialAxis(
-                      minimum: 1,
-                      maximum: 5,
-                      startAngle: 180,
-                      endAngle: 0,
-                      showTicks: false,
-                      showLabels: true,
-                      showLastLabel: true,
-                      canScaleToFit: true,
-                      axisLineStyle: const AxisLineStyle(
-                        thickness: 30,
-                        color: AppColors.backgroundMeterColor,
-                        // cornerStyle: CornerStyle.bothCurve,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SfRadialGauge(
+                      enableLoadingAnimation: true,
+                      axes: <RadialAxis>[
+                        RadialAxis(
+                          minimum: 1,
+                          maximum: 5,
+                          startAngle: 180,
+                          endAngle: 0,
+                          showTicks: false,
+                          showLabels: true,
+                          showLastLabel: true,
+                          canScaleToFit: true,
+                          axisLineStyle: const AxisLineStyle(
+                            thickness: 30,
+                            color: AppColors.backgroundMeterColor,
+                          ),
+                          ranges: <GaugeRange>[
+                            GaugeRange(
+                              startValue: 1,
+                              endValue: viewModel.selectedValue.toDouble(),
+                              color: AppColors.primaryColor,
+                              startWidth: 30,
+                              endWidth: 30,
+                            ),
+                          ],
+                          pointers: <GaugePointer>[
+                            MarkerPointer(
+                              value: viewModel.selectedValue
+                                  .toDouble()
+                                  .clamp(1, 5),
+                              markerType: MarkerType.circle,
+                              color: AppColors.primaryColor,
+                              markerHeight: 35,
+                              markerWidth: 35,
+                              enableDragging: true,
+                              enableAnimation: true,
+                              animationType: AnimationType.ease,
+                              animationDuration: 250,
+                              onValueChanged: (value) {
+                                viewModel.updateFeelingValue(value.round());
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      top: 110,
+                      child: Image.asset(
+                        'assets/images/questionnaire/questionnaire_2.png',
+                        height: 70,
                       ),
-                      ranges: <GaugeRange>[
-                        GaugeRange(
-                          startValue: 1,
-                          endValue: viewModel.selectedValue.toDouble(),
-                          color: AppColors.primaryColor,
-                          startWidth: 30,
-                          endWidth: 30,
-                        ),
-                      ],
-                      pointers: <GaugePointer>[
-                        MarkerPointer(
-                          value: viewModel.selectedValue.toDouble().clamp(1, 5),
-                          markerType: MarkerType.circle,
-                          color: AppColors.primaryColor,
-                          markerHeight: 35,
-                          markerWidth: 35,
-                          enableDragging: true,
-                          enableAnimation: true,
-                          animationType: AnimationType.ease,
-                          animationDuration: 250,
-                          onValueChanged: (value) {
-                            viewModel.updateFeelingValue(value.round());
-                          },
-                        ),
-                      ],
                     ),
                   ],
                 ),
