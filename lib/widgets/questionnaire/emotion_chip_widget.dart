@@ -15,7 +15,7 @@ class EmotionChipWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = viewModel.isEmotionSelected(emotion);
+    final isSelected = viewModel.selectedEmotions.contains(emotion);
 
     return GestureDetector(
       onTap: () => viewModel.toggleEmotion(emotion),

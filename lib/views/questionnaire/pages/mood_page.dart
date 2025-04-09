@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/colors.dart';
-import '../../../widgets/questionnaire/continue_btn_widget.dart';
 import '../../../viewmodels/questionnaire/mood_page_viewmodel.dart';
+import '../../../widgets/questionnaire/continue_btn_widget.dart';
+import '../../../utils/colors.dart';
+import '../../../utils/shared_preferences.dart';
 
 class MoodPage extends StatelessWidget {
   final VoidCallback onContinue;
@@ -38,7 +39,12 @@ class MoodPage extends StatelessWidget {
               .toList(),
           const Spacer(),
           ContinueButton(
-            onPressed: moodViewModel.isMoodSelected ? onContinue : () {},
+            onPressed: moodViewModel.selectedMood != null ? () {
+              if (moodViewModel.selectedMood != null) {
+                ApplicationStorage.saveMood(moodViewModel.selectedMood!);
+              }
+              onContinue();
+            } : () {},
           ),
         ],
       ),
@@ -47,7 +53,9 @@ class MoodPage extends StatelessWidget {
 
   Widget _buildMoodOption(String option, MoodViewModel viewModel) {
     return InkWell(
-      onTap: () => viewModel.selectMood(option),
+      onTap: () {
+        viewModel.selectedMood = option; // Update the selected mood
+      },
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 16.0),
