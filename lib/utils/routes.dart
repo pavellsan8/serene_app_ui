@@ -26,12 +26,14 @@ class AppRoutes {
 
   static const String questionnaireIntro = '/questionnaire_intro';
   static const String questionnairePage = '/questionnaire_section';
+  static const String feelingPage = '/feeling_page';
+  static const String moodPage = '/mood_page';
+  static const String emotionPage = '/emotion_page';
   static const String completeQuizPage = '/complete_question';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       splashScreen: (context) => const SplashScreen(),
-
       getStarted: (context) => const GetStartedScreen(),
       login: (context) => const LoginScreen(),
       register: (context) => const RegisterScreen(),
@@ -39,7 +41,6 @@ class AppRoutes {
       emailInput: (context) => const EmailInputScreen(),
       otpInput: (context) => const OtpInputScreen(),
       passwordInput: (context) => const PasswordInputScreen(),
-
       questionnaireIntro: (context) => const QuestionnaireIntroScreen(),
       questionnairePage: (context) => const QuestionnaireScreen(),
       completeQuizPage: (context) => const CompletePage(),

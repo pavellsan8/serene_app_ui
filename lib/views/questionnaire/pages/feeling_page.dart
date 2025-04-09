@@ -5,6 +5,7 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../../widgets/questionnaire/continue_btn_widget.dart';
 import '../../../viewmodels/questionnaire/feeling_page_viewmodel.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/shared_preferences.dart';
 
 class FeelingPage extends StatelessWidget {
   final VoidCallback onContinue;
@@ -38,7 +39,7 @@ class FeelingPage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -61,7 +62,7 @@ class FeelingPage extends StatelessWidget {
                           ranges: <GaugeRange>[
                             GaugeRange(
                               startValue: 1,
-                              endValue: viewModel.selectedValue.toDouble(),
+                              endValue: viewModel.selectedValue!.toDouble(),
                               color: AppColors.primaryColor,
                               startWidth: 30,
                               endWidth: 30,
@@ -69,7 +70,7 @@ class FeelingPage extends StatelessWidget {
                           ],
                           pointers: <GaugePointer>[
                             MarkerPointer(
-                              value: viewModel.selectedValue
+                              value: viewModel.selectedValue!
                                   .toDouble()
                                   .clamp(1, 5),
                               markerType: MarkerType.circle,
@@ -81,7 +82,7 @@ class FeelingPage extends StatelessWidget {
                               animationType: AnimationType.ease,
                               animationDuration: 250,
                               onValueChanged: (value) {
-                                viewModel.updateFeelingValue(value.round());
+                                viewModel.selectedValue = value.round();
                               },
                             ),
                           ],
@@ -89,10 +90,10 @@ class FeelingPage extends StatelessWidget {
                       ],
                     ),
                     Positioned(
-                      top: 110,
+                      top: 120,
                       child: Image.asset(
                         'assets/images/questionnaire/questionnaire_2.png',
-                        height: 70,
+                        height: 80,
                       ),
                     ),
                   ],
@@ -112,7 +113,13 @@ class FeelingPage extends StatelessWidget {
                 flex: 1,
                 child: Container(),
               ),
-              ContinueButton(onPressed: onContinue),
+              ContinueButton(
+                onPressed: () {
+                  ApplicationStorage.saveFeeling(
+                      viewModel.selectedValue ?? 1);
+                  onContinue();
+                },
+              ),
             ],
           ),
         );

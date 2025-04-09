@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MoodViewModel extends ChangeNotifier {
-  String? selectedMood;
+  String? _selectedMood;
 
-  void selectMood(String mood) {
-    selectedMood = mood;
+  String? get selectedMood => _selectedMood;
+
+  set selectedMood(String? value) {
+    _selectedMood = value;
     notifyListeners();
   }
 
-  bool get isMoodSelected => selectedMood != null;
+  bool isValid() {
+    return _selectedMood!.isNotEmpty;
+  }
 }
