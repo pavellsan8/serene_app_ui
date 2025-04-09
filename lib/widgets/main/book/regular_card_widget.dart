@@ -25,7 +25,7 @@ class BooksGridWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1,
-            childAspectRatio: 2.5,
+            childAspectRatio: 2.4,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
@@ -49,7 +49,7 @@ class BooksGridWidget extends StatelessWidget {
                       child: Image.network(
                         book.thumbnail ?? '',
                         height: 200,
-                        width: 120,
+                        width: 100,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) => Container(
                           height: 150,

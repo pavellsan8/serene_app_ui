@@ -90,7 +90,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                     children: [
                       ClipPath(
                         child: SizedBox(
-                          height: 250,
+                          height: MediaQuery.of(context).size.height * 0.3,
                           width: double.infinity,
                           child: Image.asset(
                             widget.image,
@@ -100,7 +100,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                       ),
                       Positioned(
                         top: 50,
-                        left: 20,
+                        left: 15,
                         child: GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(
@@ -111,8 +111,8 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                           child: Row(
                             children: [
                               const Icon(
-                                Icons.arrow_back_ios_outlined,
-                                size: 32,
+                                Icons.arrow_back_ios_new_rounded,
+                                size: 26,
                                 color: Colors.white,
                               ),
                               const SizedBox(width: 10),
@@ -145,9 +145,9 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                         ),
                       ),
                       Positioned(
-                        top: 110,
-                        left: 20,
-                        right: 250,
+                        top: MediaQuery.of(context).size.height * 0.12,
+                        left: MediaQuery.of(context).size.width * 0.05,
+                        right: MediaQuery.of(context).size.width * 0.62,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
