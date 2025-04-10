@@ -38,7 +38,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
           'Book Detail',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: FontWeight.w500,
             fontFamily: 'Montserrat',
           ),

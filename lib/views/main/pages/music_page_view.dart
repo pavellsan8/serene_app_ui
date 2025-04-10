@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../models/main/music_page_model.dart';
 import '../../../viewmodels/main/music_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
+import '../../../views/main/detail/music_detail_page.dart';
 import '../../../widgets/main/music/music_card_widget.dart';
 
 class MusicPage extends StatefulWidget {
@@ -30,8 +31,14 @@ class _MusicPageState extends State<MusicPage> {
         return MusicGridWidget(
           musics: musics,
           onMusicTap: (music) {
-            debugPrint("Music clicked");
-            // Handle Music tap
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MusicDetailPage(
+                  music: music,
+                ),
+              ),
+            );
           },
         );
       },
