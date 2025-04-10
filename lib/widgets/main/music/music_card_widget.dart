@@ -159,7 +159,7 @@ class MusicShimmerGridWidget extends StatelessWidget {
               ),
               child: Column(
                 children: List.generate(
-                  5,
+                  10,
                   (index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
