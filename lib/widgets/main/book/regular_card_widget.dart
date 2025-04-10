@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../models/main/book_page_model.dart';
 import '../../../utils/colors.dart';
 
-class AllBooksGridWidget extends StatelessWidget {
+class BooksGridWidget extends StatelessWidget {
   final List<Book> books;
   final Function(Book) onBookTap;
 
-  const AllBooksGridWidget({
+  const BooksGridWidget({
     Key? key,
     required this.books,
     required this.onBookTap,
@@ -18,54 +19,37 @@ class AllBooksGridWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // const Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 15),
-        //   child: Text(
-        //     'Recommended Books',
-        //     style: TextStyle(
-        //       fontSize: 24,
-        //       fontWeight: FontWeight.bold,
-        //       fontFamily: 'Montserrat',
-        //     ),
-        //   ),
-        // ),
-        // const SizedBox(height: 12),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 12),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1,
-            childAspectRatio: 2.5,
+            childAspectRatio: 2.4,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
           itemCount: books.length,
           itemBuilder: (context, index) {
             final book = books[index];
-            // final isFavorite = favoriteBooks.contains(book.id);
-
             return GestureDetector(
               onTap: () => onBookTap(book),
               child: Card(
-                elevation: 2,
+                elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                color: Colors.white,
+                color: AppColors.backgroundColor,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Image section
                     ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        bottomLeft: Radius.circular(8),
-                      ),
+                      borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        book.image ?? '',
+                        book.thumbnail ?? '',
                         height: 200,
-                        width: 120,
+                        width: 100,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) => Container(
                           height: 150,
@@ -83,7 +67,7 @@ class AllBooksGridWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              book.title ?? 'Unknown Title',
+                              book.title,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -94,7 +78,7 @@ class AllBooksGridWidget extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              book.authors ?? 'Unknown Author',
+                              book.authorsAsString,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -127,6 +111,106 @@ class AllBooksGridWidget extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class BooksShimmerGridWidget extends StatelessWidget {
+  const BooksShimmerGridWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Illustration placeholder (top image)
+            Container(
+              height: 250,
+              width: double.infinity,
+              color: Colors.grey[300],
+            ),
+            const SizedBox(height: 16),
+
+            // Book cards shimmer
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
+              child: Column(
+                children: List.generate(
+                  5,
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        children: [
+                          // Image shimmer
+                          Container(
+                            height: 150,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          // Text shimmer
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Title shimmer
+                                  Container(
+                                    height: 16,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  // Author shimmer
+                                  Container(
+                                    height: 14,
+                                    width: 120,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  // Description lines shimmer
+                                  Container(
+                                    height: 12,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Container(
+                                    height: 12,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Container(
+                                    height: 12,
+                                    width: 150,
+                                    color: Colors.grey[300],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                    // );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

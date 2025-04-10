@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../models/main/music_page_model.dart';
 import '../../../utils/colors.dart';
@@ -86,7 +87,7 @@ class MusicGridWidget extends StatelessWidget {
                               children: [
                                 Text(
                                   (music.artist?.length ?? 0) > 20
-                                      ? music.artist!.substring(0, 20) + '...'
+                                      ? '${music.artist!.substring(0, 20)}...'
                                       : music.artist ?? 'No artist',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -128,6 +129,106 @@ class MusicGridWidget extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class MusicShimmerGridWidget extends StatelessWidget {
+  const MusicShimmerGridWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Illustration placeholder (top image)
+            Container(
+              height: 250,
+              width: double.infinity,
+              color: Colors.grey[300],
+            ),
+            const SizedBox(height: 16),
+
+            // Book cards shimmer
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: Column(
+                children: List.generate(
+                  5,
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        children: [
+                          // Image shimmer
+                          Container(
+                            height: 90,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          // Text shimmer
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Title shimmer
+                                  Container(
+                                    height: 16,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  // Description lines shimmer
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          height: 12,
+                                          color: Colors.grey[300],
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: 12,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      const Expanded(
+                                        flex: 1,
+                                        child: SizedBox.shrink(),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                    // );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

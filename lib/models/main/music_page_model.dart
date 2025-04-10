@@ -21,33 +21,33 @@ class MusicResponse {
 }
 
 class Music {
+  final String? id;
   final String? title;
-  final String? videoId;
-  final String? ytLink;
+  final String? audio;
   final String? artist;
   final String? album;
-  final String? duration;
   final String? thumbnail;
+  final String? duration;
 
   Music({
+    this.id,
     this.title,
-    this.videoId,
-    this.ytLink,
+    this.audio,
     this.artist,
     this.album,
-    this.duration,
     this.thumbnail,
+    this.duration,
   });
 
   factory Music.fromJson(Map<String, dynamic> json) {
     return Music(
+      id: json['id'],
       title: json['title'],
-      videoId: json['video_id'],
-      ytLink: json['youtube_link'],
+      audio: json['audio'],
       artist: json['artist'],
       album: json['album'],
-      duration: json['duration'],
       thumbnail: json['thumbnail'],
+      duration: json['duration'],
     );
   }
 }

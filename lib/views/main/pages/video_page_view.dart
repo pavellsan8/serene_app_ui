@@ -35,6 +35,7 @@ class _VideoPageState extends State<VideoPage> {
           },
         );
       },
+      loadingBuilder: () => const VideoShimmerGridWidget(),
     );
   }
 }
