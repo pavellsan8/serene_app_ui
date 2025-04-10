@@ -3,15 +3,20 @@ import 'package:provider/provider.dart';
 
 import '../../../models/main/music_page_model.dart';
 import '../../../viewmodels/detail/music_detail_page_viewmodel.dart';
+import '../../../widgets/main/music/music_image_vinyl_widget.dart';
 import '../../../utils/routes.dart';
 import '../../../utils/colors.dart';
 
 class MusicDetailPage extends StatefulWidget {
   final Music music;
+  final List<Music>? playlist;
+  final int initialIndex;
 
   const MusicDetailPage({
     super.key,
     required this.music,
+    this.playlist,
+    this.initialIndex = 0,
   });
 
   @override
@@ -19,8 +24,42 @@ class MusicDetailPage extends StatefulWidget {
 }
 
 class _MusicDetailPageState extends State<MusicDetailPage> {
-  String highResThumbnail(String url) {
-    return url.replaceFirst(RegExp(r'w\d+-h\d+'), 'w500-h500');
+  String formatDuration(Duration duration) {
+    final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return "$minutes:$seconds";
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final viewModel =
+          Provider.of<MusicDetailPageViewModel>(context, listen: false);
+
+      // Set playlist if available
+      if (widget.playlist != null && widget.playlist!.isNotEmpty) {
+        viewModel.setPlaylist(widget.playlist!, widget.initialIndex);
+        debugPrint("Setting playlist with ${widget.playlist!.length} tracks");
+
+        // Play the initial track if it has an audio URL
+        if (widget.initialIndex < widget.playlist!.length &&
+            widget.playlist![widget.initialIndex].audio != null &&
+            widget.playlist![widget.initialIndex].audio!.isNotEmpty) {
+          viewModel.playTrackAtIndex(widget.initialIndex);
+        }
+      } else {
+        // Fallback to single track mode
+        if (widget.music.audio != null && widget.music.audio!.isNotEmpty) {
+          debugPrint("Calling playMusic with link: ${widget.music.audio}");
+          viewModel.setPlaylist([widget.music], 0);
+          viewModel.playMusic(widget.music.audio!);
+        } else {
+          debugPrint("No audio link available");
+        }
+      }
+    });
   }
 
   @override
@@ -58,20 +97,23 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
               vertical: 72,
               horizontal: 32,
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                highResThumbnail(
-                    widget.music.thumbnail ?? 'default_thumbnail_url'),
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  color: Colors.grey[300],
-                  child: const Icon(Icons.book),
-                ),
-              ),
+            child: RotatingDisc(
+              imageUrl:
+                  viewModel.currentMusic?.thumbnail ?? 'default_thumbnail_url',
             ),
+            // child: ClipRRect(
+            //   borderRadius: BorderRadius.circular(8),
+            //   child: Image.network(
+            //     widget.music.thumbnail ?? 'default_thumbnail_url',
+            //     fit: BoxFit.cover,
+            //     errorBuilder: (context, error, stackTrace) => Container(
+            //       height: MediaQuery.of(context).size.height * 0.15,
+            //       width: MediaQuery.of(context).size.width * 0.2,
+            //       color: Colors.grey[300],
+            //       child: const Icon(Icons.book),
+            //     ),
+            //   ),
+            // ),
           ),
           const Spacer(),
           Container(
@@ -94,7 +136,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.music.title ?? 'Unknown Title',
+                              viewModel.currentMusic?.title ?? 'Unknown Title',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
@@ -106,7 +148,8 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              widget.music.artist ?? 'Unknown Artist',
+                              viewModel.currentMusic?.artist ??
+                                  'Unknown Artist',
                               style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 14,
@@ -129,7 +172,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                           size: 24,
                         ),
                         onPressed: () {
-                          viewModel.toggleFavoriteStatus();
+                          viewModel.toggleFavoriteStatus(context);
                         },
                       ),
                     ],
@@ -140,27 +183,29 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                   Column(
                     children: [
                       Slider(
-                        value: 0.1, // Replace with current position value
+                        value: viewModel.currentPosition.inSeconds.toDouble(),
+                        max: viewModel.duration.inSeconds.toDouble(),
                         onChanged: (value) {
-                          // Add slider change functionality
+                          viewModel.seekTo(Duration(seconds: value.toInt()));
                         },
                         activeColor: Colors.white,
                         inactiveColor: Colors.white38,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "1:15", // Replace with current time
-                            style: TextStyle(
+                            formatDuration(viewModel.currentPosition),
+                            style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
                               fontFamily: 'Montserrat',
                             ),
                           ),
                           Text(
-                            "5:15", // Replace with total duration
-                            style: TextStyle(
+                            viewModel.currentMusic?.duration ??
+                                'Unknown Duration',
+                            style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
                               fontFamily: 'Montserrat',
@@ -178,16 +223,17 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          // Shuffle functionality
+                          viewModel.toggleShuffle(); // Toggle shuffle
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.shuffle_rounded,
-                          color: Colors.white,
+                          color:
+                              viewModel.isShuffle ? Colors.amber : Colors.white,
                         ),
                       ),
                       IconButton(
                         onPressed: () {
-                          // Previous track functionality
+                          viewModel.playPrevious(); // Play previous track
                         },
                         icon: const Icon(
                           Icons.skip_previous_rounded,
@@ -197,7 +243,6 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                       IconButton(
                         onPressed: () {
                           viewModel.togglePlaying(); // Toggle play/pause
-                          // Add functionality to play or pause music here
                         },
                         icon: Icon(
                           viewModel.isPlaying
@@ -209,7 +254,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                       ),
                       IconButton(
                         onPressed: () {
-                          // Next track functionality
+                          viewModel.playNext(); // Play next track
                         },
                         icon: const Icon(
                           Icons.skip_next_rounded,
@@ -219,7 +264,6 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                       IconButton(
                         onPressed: () {
                           viewModel.toggleRepeat(); // Toggle repeat
-                          // Repeat functionality
                         },
                         icon: Icon(
                           viewModel.isRepeat
