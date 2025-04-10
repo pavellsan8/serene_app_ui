@@ -53,8 +53,8 @@ class VideoGridWidget extends StatelessWidget {
                       ),
                       child: Image.network(
                         video.thumbnail ?? '',
-                        height: 100,
-                        width: 120,
+                        height: 80,
+                        width: 140,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) => Container(
                           height: 150,
