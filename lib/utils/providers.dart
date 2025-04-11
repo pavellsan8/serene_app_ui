@@ -22,6 +22,7 @@ import '../viewmodels/main/music_page_viewmodel.dart';
 import '../viewmodels/detail/music_detail_page_viewmodel.dart';
 
 import '../viewmodels/main/video_page_viewmodel.dart';
+import '../viewmodels/detail/video_detail_page_viewmodel.dart';
 
 import '../viewmodels/auth/logout_viewmodel.dart';
 
@@ -51,6 +52,7 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => MusicPageViewModel()),
         ChangeNotifierProvider(create: (_) => MusicDetailPageViewModel()),
         ChangeNotifierProvider(create: (_) => VideoPageViewModel()),
+        ChangeNotifierProvider(create: (_) => VideoDetailViewModel()),
         ChangeNotifierProvider(create: (_) => LogoutViewModel()),
       ],
       child: child,
