@@ -147,7 +147,7 @@ class HomePage extends StatelessWidget {
                     childAspectRatio: aspectRatio,
                     children: [
                       CardItem(
-                        title: "Sere" "bot",
+                        title: "Sere" "Bot",
                         width: availableWidth * 0.18, // 18% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: "assets/images/home/menu/serebot.png",
@@ -157,7 +157,7 @@ class HomePage extends StatelessWidget {
                             "Talk to our chatbot for support and advice.",
                       ),
                       CardItem(
-                        title: "Sere" "hear",
+                        title: "Sere" "Hear",
                         width: availableWidth * 0.16, // 16% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: "assets/images/home/menu/serehear.png",
@@ -166,7 +166,7 @@ class HomePage extends StatelessWidget {
                         description: "Listen to calming music for relaxation.",
                       ),
                       CardItem(
-                        title: "Sere" "watch",
+                        title: "Sere" "Watch",
                         width: availableWidth * 0.18, // 18% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: "assets/images/home/menu/serewatch.png",
@@ -175,7 +175,7 @@ class HomePage extends StatelessWidget {
                         description: "Watch videos that help you relax.",
                       ),
                       CardItem(
-                        title: "Sere" "read",
+                        title: "Sere" "Read",
                         width: availableWidth * 0.16, // 16% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: "assets/images/home/menu/sereread.png",

@@ -5,7 +5,7 @@ import '../../../models/main/music_page_model.dart';
 import '../../../viewmodels/main/music_page_viewmodel.dart';
 import '../../../viewmodels/detail/music_detail_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
-import '../../../views/main/detail/music_detail_page.dart';
+import '../detail/music_detail_page_view.dart';
 import '../../../widgets/main/music/music_card_widget.dart';
 
 class MusicPage extends StatefulWidget {
