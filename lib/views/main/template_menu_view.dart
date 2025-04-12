@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/colors.dart';
+import '../../utils/routes.dart';
 
 class GenericPage<T> extends StatefulWidget {
   final Future<List<T>> Function() fetchData; // Function to fetch data
@@ -7,6 +9,7 @@ class GenericPage<T> extends StatefulWidget {
   final String feature; // Feature name for the page
   final String subtitle; // Subtitle for the page
   final Widget Function(List<T>) itemBuilder; // Custom item builder
+  final Widget Function()? loadingBuilder;
 
   const GenericPage({
     super.key,
@@ -15,6 +18,7 @@ class GenericPage<T> extends StatefulWidget {
     required this.feature,
     required this.subtitle,
     required this.itemBuilder, // Accept the custom widget builder function
+    this.loadingBuilder,
   });
 
   @override
@@ -40,11 +44,12 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
         future: futureData, // Use the futureData which is set only once
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
-            );
+            return widget.loadingBuilder?.call() ??
+                const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primaryColor,
+                  ),
+                );
           }
 
           if (snapshot.hasError) {
@@ -85,7 +90,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                     children: [
                       ClipPath(
                         child: SizedBox(
-                          height: 250,
+                          height: MediaQuery.of(context).size.height * 0.3,
                           width: double.infinity,
                           child: Image.asset(
                             widget.image,
@@ -95,16 +100,19 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                       ),
                       Positioned(
                         top: 50,
-                        left: 20,
+                        left: 15,
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pop(context);
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.homePage,
+                            );
                           },
                           child: Row(
                             children: [
                               const Icon(
-                                Icons.arrow_back_ios_outlined,
-                                size: 32,
+                                Icons.arrow_back_ios_new_rounded,
+                                size: 26,
                                 color: Colors.white,
                               ),
                               const SizedBox(width: 10),
@@ -137,9 +145,9 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                         ),
                       ),
                       Positioned(
-                        top: 110,
-                        left: 20,
-                        right: 250,
+                        top: MediaQuery.of(context).size.height * 0.12,
+                        left: MediaQuery.of(context).size.width * 0.05,
+                        right: MediaQuery.of(context).size.width * 0.62,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

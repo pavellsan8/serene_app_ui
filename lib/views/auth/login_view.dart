@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(height: 30),
                           Image.asset(
                             'assets/images/auth/login.png',
-                            height: 200,
+                            height: 150,
                           ),
                           const SizedBox(height: 25),
                           const Align(
@@ -112,7 +112,9 @@ class LoginScreen extends StatelessWidget {
                               TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                      context, AppRoutes.emailInput);
+                                    context,
+                                    AppRoutes.emailInput,
+                                  );
                                 },
                                 style: TextButton.styleFrom(
                                   foregroundColor: AppColors.fontBlueColor,
@@ -122,6 +124,7 @@ class LoginScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'Montserrat',
+                                    fontSize: 16,
                                   ),
                                 ),
                               ),
@@ -184,12 +187,15 @@ class LoginScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Montserrat',
+                                fontSize: 16,
                               ),
                             ),
                             TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(
-                                    context, AppRoutes.register);
+                                  context,
+                                  AppRoutes.register,
+                                );
                               },
                               style: TextButton.styleFrom(
                                 foregroundColor: AppColors.fontBlueColor,
@@ -199,6 +205,7 @@ class LoginScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontFamily: 'Montserrat',
+                                  fontSize: 16,
                                 ),
                               ),
                             ),

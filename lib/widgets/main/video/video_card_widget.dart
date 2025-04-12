@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../models/main/video_page_model.dart';
 import '../../../utils/colors.dart';
@@ -52,8 +53,8 @@ class VideoGridWidget extends StatelessWidget {
                       ),
                       child: Image.network(
                         video.thumbnail ?? '',
-                        height: 100,
-                        width: 150,
+                        height: 80,
+                        width: 140,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) => Container(
                           height: 150,
@@ -70,10 +71,10 @@ class VideoGridWidget extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 8),
+                            // const SizedBox(height: 6),
                             Text(
                               video.title ?? 'Unknown Title',
-                              maxLines: 1,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -128,6 +129,106 @@ class VideoGridWidget extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class VideoShimmerGridWidget extends StatelessWidget {
+  const VideoShimmerGridWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Illustration placeholder (top image)
+            Container(
+              height: 250,
+              width: double.infinity,
+              color: Colors.grey[300],
+            ),
+            const SizedBox(height: 16),
+
+            // Book cards shimmer
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: Column(
+                children: List.generate(
+                  10,
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        children: [
+                          // Image shimmer
+                          Container(
+                            height: 70,
+                            width: 140,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          // Text shimmer
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Title shimmer
+                                  Container(
+                                    height: 16,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  // Description lines shimmer
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          height: 12,
+                                          color: Colors.grey[300],
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: 12,
+                                          color: Colors.grey[400],
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      const Expanded(
+                                        flex: 1,
+                                        child: SizedBox.shrink(),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                    // );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

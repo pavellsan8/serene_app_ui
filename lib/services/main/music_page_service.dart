@@ -6,10 +6,10 @@ import '../../models/main/music_page_model.dart';
 import '../../utils/api_url.dart';
 
 class MusicService {
-  Future<MusicResponse> getMusicData({String? query}) async {
+  Future<MusicResponse> getMusicData({String? search}) async {
     String baseUrl = "${EnvConfig.baseUrl}/api/v1/get-song-list";
     String finalUrl =
-        "$baseUrl?query=${query?.isNotEmpty == true ? query : 'relaxing'}";
+        "$baseUrl?search=${search?.isNotEmpty == true ? search : 'chill'}";
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? accessToken = prefs.getString("access_token");

@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../../../models/main/music_page_model.dart';
 import '../../../viewmodels/main/music_page_viewmodel.dart';
+import '../../../viewmodels/detail/music_detail_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
+import '../detail/music_detail_page_view.dart';
 import '../../../widgets/main/music/music_card_widget.dart';
 
 class MusicPage extends StatefulWidget {
@@ -30,11 +32,25 @@ class _MusicPageState extends State<MusicPage> {
         return MusicGridWidget(
           musics: musics,
           onMusicTap: (music) {
-            debugPrint("Music clicked");
-            // Handle Music tap
+            final int selectedIndex =
+                musics.indexWhere((item) => item.id == music.id);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) => MusicDetailPageViewModel(),
+                  child: MusicDetailPage(
+                    music: music,
+                    playlist: musics, // Pass the entire music list
+                    initialIndex: selectedIndex >= 0 ? selectedIndex : 0,
+                  ),
+                ),
+              ),
+            );
           },
         );
       },
+      loadingBuilder: () => const MusicShimmerGridWidget(),
     );
   }
 }

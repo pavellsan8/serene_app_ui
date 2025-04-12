@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/auth/login_model.dart';
 import '../../utils/api_url.dart';
+import '../../utils/shared_preferences.dart';
 
 class LoginService {
   Future<LoginResponse> loginUser(LoginRequest request) async {
@@ -25,18 +25,12 @@ class LoginService {
       // Login response body output
       final loginResponse = LoginResponse.fromJson(responseData);
       if (loginResponse.data != null) {
-        final prefs = await SharedPreferences.getInstance();
-
         // simpan data email, access token dan refresh token
-        await prefs.setString("email", request.email);
-        await prefs.setString("access_token", loginResponse.data!.accessToken);
-        await prefs.setString(
-            "refresh_token", loginResponse.data!.refreshToken);
-
-        debugPrint('===== SAVED TOKEN DATA =====');
-        debugPrint('access_token: ${prefs.getString("access_token")}');
-        debugPrint('refresh_token: ${prefs.getString("refresh_token")}');
-        debugPrint('============================');
+        await ApplicationStorage.saveEmail(request.email);
+        await ApplicationStorage.saveAccessToken(
+            loginResponse.data!.accessToken);
+        await ApplicationStorage.saveRefreshToken(
+            loginResponse.data!.refreshToken);
       }
 
       return loginResponse;
@@ -59,16 +53,14 @@ class LoginService {
       final response = await http.post(
         url,
         headers: {
+          "Authorization": "Bearer $refreshToken",
           "Content-Type": "application/json",
         },
-        body: jsonEncode({
-          "refresh_token": refreshToken,
-        }),
       );
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        final newAccessToken = responseData["access_token"];
+        final newAccessToken = responseData["data"]["access_token"];
 
         await prefs.setString("access_token", newAccessToken);
         return newAccessToken;
