@@ -71,10 +71,10 @@ class VideoGridWidget extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 8),
+                            // const SizedBox(height: 6),
                             Text(
                               video.title ?? 'Unknown Title',
-                              maxLines: 1,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
