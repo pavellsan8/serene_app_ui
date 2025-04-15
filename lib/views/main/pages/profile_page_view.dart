@@ -61,9 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: profileViewModel.isLoading
           ? const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
+              child: ProfileInfoShimmerCardWidget(),
             )
           : profileViewModel.errorMessage != null
               ? Center(
@@ -116,7 +114,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   children: [
                                     CircleAvatar(
                                       radius: 40,
-                                      backgroundColor: AppColors.backgroundColor,
+                                      backgroundColor:
+                                          AppColors.backgroundColor,
                                       child: Text(
                                         getInitials(
                                             profileViewModel.userData!.name),
@@ -191,19 +190,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
-                                ProfileInfoCard(
+                                ProfileInfoCardWidget(
                                   icon: Icons.video_library_outlined,
                                   title: "Favorites Videos",
                                   subtitle: "Playlist of video that you like",
                                   onTap: null,
                                 ),
-                                ProfileInfoCard(
+                                ProfileInfoCardWidget(
                                   icon: Icons.music_note_outlined,
                                   title: "Favorites Musics",
                                   subtitle: "Playlist of music that you like",
                                   onTap: null,
                                 ),
-                                ProfileInfoCard(
+                                ProfileInfoCardWidget(
                                   icon: Icons.book_outlined,
                                   title: "Favorites Books",
                                   subtitle: "Playlist of book that you like",
@@ -227,13 +226,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        const ProfileInfoCard(
+                        const ProfileInfoCardWidget(
                           icon: Icons.info_outline_rounded,
                           title: "About Us",
                           subtitle: "Get to know us better",
                           onTap: null,
                         ),
-                        ProfileInfoCard(
+                        ProfileInfoCardWidget(
                           icon: Icons.logout,
                           title: "Log out",
                           subtitle: "Change your account",

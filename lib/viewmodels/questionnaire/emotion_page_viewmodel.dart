@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
 class EmotionViewModel extends ChangeNotifier {
-  List<String> selectedEmotions = [];
+  final List<String> _selectedEmotions = [];
+
+  List<String> get selectedEmotions => List.unmodifiable(_selectedEmotions);
 
   void toggleEmotion(String emotion) {
-    if (selectedEmotions.contains(emotion)) {
-      selectedEmotions.remove(emotion);
+    if (_selectedEmotions.contains(emotion)) {
+      _selectedEmotions.remove(emotion);
     } else {
-      selectedEmotions.add(emotion);
+      _selectedEmotions.add(emotion);
     }
-    notifyListeners(); 
+    notifyListeners();
   }
 
-  bool isEmotionSelected(String emotion) {
-    return selectedEmotions.contains(emotion);
+  void setEmotions(List<String> emotions) {
+    _selectedEmotions.clear();
+    _selectedEmotions.addAll(emotions);
+    notifyListeners();
+  }
+
+  bool isValid() {
+    return _selectedEmotions.isNotEmpty;
   }
 }

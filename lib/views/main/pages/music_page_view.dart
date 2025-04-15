@@ -1,42 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../../utils/colors.dart';
-import '../../../utils/routes.dart';
+import '../../../models/main/music_page_model.dart';
+import '../../../viewmodels/main/music_page_viewmodel.dart';
+import '../../../viewmodels/detail/music_detail_page_viewmodel.dart';
+import '../../../views/main/template_menu_view.dart';
+import '../detail/music_detail_page_view.dart';
+import '../../../widgets/main/music/music_card_widget.dart';
 
-class MusicPage extends StatelessWidget {
+class MusicPage extends StatefulWidget {
   const MusicPage({super.key});
 
   @override
+  State<MusicPage> createState() => _MusicPageState();
+}
+
+class _MusicPageState extends State<MusicPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.primaryColor,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 0),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_rounded,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.homePage);
-            },
-          ),
-        ),
-      ),
-      body: const Center(
-        child: Text(
-          "Music Page",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-            decoration: TextDecoration.none,
-          ),
-        ),
-      ),
+    return GenericPage<Music>(
+      fetchData: () async {
+        final viewModel =
+            Provider.of<MusicPageViewModel>(context, listen: false);
+        return await viewModel.fetchData();
+      },
+      image: 'assets/images/home/detail/music_ilustration.jpg',
+      feature: 'Hear',
+      subtitle: 'Let the music flow in your mind.',
+      // Pass your custom widget to itemBuilder
+      itemBuilder: (musics) {
+        return MusicGridWidget(
+          musics: musics,
+          onMusicTap: (music) {
+            final int selectedIndex =
+                musics.indexWhere((item) => item.id == music.id);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) => MusicDetailPageViewModel(),
+                  child: MusicDetailPage(
+                    music: music,
+                    playlist: musics, // Pass the entire music list
+                    initialIndex: selectedIndex >= 0 ? selectedIndex : 0,
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+      loadingBuilder: () => const MusicShimmerGridWidget(),
     );
   }
 }
