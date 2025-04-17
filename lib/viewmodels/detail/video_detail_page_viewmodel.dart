@@ -2,16 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../models/favourite/favourite_model.dart';
 import '../../services/favourite/video_favourite_service.dart';
-import '../../utils/shared_preferences.dart';
+import '../../services/favourite/template_favourite_service.dart';
+import '../../viewmodels/detail/toggle_favorites_viewmodel.dart';
 
-class VideoDetailViewModel extends ChangeNotifier {
-  bool isFavorite = false;
+class VideoDetailViewModel extends ChangeNotifier with FavoriteToggleMixin {
+  bool _isFavorite = false;
   bool isDescriptionExpanded = false;
   bool isFullScreen = false;
 
-  final VideoFavouriteService videoFavouriteService = VideoFavouriteService();
+  final VideoFavouriteService _videoFavouriteService = VideoFavouriteService();
+
+  @override
+  bool get isFavorite => _isFavorite;
+
+  @override
+  void setFavorite(bool value) {
+    _isFavorite = value;
+  }
+
+  @override
+  BaseFavouriteService get favoriteService => _videoFavouriteService;
 
   // YouTube controller reference
   YoutubePlayerController? _youtubeController;
@@ -72,66 +83,5 @@ class VideoDetailViewModel extends ChangeNotifier {
     }
     // Otherwise, allow normal back navigation
     return true;
-  }
-
-  Future<void> toggleFavorite(BuildContext context, String itemId) async {
-    final email = await ApplicationStorage.getEmail();
-
-    if (email == null) {
-      debugPrint('Email not found in SharedPreferences');
-    }
-
-    // Create the request object
-    final request = ItemFavouriteRequest(
-      email: email ?? '',
-      itemId: itemId,
-    );
-
-    // Toggle favorite logic
-    isFavorite = !isFavorite;
-    notifyListeners();
-
-    try {
-      String apiMessage;
-      if (isFavorite) {
-        final response =
-            await videoFavouriteService.addVideoFavourite(request: request);
-        apiMessage = response.message;
-      } else {
-        final response =
-            await videoFavouriteService.removeVideoFavourite(request: request);
-        apiMessage = response.message;
-      }
-
-      // Show success snackbar
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            apiMessage,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-          duration: const Duration(seconds: 1),
-        ),
-      );
-    } catch (e) {
-      // Handle API errors
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Failed to update favorite status. Please try again later.',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-          duration: Duration(seconds: 2),
-        ),
-      );
-    }
   }
 }

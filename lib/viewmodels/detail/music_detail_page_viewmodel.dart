@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 import '../../models/main/music_page_model.dart';
-import '../../models/favourite/favourite_model.dart';
 import '../../services/favourite/music_favourite_service.dart';
-import '../../utils/shared_preferences.dart';
+import '../../services/favourite/template_favourite_service.dart';
+import '../../viewmodels/detail/toggle_favorites_viewmodel.dart';
 
-class MusicDetailPageViewModel with ChangeNotifier {
-  final MusicFavouriteService musicFavouriteService = MusicFavouriteService();
+class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
+  final MusicFavouriteService _musicFavouriteService = MusicFavouriteService();
   final AudioPlayer _audioPlayer = AudioPlayer();
 
   bool _isFavorite = false;
@@ -17,7 +17,17 @@ class MusicDetailPageViewModel with ChangeNotifier {
   bool _isRepeat = false;
   bool _isShuffle = false;
 
+  @override
   bool get isFavorite => _isFavorite;
+
+  @override
+  void setFavorite(bool value) {
+    _isFavorite = value;
+  }
+
+  @override
+  BaseFavouriteService get favoriteService => _musicFavouriteService;
+
   bool get isPlaying => _isPlaying;
   bool get isRepeat => _isRepeat;
   bool get isShuffle => _isShuffle;
@@ -153,67 +163,6 @@ class MusicDetailPageViewModel with ChangeNotifier {
   void toggleShuffle() {
     _isShuffle = !_isShuffle;
     notifyListeners();
-  }
-
-  Future<void> toggleFavorite(BuildContext context, String itemId) async {
-    final email = await ApplicationStorage.getEmail();
-
-    if (email == null) {
-      debugPrint('Email not found in SharedPreferences');
-    }
-
-    // Create the request object
-    final request = ItemFavouriteRequest(
-      email: email ?? '',
-      itemId: itemId,
-    );
-
-    // Toggle favorite logic
-    _isFavorite = !_isFavorite;
-    notifyListeners();
-
-    try {
-      String apiMessage;
-      if (isFavorite) {
-        final response =
-            await musicFavouriteService.addMusicFavourite(request: request);
-        apiMessage = response.message;
-      } else {
-        final response =
-            await musicFavouriteService.removeMusicFavourite(request: request);
-        apiMessage = response.message;
-      }
-
-      // Show success snackbar
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            apiMessage,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-          duration: const Duration(seconds: 1),
-        ),
-      );
-    } catch (e) {
-      // Handle API errors
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Failed to update favorite status. Please try again later.',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-          duration: Duration(seconds: 2),
-        ),
-      );
-    }
   }
 
   Future<void> playMusic(String url) async {

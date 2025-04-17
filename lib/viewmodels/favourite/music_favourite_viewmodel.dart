@@ -5,7 +5,7 @@ import '../../services/favourite/music_favourite_service.dart';
 import '../../utils/shared_preferences.dart';
 
 class MusicFavoritesViewModel extends ChangeNotifier {
-  final MusicFavouriteService _musicFavouriteService = MusicFavouriteService();
+  final MusicFavouriteService musicFavouriteService = MusicFavouriteService();
   bool isLoading = true;
   List<Music> favoriteMusics = [];
 
@@ -14,7 +14,7 @@ class MusicFavoritesViewModel extends ChangeNotifier {
       final email = await ApplicationStorage.getEmail();
       debugPrint("Fetching favorite Musics for email: $email");
 
-      final response = await _musicFavouriteService.getMusicData(email: email);
+      final response = await musicFavouriteService.getData(email: email);
       debugPrint("Musics found: ${response.data.length}");
 
       favoriteMusics = response.data;
