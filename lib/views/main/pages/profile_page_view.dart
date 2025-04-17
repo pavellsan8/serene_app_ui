@@ -196,11 +196,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                   subtitle: "Playlist of video that you like",
                                   onTap: null,
                                 ),
-                                const ProfileInfoCardWidget(
+                                ProfileInfoCardWidget(
                                   icon: Icons.music_note_outlined,
                                   title: "Favorites Musics",
                                   subtitle: "Playlist of music that you like",
-                                  onTap: null,
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.musicFavourite,
+                                    );
+                                  },
                                 ),
                                 ProfileInfoCardWidget(
                                   icon: Icons.book_outlined,

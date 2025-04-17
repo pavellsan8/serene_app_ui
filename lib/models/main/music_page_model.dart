@@ -24,7 +24,7 @@ class MusicResponse {
 }
 
 class Music {
-  final String? id;
+  final String id;
   final String? title;
   final String? audio;
   final String? artist;
@@ -33,7 +33,7 @@ class Music {
   final String? duration;
 
   Music({
-    this.id,
+    required this.id,
     this.title,
     this.audio,
     this.artist,

@@ -172,7 +172,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                           size: 24,
                         ),
                         onPressed: () {
-                          viewModel.toggleFavoriteStatus(context);
+                          viewModel.toggleFavorite(context, widget.music.id);
                         },
                       ),
                     ],

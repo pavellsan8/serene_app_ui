@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../services/favourite/book_favourite_service.dart';
 import '../../models/main/book_page_model.dart';
+import '../../services/favourite/book_favourite_service.dart';
 import '../../utils/shared_preferences.dart';
 
 class BookFavoritesViewModel extends ChangeNotifier {
