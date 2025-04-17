@@ -13,6 +13,6 @@ class BookPageViewModel extends GenericPageViewModel<Book> {
   @override
   Future<List<Book>> fetchData() async {
     final BookResponse response = await bookService.getBookData();
-    return response.data ?? [];
+    return response.data;
   }
 }
