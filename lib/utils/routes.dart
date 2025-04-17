@@ -20,6 +20,8 @@ import '../views/main/pages/book_page_view.dart';
 import '../views/main/pages/chatbot_page_view.dart';
 import '../views/main/pages/profile_page_view.dart';
 
+import '../views/main/favorite/book_favourite_page_view.dart';
+
 class AppRoutes {
   static const String splashScreen = '/splash';
 
@@ -45,6 +47,8 @@ class AppRoutes {
   static const String chatbotPage = '/chatbot_page';
   static const String profilePage = '/profile_page';
 
+  static const String bookFavourite = '/book_favourite';
+
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       splashScreen: (context) => const SplashScreen(),
@@ -58,13 +62,13 @@ class AppRoutes {
       questionnaireIntro: (context) => const QuestionnaireIntroScreen(),
       questionnairePage: (context) => const QuestionnaireScreen(),
       completeQuizPage: (context) => const CompletePage(),
-
       homePage: (context) => const HomePage(),
       musicPage: (context) => const MusicPage(),
       videoPage: (context) => const VideoPage(),
       bookPage: (context) => const BookPage(),
       chatbotPage: (context) => const ChatbotPage(),
       profilePage: (context) => const ProfilePage(),
+      bookFavourite: (context) => const BookFavouritesPage(),
     };
   }
 }

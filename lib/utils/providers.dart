@@ -17,6 +17,7 @@ import '../viewmodels/questionnaire/emotion_page_viewmodel.dart';
 
 import '../viewmodels/main/book_page_viewmodel.dart';
 import '../viewmodels/detail/book_detail_page_viewmodel.dart';
+import '../viewmodels/favourite/book_favourite_viewmodel.dart';
 
 import '../viewmodels/main/music_page_viewmodel.dart';
 import '../viewmodels/detail/music_detail_page_viewmodel.dart';
@@ -50,6 +51,7 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => EmotionViewModel()),
         ChangeNotifierProvider(create: (_) => BookPageViewModel()),
         ChangeNotifierProvider(create: (_) => BookDetailViewModel()),
+        ChangeNotifierProvider(create: (_) => BookFavoritesViewModel()),
         ChangeNotifierProvider(create: (_) => MusicPageViewModel()),
         ChangeNotifierProvider(create: (_) => MusicDetailPageViewModel()),
         ChangeNotifierProvider(create: (_) => VideoPageViewModel()),

@@ -170,15 +170,15 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ),
                           ),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 0,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 10),
-                                Padding(
+                                const SizedBox(height: 10),
+                                const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Text(
                                     "Playlists",
@@ -190,13 +190,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
-                                ProfileInfoCardWidget(
+                                const ProfileInfoCardWidget(
                                   icon: Icons.video_library_outlined,
                                   title: "Favorites Videos",
                                   subtitle: "Playlist of video that you like",
                                   onTap: null,
                                 ),
-                                ProfileInfoCardWidget(
+                                const ProfileInfoCardWidget(
                                   icon: Icons.music_note_outlined,
                                   title: "Favorites Musics",
                                   subtitle: "Playlist of music that you like",
@@ -206,9 +206,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                   icon: Icons.book_outlined,
                                   title: "Favorites Books",
                                   subtitle: "Playlist of book that you like",
-                                  onTap: null,
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.bookFavourite,
+                                    );
+                                  },
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                               ],
                             ),
                           ),

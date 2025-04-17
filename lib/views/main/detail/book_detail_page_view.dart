@@ -189,7 +189,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: IconButton(
-                        onPressed: () => viewModel.toggleFavorite(context),
+                        onPressed: () =>
+                            viewModel.toggleFavorite(context, widget.book.id),
                         icon: Icon(
                           viewModel.isFavorite
                               ? Icons.favorite
