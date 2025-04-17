@@ -1,21 +1,24 @@
 class MusicResponse {
-  final List<Music>? data;
-  final bool success;
+  final int status;
   final String message;
+  final String? email;
+  final List<Music> data;
 
   MusicResponse({
-    required this.data,
-    required this.success,
+    required this.status,
     required this.message,
+    this.email,
+    required this.data,
   });
 
   factory MusicResponse.fromJson(Map<String, dynamic> json) {
     return MusicResponse(
-      data: json['data'] != null
-          ? List<Music>.from(json['data'].map((x) => Music.fromJson(x)))
-          : null,
-      success: json['success'] ?? false,
-      message: json['message'] ?? '',
+      status: json['status'] as int,
+      message: json['message'] as String,
+      email: json['email'] as String?,
+      data: (json['data'] as List<dynamic>)
+          .map((bookJson) => Music.fromJson(bookJson as Map<String, dynamic>))
+          .toList(),
     );
   }
 }

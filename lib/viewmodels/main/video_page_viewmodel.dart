@@ -13,6 +13,6 @@ class VideoPageViewModel extends GenericPageViewModel<Video> {
   @override
   Future<List<Video>> fetchData() async {
     final VideoResponse response = await videoService.getVideoData();
-    return response.data ?? [];
+    return response.data;
   }
 }
