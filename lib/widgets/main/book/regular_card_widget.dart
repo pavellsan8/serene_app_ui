@@ -6,11 +6,13 @@ import '../../../utils/colors.dart';
 
 class BooksGridWidget extends StatelessWidget {
   final List<Book> books;
+  final Color color;
   final Function(Book) onBookTap;
 
   const BooksGridWidget({
     Key? key,
     required this.books,
+    required this.color,
     required this.onBookTap,
   }) : super(key: key);
 
@@ -39,7 +41,7 @@ class BooksGridWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                color: AppColors.backgroundColor,
+                color: color,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -116,7 +118,12 @@ class BooksGridWidget extends StatelessWidget {
 }
 
 class BooksShimmerGridWidget extends StatelessWidget {
-  const BooksShimmerGridWidget({super.key});
+  final bool showContainer;
+
+  const BooksShimmerGridWidget({
+    Key? key,
+    required this.showContainer,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -127,11 +134,12 @@ class BooksShimmerGridWidget extends StatelessWidget {
         child: Column(
           children: [
             // Illustration placeholder (top image)
-            Container(
-              height: 250,
-              width: double.infinity,
-              color: Colors.grey[300],
-            ),
+            if (showContainer)
+              Container(
+                height: 250,
+                width: double.infinity,
+                color: Colors.grey[300],
+              ),
             const SizedBox(height: 16),
 
             // Book cards shimmer

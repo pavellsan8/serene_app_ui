@@ -6,6 +6,7 @@ import '../../../viewmodels/main/video_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
 import '../../../views/main/detail/video_detail_page_view.dart';
 import '../../../widgets/main/video/video_card_widget.dart';
+import '../../../utils/colors.dart';
 
 class VideoPage extends StatefulWidget {
   const VideoPage({super.key});
@@ -30,6 +31,7 @@ class _VideoPageState extends State<VideoPage> {
       itemBuilder: (videos) {
         return VideoGridWidget(
           videos: videos,
+          color: AppColors.backgroundColor,
           onVideoTap: (video) {
             Navigator.push(
               context,
@@ -43,7 +45,9 @@ class _VideoPageState extends State<VideoPage> {
           },
         );
       },
-      loadingBuilder: () => const VideoShimmerGridWidget(),
+      loadingBuilder: () => const VideoShimmerGridWidget(
+        showContainer: true,
+      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import '../../../viewmodels/main/book_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
 import '../../../views/main/detail/book_detail_page_view.dart';
 import '../../../widgets/main/book/regular_card_widget.dart';
+import '../../../utils/colors.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({super.key});
@@ -29,6 +30,7 @@ class _BookPageState extends State<BookPage> {
       itemBuilder: (books) {
         return BooksGridWidget(
           books: books,
+          color: AppColors.backgroundColor,
           onBookTap: (book) {
             Navigator.push(
               context,
@@ -42,7 +44,9 @@ class _BookPageState extends State<BookPage> {
           },
         );
       },
-      loadingBuilder: () => const BooksShimmerGridWidget(),
+      loadingBuilder: () => const BooksShimmerGridWidget(
+        showContainer: true,
+      ),
     );
   }
 }

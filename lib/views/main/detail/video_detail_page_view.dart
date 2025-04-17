@@ -167,6 +167,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                     ),
                     VideoGridWidget(
                       videos: filteredRecommendations,
+                      color: AppColors.backgroundColor,
                       onVideoTap: (video) {
                         Navigator.push(
                           context,

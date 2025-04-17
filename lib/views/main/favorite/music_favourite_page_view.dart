@@ -5,7 +5,7 @@ import '../../../models/main/music_page_model.dart';
 import '../../../viewmodels/favourite/music_favourite_viewmodel.dart';
 import '../../../views/main/favorite/favorite_template_view.dart';
 import '../../../views/main/detail/music_detail_page_view.dart';
-import '../../../widgets/favourite/music_favourite_card_widget.dart';
+import '../../../widgets/main/music/music_card_widget.dart';
 
 class MusicFavouritesPage extends StatelessWidget {
   const MusicFavouritesPage({Key? key}) : super(key: key);
@@ -21,8 +21,9 @@ class MusicFavouritesPage extends StatelessWidget {
             items: viewModel.favoriteMusics,
             isLoading: viewModel.isLoading,
             itemBuilder: (context, books) {
-              return MusicFavouriteGridWidget(
+              return MusicGridWidget(
                 musics: books,
+                color: Colors.transparent,
                 onMusicTap: (music) {
                   Navigator.push(
                     context,
@@ -35,7 +36,9 @@ class MusicFavouritesPage extends StatelessWidget {
                 },
               );
             },
-            shimmerWidget: const MusicFavouriteShimmerGridWidget(),
+            shimmerWidget: const MusicShimmerGridWidget(
+              showContainer: false,
+            ),
           );
         },
       ),

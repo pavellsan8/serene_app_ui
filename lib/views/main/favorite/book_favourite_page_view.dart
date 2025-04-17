@@ -5,7 +5,7 @@ import '../../../models/main/book_page_model.dart';
 import '../../../viewmodels/favourite/book_favourite_viewmodel.dart';
 import '../../../views/main/favorite/favorite_template_view.dart';
 import '../../../views/main/detail/book_detail_page_view.dart';
-import '../../../widgets/favourite/book_favourite_card_widget.dart';
+import '../../../widgets/main/book/regular_card_widget.dart';
 
 class BookFavouritesPage extends StatelessWidget {
   const BookFavouritesPage({Key? key}) : super(key: key);
@@ -21,8 +21,9 @@ class BookFavouritesPage extends StatelessWidget {
             items: viewModel.favoriteBooks,
             isLoading: viewModel.isLoading,
             itemBuilder: (context, books) {
-              return BooksFavouriteGridWidget(
+              return BooksGridWidget(
                 books: books,
+                color: Colors.transparent,
                 onBookTap: (book) {
                   Navigator.push(
                     context,
@@ -36,7 +37,9 @@ class BookFavouritesPage extends StatelessWidget {
                 },
               );
             },
-            shimmerWidget: const BooksFavouriteShimmerGridWidget(),
+            shimmerWidget: const BooksShimmerGridWidget(
+              showContainer: false,
+            ),
           );
         },
       ),

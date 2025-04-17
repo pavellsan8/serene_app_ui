@@ -6,11 +6,13 @@ import '../../../utils/colors.dart';
 
 class MusicGridWidget extends StatelessWidget {
   final List<Music> musics;
+  final Color color;
   final Function(Music) onMusicTap;
 
   const MusicGridWidget({
     Key? key,
     required this.musics,
+    required this.color,
     required this.onMusicTap,
   }) : super(key: key);
 
@@ -39,7 +41,7 @@ class MusicGridWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                color: AppColors.backgroundColor,
+                color: color,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -134,7 +136,12 @@ class MusicGridWidget extends StatelessWidget {
 }
 
 class MusicShimmerGridWidget extends StatelessWidget {
-  const MusicShimmerGridWidget({super.key});
+  final bool showContainer;
+
+  const MusicShimmerGridWidget({
+    Key? key,
+    required this.showContainer,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -145,11 +152,12 @@ class MusicShimmerGridWidget extends StatelessWidget {
         child: Column(
           children: [
             // Illustration placeholder (top image)
-            Container(
-              height: 250,
-              width: double.infinity,
-              color: Colors.grey[300],
-            ),
+            if (showContainer)
+              Container(
+                height: 250,
+                width: double.infinity,
+                color: Colors.grey[300],
+              ),
             const SizedBox(height: 16),
 
             // Book cards shimmer

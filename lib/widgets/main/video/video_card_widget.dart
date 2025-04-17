@@ -6,11 +6,13 @@ import '../../../utils/colors.dart';
 
 class VideoGridWidget extends StatelessWidget {
   final List<Video> videos;
+  final Color color;
   final Function(Video) onVideoTap;
 
   const VideoGridWidget({
     Key? key,
     required this.videos,
+    required this.color,
     required this.onVideoTap,
   }) : super(key: key);
 
@@ -39,7 +41,7 @@ class VideoGridWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                color: AppColors.backgroundColor,
+                color: color,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -134,7 +136,12 @@ class VideoGridWidget extends StatelessWidget {
 }
 
 class VideoShimmerGridWidget extends StatelessWidget {
-  const VideoShimmerGridWidget({super.key});
+  final bool showContainer;
+
+  const VideoShimmerGridWidget({
+    Key? key,
+    required this.showContainer,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -145,11 +152,12 @@ class VideoShimmerGridWidget extends StatelessWidget {
         child: Column(
           children: [
             // Illustration placeholder (top image)
-            Container(
-              height: 250,
-              width: double.infinity,
-              color: Colors.grey[300],
-            ),
+            if (showContainer)
+              Container(
+                height: 250,
+                width: double.infinity,
+                color: Colors.grey[300],
+              ),
             const SizedBox(height: 16),
 
             // Book cards shimmer
