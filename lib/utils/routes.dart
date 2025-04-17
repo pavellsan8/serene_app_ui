@@ -62,7 +62,7 @@ class AppRoutes {
       homePage: (context) => const HomePage(),
       musicPage: (context) => const MusicPage(),
       videoPage: (context) => const VideoPage(),
-      bookPage: (context) => BookPage(),
+      bookPage: (context) => const BookPage(),
       chatbotPage: (context) => const ChatbotPage(),
       profilePage: (context) => const ProfilePage(),
     };
