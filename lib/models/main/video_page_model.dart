@@ -1,21 +1,24 @@
 class VideoResponse {
-  final List<Video>? data;
-  final bool success;
+  final int status;
   final String message;
+  final String? email;
+  final List<Video> data;
 
   VideoResponse({
-    required this.data,
-    required this.success,
+    required this.status,
     required this.message,
+    this.email,
+    required this.data,
   });
 
   factory VideoResponse.fromJson(Map<String, dynamic> json) {
     return VideoResponse(
-      data: json['data'] != null
-          ? List<Video>.from(json['data'].map((x) => Video.fromJson(x)))
-          : null,
-      success: json['success'] ?? false,
-      message: json['message'] ?? '',
+      status: json['status'] as int,
+      message: json['message'] as String,
+      email: json['email'] as String?,
+      data: (json['data'] as List<dynamic>)
+          .map((bookJson) => Video.fromJson(bookJson as Map<String, dynamic>))
+          .toList(),
     );
   }
 }

@@ -14,6 +14,6 @@ class MusicPageViewModel extends GenericPageViewModel<Music> {
   @override
   Future<List<Music>> fetchData() async {
     final MusicResponse response = await musicService.getMusicData();
-    return response.data ?? [];
+    return response.data;
   }
 }
