@@ -16,7 +16,7 @@ class BookFavoritesViewModel extends ChangeNotifier {
 
       final response = await _bookFavouriteService.getBookData(email: email);
       debugPrint("Books found: ${response.data.length}");
-    
+
       favoriteBooks = response.data;
     } catch (e) {
       debugPrint("Error fetching favorite books: $e");

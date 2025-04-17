@@ -25,7 +25,7 @@ class VideoResponse {
 
 class Video {
   final String? title;
-  final String? videoId;
+  final String videoId;
   final String? ytLink;
   final String? channel;
   final String? publishedAt;
@@ -35,7 +35,7 @@ class Video {
 
   Video({
     this.title,
-    this.videoId,
+    required this.videoId,
     this.ytLink,
     this.channel,
     this.publishedAt,

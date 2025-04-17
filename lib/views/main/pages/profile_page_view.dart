@@ -190,11 +190,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
-                                const ProfileInfoCardWidget(
+                                ProfileInfoCardWidget(
                                   icon: Icons.video_library_outlined,
                                   title: "Favorites Videos",
                                   subtitle: "Playlist of video that you like",
-                                  onTap: null,
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.videoFavourite,
+                                    );
+                                  },
                                 ),
                                 ProfileInfoCardWidget(
                                   icon: Icons.music_note_outlined,

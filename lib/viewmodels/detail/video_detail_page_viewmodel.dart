@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../models/favourite/favourite_model.dart';
+import '../../services/favourite/video_favourite_service.dart';
+import '../../utils/shared_preferences.dart';
+
 class VideoDetailViewModel extends ChangeNotifier {
   bool isFavorite = false;
   bool isDescriptionExpanded = false;
   bool isFullScreen = false;
+
+  final VideoFavouriteService videoFavouriteService = VideoFavouriteService();
 
   // YouTube controller reference
   YoutubePlayerController? _youtubeController;
@@ -68,22 +74,64 @@ class VideoDetailViewModel extends ChangeNotifier {
     return true;
   }
 
-  void toggleFavorite(BuildContext context) {
+  Future<void> toggleFavorite(BuildContext context, String itemId) async {
+    final email = await ApplicationStorage.getEmail();
+
+    if (email == null) {
+      debugPrint('Email not found in SharedPreferences');
+    }
+
+    // Create the request object
+    final request = ItemFavouriteRequest(
+      email: email ?? '',
+      itemId: itemId,
+    );
+
+    // Toggle favorite logic
     isFavorite = !isFavorite;
     notifyListeners();
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          isFavorite ? 'Added to favorites!' : 'Removed from favorites!',
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Montserrat',
+    try {
+      String apiMessage;
+      if (isFavorite) {
+        final response =
+            await videoFavouriteService.addVideoFavourite(request: request);
+        apiMessage = response.message;
+      } else {
+        final response =
+            await videoFavouriteService.removeVideoFavourite(request: request);
+        apiMessage = response.message;
+      }
+
+      // Show success snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            apiMessage,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
           ),
+          duration: const Duration(seconds: 1),
         ),
-        duration: const Duration(seconds: 1),
-      ),
-    );
+      );
+    } catch (e) {
+      // Handle API errors
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Failed to update favorite status. Please try again later.',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
 }

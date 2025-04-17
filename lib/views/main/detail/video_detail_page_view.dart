@@ -149,8 +149,10 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () =>
-                                    viewModel.toggleFavorite(context),
+                                onPressed: () => viewModel.toggleFavorite(
+                                  context,
+                                  widget.video.videoId,
+                                ),
                                 icon: Icon(
                                   viewModel.isFavorite
                                       ? Icons.favorite

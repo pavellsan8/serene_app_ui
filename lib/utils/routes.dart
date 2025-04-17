@@ -22,6 +22,7 @@ import '../views/main/pages/profile_page_view.dart';
 
 import '../views/main/favorite/book_favourite_page_view.dart';
 import '../views/main/favorite/music_favourite_page_view.dart';
+import '../views/main/favorite/video_favourite_page_view.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash';
@@ -50,6 +51,7 @@ class AppRoutes {
 
   static const String bookFavourite = '/book_favourite';
   static const String musicFavourite = '/music_favourite';
+  static const String videoFavourite = '/video_favourite';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -72,6 +74,7 @@ class AppRoutes {
       profilePage: (context) => const ProfilePage(),
       bookFavourite: (context) => const BookFavouritesPage(),
       musicFavourite: (context) => const MusicFavouritesPage(),
+      videoFavourite: (context) => const VideoFavouritesPage(),
     };
   }
 }
