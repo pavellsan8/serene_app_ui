@@ -7,7 +7,7 @@ import '../../utils/api_url.dart';
 
 class MusicService {
   Future<MusicResponse> getMusicData({String? search}) async {
-    String baseUrl = "${EnvConfig.baseUrl}/api/v1/get-song-list";
+    String baseUrl = "${EnvConfig.baseUrl}/api/v1/get-music-list";
     String finalUrl =
         "$baseUrl?search=${search?.isNotEmpty == true ? search : 'chill'}";
 
