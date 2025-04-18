@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/colors.dart';
+import '../../widgets/favourite/feature_card_widget.dart';
+import '../../widgets/favourite/team_member_widget.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -8,6 +10,7 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'About Us',
@@ -17,9 +20,15 @@ class AboutUsPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,7 +40,7 @@ class AboutUsPage extends StatelessWidget {
                 height: MediaQuery.of(context).size.width * 0.3,
               ),
             ),
-            const SizedBox(height: 24.0),
+            const SizedBox(height: 24),
 
             // App Name and Tagline
             // const Center(
@@ -46,7 +55,7 @@ class AboutUsPage extends StatelessWidget {
             //           color: AppColors.primaryColor,
             //         ),
             //       ),
-            //       SizedBox(height: 8.0),
+            //       SizedBox(height: 8),
             //       Text(
             //         'Your Companion for Mental Health',
             //         style: TextStyle(
@@ -59,7 +68,7 @@ class AboutUsPage extends StatelessWidget {
             //     ],
             //   ),
             // ),
-            // const SizedBox(height: 32.0),
+            // const SizedBox(height: 32),
 
             // About Section
             const Text(
@@ -71,7 +80,7 @@ class AboutUsPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 8),
             const Text(
               'This app is designed to address the mental health needs of users by providing '
               'a set of unique features tailored to support relaxation, emotional wellbeing, '
@@ -82,7 +91,7 @@ class AboutUsPage extends StatelessWidget {
                 fontFamily: 'Montserrat',
               ),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 16),
 
             // Features Section
             const Text(
@@ -94,31 +103,30 @@ class AboutUsPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 16.0),
-
-            _buildFeatureCard(
-              icon: Icons.chat_bubble_outline,
+            const SizedBox(height: 16),
+            const FeatureCardAboutWidget(
+              image: 'assets/images/home/menu/serebot_white.png',
               title: 'Chatbot Consultation',
               description:
                   'Share your feelings with an empathetic virtual companion.',
             ),
-            _buildFeatureCard(
-              icon: Icons.music_note,
+            const FeatureCardAboutWidget(
+              image: 'assets/images/home/menu/serehear.png',
               title: 'Relaxing Music',
               description: 'Curated tracks to ease stress and relax your mind.',
             ),
-            _buildFeatureCard(
-              icon: Icons.video_collection,
-              title: 'Relaxation Videos',
+            const FeatureCardAboutWidget(
+              image: 'assets/images/home/menu/serewatch.png',
+              title: 'Meditation Videos',
               description: 'Watch calming videos to promote peace and balance.',
             ),
-            _buildFeatureCard(
-              icon: Icons.book,
-              title: 'Calming Reads',
+            const FeatureCardAboutWidget(
+              image: 'assets/images/home/menu/sereread.png',
+              title: 'Book Reading',
               description:
                   'Explore books to uplift your mood and relax your mind.',
             ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 32),
 
             // Goal Section
             const Text(
@@ -130,7 +138,7 @@ class AboutUsPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 8),
             const Text(
               'By combining these features, this app aims to become an effective and reliable solution for users seeking '
               'to improve, maintain, and restore their mental wellbeing.',
@@ -139,68 +147,92 @@ class AboutUsPage extends StatelessWidget {
                 fontFamily: 'Montserrat',
               ),
             ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 32),
+
+            // Team Section (New)
+            const Text(
+              'Meet the Team',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat',
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Row(
+                  children: [
+                    TeamMemberWidget(
+                      image: 'assets/images/favourite/evan.jpg',
+                      name: 'Evan Yauris',
+                      role: 'Product Conceptualizer',
+                    ),
+                    SizedBox(width: 24),
+                    TeamMemberWidget(
+                      image: 'assets/images/favourite/nawfal.jpg',
+                      name: 'Nawfal Sayeed',
+                      role: 'UI / UX Designer',
+                    ),
+                    SizedBox(width: 24),
+                    TeamMemberWidget(
+                      image: 'assets/images/favourite/pavel.jpg',
+                      name: 'Pavel Susanto',
+                      role: 'Application Developer',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
 
             // Divider for styling
             const Divider(thickness: 1.5),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 8),
 
             // Footer Section
-            const Center(
-              child: Text(
-                'Thank you for using Serene Mobile App',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-            ),
-            const SizedBox(height: 8.0),
-            const Center(
-              child: Text(
-                'Together, we can build a better state of mind.',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontStyle: FontStyle.italic,
-                  color: AppColors.primaryColor,
-                  fontFamily: 'Montserrat',
-                ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              alignment: Alignment.center,
+              child: const Column(
+                children: [
+                  Text(
+                    'Thank you for choosing Serene',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Version 1.2 • © 2025 Serene',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Taking small steps toward better mental health, together.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontStyle: FontStyle.italic,
+                      color: AppColors.primaryColor,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  // Helper method to build a feature card
-  Widget _buildFeatureCard({
-    required IconData icon,
-    required String title,
-    required String description,
-  }) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-      elevation: 4,
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        leading: Icon(icon, color: AppColors.primaryColor, size: 32.0),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Montserrat',
-          ),
-        ),
-        subtitle: Text(
-          description,
-          style: const TextStyle(
-            fontSize: 14,
-            fontFamily: 'Montserrat',
-          ),
         ),
       ),
     );

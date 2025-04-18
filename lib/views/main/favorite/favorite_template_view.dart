@@ -19,6 +19,7 @@ class FavoritesPage<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           appBarTitle,
@@ -27,6 +28,12 @@ class FavoritesPage<T> extends StatelessWidget {
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.w600,
           ),
+        ),
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded), 
+          color: Colors.black, 
+          onPressed: () => Navigator.of(context).pop(),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
