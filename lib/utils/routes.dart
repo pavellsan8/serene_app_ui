@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../views//splash_screen/splash_screen.dart';
+
+import '../views/splash_screen/splash_screen.dart';
 
 import '../views/auth/get_started_view.dart';
 import '../views/auth/login_view.dart';
@@ -24,6 +25,8 @@ import '../views/main/favorite/book_favourite_page_view.dart';
 import '../views/main/favorite/music_favourite_page_view.dart';
 import '../views/main/favorite/video_favourite_page_view.dart';
 
+import '../views/about/about_page_view.dart';
+
 class AppRoutes {
   static const String splashScreen = '/splash';
 
@@ -37,9 +40,6 @@ class AppRoutes {
 
   static const String questionnaireIntro = '/questionnaire_intro';
   static const String questionnairePage = '/questionnaire_section';
-  static const String feelingPage = '/feeling_page';
-  static const String moodPage = '/mood_page';
-  static const String emotionPage = '/emotion_page';
   static const String completeQuizPage = '/complete_question';
 
   static const String homePage = '/home_page';
@@ -52,6 +52,8 @@ class AppRoutes {
   static const String bookFavourite = '/book_favourite';
   static const String musicFavourite = '/music_favourite';
   static const String videoFavourite = '/video_favourite';
+
+  static const String aboutPage = '/about_page';
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -75,6 +77,7 @@ class AppRoutes {
       bookFavourite: (context) => const BookFavouritesPage(),
       musicFavourite: (context) => const MusicFavouritesPage(),
       videoFavourite: (context) => const VideoFavouritesPage(),
+      aboutPage: (context) => const AboutUsPage(),
     };
   }
 }

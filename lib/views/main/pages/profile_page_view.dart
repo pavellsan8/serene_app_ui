@@ -241,11 +241,16 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        const ProfileInfoCardWidget(
+                        ProfileInfoCardWidget(
                           icon: Icons.info_outline_rounded,
                           title: "About Us",
                           subtitle: "Get to know us better",
-                          onTap: null,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.aboutPage,
+                            );
+                          },
                         ),
                         ProfileInfoCardWidget(
                           icon: Icons.logout,
