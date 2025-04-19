@@ -200,6 +200,18 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
     _audioPlayer.seek(position);
   }
 
+  Future<void> checkFavoriteStatus(String musicId) async {
+    final favorites = await _musicFavouriteService.getData();
+    _isFavorite = favorites.data.any((music) => music.id == musicId);
+    notifyListeners();
+  }
+
+  String formatDuration(Duration duration) {
+    final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return "$minutes:$seconds";
+  }
+
   @override
   void dispose() {
     _audioPlayer.dispose();

@@ -24,12 +24,6 @@ class MusicDetailPage extends StatefulWidget {
 }
 
 class _MusicDetailPageState extends State<MusicDetailPage> {
-  String formatDuration(Duration duration) {
-    final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
-    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
-    return "$minutes:$seconds";
-  }
-
   @override
   void initState() {
     super.initState();
@@ -37,6 +31,8 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final viewModel =
           Provider.of<MusicDetailPageViewModel>(context, listen: false);
+
+      viewModel.checkFavoriteStatus(widget.music.id);
 
       // Set playlist if available
       if (widget.playlist != null && widget.playlist!.isNotEmpty) {
@@ -195,7 +191,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            formatDuration(viewModel.currentPosition),
+                            viewModel.formatDuration(viewModel.currentPosition),
                             style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 12,

@@ -40,6 +40,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
     final viewModel = Provider.of<VideoDetailViewModel>(context, listen: false);
     viewModel.setPortraitOrientation();
     viewModel.setYoutubeController(_youtubeController);
+    viewModel.checkFavoriteStatus(widget.video.videoId);
   }
 
   @override

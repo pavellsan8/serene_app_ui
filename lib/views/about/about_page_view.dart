@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/colors.dart';
-import '../../widgets/favourite/feature_card_widget.dart';
-import '../../widgets/favourite/team_member_widget.dart';
+import '../../widgets/about/feature_card_widget.dart';
+import '../../widgets/about/team_member_widget.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);

@@ -27,6 +27,12 @@ class BookDetailViewModel extends ChangeNotifier with FavoriteToggleMixin {
     notifyListeners();
   }
 
+  Future<void> checkFavoriteStatus(String bookId) async {
+    final favorites = await _bookFavouriteService.getData();
+    _isFavorite = favorites.data.any((book) => book.id == bookId);
+    notifyListeners();
+  }
+
   String getHighQualityThumbnail(String? thumbnailUrl) {
     if (thumbnailUrl == null) return '';
     return thumbnailUrl.replaceFirst(RegExp(r'zoom=\d'), 'zoom=3');

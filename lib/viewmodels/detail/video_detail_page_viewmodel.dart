@@ -84,4 +84,10 @@ class VideoDetailViewModel extends ChangeNotifier with FavoriteToggleMixin {
     // Otherwise, allow normal back navigation
     return true;
   }
+
+  Future<void> checkFavoriteStatus(String videoId) async {
+    final favorites = await _videoFavouriteService.getData();
+    _isFavorite = favorites.data.any((video) => video.videoId == videoId);
+    notifyListeners();
+  }
 }

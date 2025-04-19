@@ -24,9 +24,21 @@ class BookDetailPage extends StatefulWidget {
 
 class _BookDetailPageState extends State<BookDetailPage> {
   @override
+  void initState() {
+    super.initState();
+    // Check if the book is in favorites when the page loads
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final viewModel =
+          Provider.of<BookDetailViewModel>(context, listen: false);
+      viewModel.checkFavoriteStatus(widget.book.id);
+    });
+  }
+
+  @override
+  // Not showing the current book id on the recommendation
   Widget build(BuildContext context) {
     final List<Book> filteredRecommendations = widget.recommendedBooks
-        .where((b) => b.title != widget.book.title)
+        .where((b) => b.id != widget.book.id)
         .toList();
 
     final viewModel = Provider.of<BookDetailViewModel>(context);
