@@ -42,7 +42,7 @@ class PasswordInputViewmodel extends ChangeNotifier {
         email: email,
         password: passwordController.text,
       );
-      print("User Email: $email");
+      debugPrint("User Email: $email");
 
       final response = await _resetPasswordInputService.resetPassword(request);
       if (!context.mounted) return;

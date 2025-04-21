@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/main/user_profile_model.dart';
 import '../../utils/api_url.dart';
+import '../../utils/shared_preferences.dart';
 
 class GetUserProfileService {
   Future<UserProfileResponse> fetchUserProfile(String email) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? accessToken = prefs.getString("access_token");
+    final accessToken = await ApplicationStorage.getAccessToken();
 
     if (accessToken == null) {
       throw Exception("No access token found.");

@@ -19,9 +19,7 @@ void main() async {
 }
 
 class SereneApp extends StatelessWidget {
-  final SharedPreferences? prefs;
-
-  const SereneApp({super.key, this.prefs});
+  const SereneApp({super.key});
 
   @override
   Widget build(BuildContext context) {

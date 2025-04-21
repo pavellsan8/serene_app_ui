@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-import '../../utils/routes.dart';
 import '../../services/auth/login_service.dart';
+import '../../utils/routes.dart';
+import '../../utils/shared_preferences.dart';
 
 class SplashViewModel extends ChangeNotifier {
   final SharedPreferences prefs;
@@ -13,8 +14,8 @@ class SplashViewModel extends ChangeNotifier {
 
   /// Mengecek apakah user sudah login
   Future<String> checkLoginStatus() async {
-    final accessToken = prefs.getString("access_token");
-    final refreshToken = prefs.getString("refresh_token");
+    final accessToken = await ApplicationStorage.getAccessToken();
+    final refreshToken = await ApplicationStorage.getRefreshToken();
 
     debugPrint("🔑 Access Token: $accessToken");
     debugPrint("🔑 Refresh Token: $refreshToken");

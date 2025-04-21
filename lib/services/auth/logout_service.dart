@@ -1,22 +1,22 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/auth/logout_model.dart';
 import '../../utils/api_url.dart';
+import '../../utils/shared_preferences.dart';
 
 class LogoutService {
   Future<LogoutResponse> logoutUser() async {
     final url = Uri.parse("${EnvConfig.baseUrl}/api/v1/logout-user");
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final accessToken = prefs.getString("access_token");
-      final refreshToken = prefs.getString("refresh_token");
+      final accessToken = await ApplicationStorage.getAccessToken();
+      final refreshToken = await ApplicationStorage.getRefreshToken();
 
-      print("===== STORED TOKENS BEFORE LOGOUT =====");
-      print("Access Token: $accessToken");
-      print("Refresh Token: $refreshToken");
-      print("======================================");
+      debugPrint("===== STORED TOKENS BEFORE LOGOUT =====");
+      debugPrint("Access Token: $accessToken");
+      debugPrint("Refresh Token: $refreshToken");
+      debugPrint("======================================");
 
       final response = await http.post(
         url,
@@ -30,12 +30,11 @@ class LogoutService {
       final logoutResponse = LogoutResponse.fromJson(responseData);
 
       if (response.statusCode == 200) {
-        await prefs.remove("access_token");
-        await prefs.remove("refresh_token");
+        await ApplicationStorage.removeTokens();
 
-        print("===== LOGOUT SUCCESS =====");
-        print("Tokens removed.");
-        print("==========================");
+        debugPrint("===== LOGOUT SUCCESS =====");
+        debugPrint("Tokens removed.");
+        debugPrint("==========================");
       }
       return logoutResponse;
     } catch (e) {

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/auth/login_model.dart';
 import '../../utils/api_url.dart';
@@ -40,8 +39,7 @@ class LoginService {
   }
 
   Future<String?> refreshToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    final refreshToken = prefs.getString("refresh_token");
+    final refreshToken = await ApplicationStorage.getRefreshToken();
 
     if (refreshToken == null) {
       return null;
@@ -62,7 +60,7 @@ class LoginService {
         final responseData = jsonDecode(response.body);
         final newAccessToken = responseData["data"]["access_token"];
 
-        await prefs.setString("access_token", newAccessToken);
+        ApplicationStorage.saveAccessToken(newAccessToken);
         return newAccessToken;
       } else {
         return null;

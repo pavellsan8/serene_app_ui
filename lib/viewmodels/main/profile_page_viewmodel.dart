@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/main/user_profile_model.dart';
 import '../../services/main/user_profile_service.dart';
+import '../../utils/shared_preferences.dart';
 
 class UserProfileViewModel extends ChangeNotifier {
   final GetUserProfileService _userProfileService = GetUserProfileService();
@@ -17,12 +17,7 @@ class UserProfileViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await Future.delayed(
-        const Duration(milliseconds: 1),
-      ); // Small delay for safety
-
-      String? email = prefs.getString("email");
+      final email = await ApplicationStorage.getEmail();
       debugPrint('Retrieved email: $email');
 
       if (email == null) {

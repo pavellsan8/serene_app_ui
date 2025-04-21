@@ -15,6 +15,6 @@ Serene is a friendly app designed to help you take care of your mental well-bein
 - **Frontend**: Flutter
 - **Backend**: Flask
 - **Database**: PostgreSQL
-- **AI & Chatbot**: NLP-based AI
+- **AI & Chatbot**: OpenAI
 
 🌿 **Take a deep breath and let Serene be your pocket-sized peace of mind!**

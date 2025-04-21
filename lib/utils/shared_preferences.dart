@@ -94,6 +94,13 @@ class ApplicationStorage {
     return prefs.getString(refreshTokenKey);
   }
 
+  // Delete access token and refresh token
+  static Future<void> removeTokens() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(accessTokenKey);
+    await prefs.remove(refreshTokenKey);
+  }
+
   // Delete all questionnaire-related keys
   static Future<void> clearQuestionnaireData() async {
     final prefs = await SharedPreferences.getInstance();

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/main/video_page_model.dart';
 import '../../utils/api_url.dart';
+import '../../utils/shared_preferences.dart';
 
 class VideoService {
   Future<VideoResponse> getVideoData({String? query}) async {
@@ -11,10 +11,9 @@ class VideoService {
     String finalUrl =
         "$baseUrl?query=${query?.isNotEmpty == true ? query : 'relaxing'}";
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? accessToken = prefs.getString("access_token");
-
+    final accessToken = await ApplicationStorage.getAccessToken();
     final url = Uri.parse(finalUrl);
+
     try {
       final response = await http.get(
         url,

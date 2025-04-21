@@ -20,7 +20,7 @@ class OtpInputViewModel extends ChangeNotifier {
     if (_isDisposed) return;
 
     final userOtp = otpController.text.trim();
-    print("User OTP: $userOtp, Server OTP: $serverOtp");
+    debugPrint("User OTP: $userOtp, Server OTP: $serverOtp");
 
     isOtpValid = userOtp == serverOtp;
     if (!_isDisposed) notifyListeners();
@@ -98,7 +98,7 @@ class OtpInputViewModel extends ChangeNotifier {
       try {
         otpController.dispose();
       } catch (e) {
-        print("Error disposing otpController: $e");
+        debugPrint("Error disposing otpController: $e");
       }
     }
     super.dispose();
