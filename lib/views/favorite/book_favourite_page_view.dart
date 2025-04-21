@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/main/book_page_model.dart';
-import '../../../viewmodels/favourite/book_favourite_viewmodel.dart';
-import '../../../views/main/favorite/favorite_template_view.dart';
-import '../../../views/main/detail/book_detail_page_view.dart';
-import '../../../widgets/main/book/regular_card_widget.dart';
+import '../../models/main/book_page_model.dart';
+import '../../viewmodels/favourite/book_favourite_viewmodel.dart';
+import 'favorite_template_view.dart';
+import '../main/detail/book_detail_page_view.dart';
+import '../../widgets/main/book/regular_card_widget.dart';
 
 class BookFavouritesPage extends StatelessWidget {
   const BookFavouritesPage({Key? key}) : super(key: key);
@@ -20,6 +20,11 @@ class BookFavouritesPage extends StatelessWidget {
             appBarTitle: "Favorite Books",
             items: viewModel.favoriteBooks,
             isLoading: viewModel.isLoading,
+            searchPredicate: (book, query) {
+              final lowercaseQuery = query.toLowerCase();
+              // Search by title
+              return book.title.toLowerCase().contains(lowercaseQuery);
+            },
             itemBuilder: (context, books) {
               return BooksGridWidget(
                 books: books,

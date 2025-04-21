@@ -21,9 +21,9 @@ import '../views/main/pages/book_page_view.dart';
 import '../views/main/pages/chatbot_page_view.dart';
 import '../views/main/pages/profile_page_view.dart';
 
-import '../views/main/favorite/book_favourite_page_view.dart';
-import '../views/main/favorite/music_favourite_page_view.dart';
-import '../views/main/favorite/video_favourite_page_view.dart';
+import '../views/favorite/book_favourite_page_view.dart';
+import '../views/favorite/music_favourite_page_view.dart';
+import '../views/favorite/video_favourite_page_view.dart';
 
 import '../views/about/about_page_view.dart';
 
