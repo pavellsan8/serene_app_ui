@@ -35,7 +35,10 @@ class ChatbotInputArea extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 hintText: "Type your message...",
-                hintStyle: const TextStyle(color: AppColors.subtitleTextColor),
+                hintStyle: const TextStyle(
+                  color: AppColors.subtitleTextColor,
+                  fontFamily: 'Montserrat',
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
@@ -46,6 +49,11 @@ class ChatbotInputArea extends StatelessWidget {
                   horizontal: 20,
                   vertical: 10,
                 ),
+              ),
+              style: const TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 16,
+                color: Colors.black,
               ),
               textCapitalization: TextCapitalization.sentences,
               onSubmitted: (_) => onSend(),
@@ -61,7 +69,10 @@ class ChatbotInputArea extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              icon: const Icon(Icons.send_rounded, color: Colors.white),
+              icon: const Icon(
+                Icons.send_rounded,
+                color: Colors.white,
+              ),
               onPressed: onSend,
             ),
           ),

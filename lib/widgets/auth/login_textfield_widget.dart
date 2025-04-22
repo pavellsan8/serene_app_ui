@@ -74,6 +74,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           obscureText: widget.obscureText ? _isObscured : false,
           onChanged: widget.onChanged,
+          style: const TextStyle(
+            fontFamily: 'Montserrat',
+            fontSize: 16,
+            color: Colors.black,
+          ),
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: TextStyle(
@@ -91,7 +96,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
+              borderSide:
+                  const BorderSide(color: AppColors.primaryColor, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),

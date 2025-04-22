@@ -24,8 +24,9 @@ class _ChatbotPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<ChatbotViewModel>(context);
-    
+
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primaryColor,
@@ -33,7 +34,7 @@ class _ChatbotPageContent extends StatelessWidget {
           padding: const EdgeInsets.only(left: 0),
           child: IconButton(
             icon: const Icon(
-              Icons.arrow_back_rounded,
+              Icons.arrow_back_ios_new_rounded,
               color: Colors.white,
             ),
             onPressed: () {
@@ -47,7 +48,7 @@ class _ChatbotPageContent extends StatelessWidget {
               radius: 20,
               backgroundColor: Colors.white,
               child: Image.asset(
-                "assets/images/home/menu/serebot.png",
+                "assets/images/home/menu/serebot_white.png",
                 width: 22,
               ),
             ),
@@ -56,7 +57,7 @@ class _ChatbotPageContent extends StatelessWidget {
               "Serebot",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Montserrat',
               ),
@@ -75,14 +76,16 @@ class _ChatbotPageContent extends StatelessWidget {
                         Icon(
                           Icons.chat_bubble_outline,
                           size: 80,
-                          color: Colors.grey.shade300,
+                          color: Colors.grey[300],
                         ),
                         const SizedBox(height: 16),
                         Text(
                           "Start the conversation with Serebot!",
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey.shade600,
+                            color: Colors.grey[500],
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                       ],
