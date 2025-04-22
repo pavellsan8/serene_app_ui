@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../viewmodels/main/profile_page_viewmodel.dart';
 import '../../../viewmodels/auth/logout_viewmodel.dart';
 import '../../../widgets/main/profile/profile_card_widget.dart';
+import '../../../widgets/main/profile/logout_dialog_widget.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
 
@@ -256,21 +257,24 @@ class _ProfilePageState extends State<ProfilePage> {
                           icon: Icons.logout,
                           title: "Log out",
                           subtitle: "Change your account",
-                          onTap: logoutViewModel.isLoading
-                              ? null
-                              : () {
-                                  logoutViewModel.logout(context);
-                                },
-                          trailing: logoutViewModel.isLoading
-                              ? const SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                              : null,
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return LogoutDialog(
+                                  onConfirm: logoutViewModel.isLoading
+                                      ? null
+                                      : () {
+                                          logoutViewModel.logout(context);
+                                        },
+                                  onCancel: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  isLoading: logoutViewModel.isLoading,
+                                );
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),
