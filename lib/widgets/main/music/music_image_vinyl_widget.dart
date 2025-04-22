@@ -74,7 +74,7 @@ class _RotatingDiscState extends State<RotatingDisc>
               gradient: RadialGradient(
                 colors: [
                   Colors.grey.shade800,
-                  Colors.black.withOpacity(0.8),
+                  Colors.black.withAlpha((0.8 * 255).toInt()),
                 ],
                 stops: const [0.6, 1.0],
               ),
@@ -100,7 +100,7 @@ class _RotatingDiscState extends State<RotatingDisc>
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withAlpha((0.2 * 255).toInt()),
                     blurRadius: 10,
                     spreadRadius: 1,
                   )
@@ -128,10 +128,10 @@ class _RotatingDiscState extends State<RotatingDisc>
             width: widget.size * 0.08,
             height: widget.size * 0.08,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.8),
+              color: Colors.black.withAlpha((0.8 * 255).toInt()),
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withAlpha((0.5 * 255).toInt()),
                 width: 1,
               ),
             ),
@@ -145,7 +145,7 @@ class _RotatingDiscState extends State<RotatingDisc>
               width: widget.size * 0.2,
               height: widget.size * 0.2,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black.withAlpha((0.7 * 255).toInt()),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -167,7 +167,7 @@ class VinylGroovesPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final paint = Paint()
-      ..color = Colors.grey.withOpacity(0.3)
+      ..color = Colors.grey.withAlpha((0.3 * 255).toInt())
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.5;
 
@@ -179,7 +179,7 @@ class VinylGroovesPainter extends CustomPainter {
 
     // Membuat beberapa garis groove yang lebih tebal
     paint.strokeWidth = 1.0;
-    paint.color = Colors.grey.withOpacity(0.5);
+    paint.color = Colors.grey.withAlpha((0.5 * 255).toInt());
     for (double i = maxRadius * 0.3;
         i < maxRadius * 0.95;
         i += maxRadius * 0.15) {

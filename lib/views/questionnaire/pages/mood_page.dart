@@ -39,12 +39,14 @@ class MoodPage extends StatelessWidget {
               .toList(),
           const Spacer(),
           ContinueButton(
-            onPressed: moodViewModel.selectedMood != null ? () {
-              if (moodViewModel.selectedMood != null) {
-                ApplicationStorage.saveMood(moodViewModel.selectedMood!);
-              }
-              onContinue();
-            } : () {},
+            onPressed: moodViewModel.selectedMood != null
+                ? () {
+                    if (moodViewModel.selectedMood != null) {
+                      ApplicationStorage.saveMood(moodViewModel.selectedMood!);
+                    }
+                    onContinue();
+                  }
+                : () {},
           ),
         ],
       ),
@@ -61,13 +63,13 @@ class MoodPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         decoration: BoxDecoration(
           color: viewModel.selectedMood == option
-              ? AppColors.primaryColor.withOpacity(0.1)
-              : Colors.grey.withOpacity(0.1),
+              ? AppColors.primaryColor.withAlpha((0.1 * 255).toInt())
+              : Colors.grey.withAlpha((0.1 * 255).toInt()),
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
             color: viewModel.selectedMood == option
                 ? AppColors.primaryColor
-                : Colors.grey.withOpacity(0.2),
+                : Colors.grey.withAlpha((0.2 * 255).toInt()),
             width: 1.0,
           ),
         ),

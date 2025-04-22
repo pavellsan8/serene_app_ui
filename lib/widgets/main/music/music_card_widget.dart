@@ -153,26 +153,33 @@ class MusicShimmerGridWidget extends StatelessWidget {
           children: [
             // Illustration placeholder (top image)
             if (showContainer)
-              Container(
-                height: 250,
-                width: double.infinity,
-                color: Colors.grey[300],
-              ),
+              Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: double.infinity,
+                    color: Colors.grey[300],
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              )
 
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 12,
-              ),
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(30),
+            // Placeholder search bar
+            else
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 12,
+                ),
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
               ),
-            ),
 
             // Book cards shimmer
             Padding(

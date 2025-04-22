@@ -36,7 +36,7 @@ class CustomOtpField extends StatelessWidget {
       boxShadows: [
         BoxShadow(
           offset: const Offset(0, 1),
-          color: Colors.black.withOpacity(0.05),
+          color: Colors.black.withAlpha((0.05 * 255).toInt()),
           blurRadius: 2,
         )
       ],
