@@ -2,6 +2,7 @@ C/C++ Structured LogW
 U
 SC:\Users\pavel\Flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ž«öÄå2¤ ¾¥Ÿ’Ù2®
 «
 ¨C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\additional_project_files.txt	ž«öÄå2 ÷‰›šä2«
@@ -27,3 +28,30 @@ A
 žC:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\prefab_config.json	Ÿ«öÄå2( †Š›šä2©
 ¦
 £C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\symbol_folder_index.txt	Ÿ«öÄå2š ‡Š›šä2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	…Ó–Üå2¤ ¾¥Ÿ’Ù2®
+«
+¨C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\additional_project_files.txt	…Ó–Üå2 “Ò–Üå2«
+¨
+¥C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\android_gradle_build.json	…Ó–Üå2È	 ÆÒ–Üå2°
+­
+ªC:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\android_gradle_build_mini.json	…Ó–Üå2£ éÒ–Üå2
+š
+—C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\build.ninja	…Ó–Üå2ûÖ ùÏ–Üå2¡
+ž
+›C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\build.ninja.txt	…Ó–Üå2¦
+£
+ C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\build_file_index.txt	…Ó–Üå2S öÒ–Üå2§
+¤
+¡C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\compile_commands.json	…Ó–Üå2	«
+¨
+¥C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\compile_commands.json.bin	…Ó–Üå2
+±
+®
+«C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\metadata_generation_command.txt	…Ó–Üå2Ž
+ îÒ–Üå2¤
+¡
+žC:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\prefab_config.json	…Ó–Üå2( ïÒ–Üå2©
+¦
+£C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\arm64-v8a\symbol_folder_index.txt	…Ó–Üå2š ðÒ–Üå2
+>>>>>>> feature/favourite

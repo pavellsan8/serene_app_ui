@@ -2,6 +2,7 @@ C/C++ Structured LogW
 U
 SC:\Users\pavel\Flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ô«öÄå2¤ ¾¥Ÿ’Ù2°
 ­
 ªC:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\additional_project_files.txt	ô«öÄå2 ôœšä2­
@@ -27,3 +28,30 @@ A
  C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\prefab_config.json	ô«öÄå2( ‡œšä2«
 ¨
 ¥C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\symbol_folder_index.txt	ô«öÄå2œ ˆœšä2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	Íë—Üå2¤ ¾¥Ÿ’Ù2°
+­
+ªC:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\additional_project_files.txt	Íë—Üå2 ¬ë—Üå2­
+ª
+§C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\android_gradle_build.json	Íë—Üå2Ì	 ±ë—Üå2²
+¯
+¬C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\android_gradle_build_mini.json	Íë—Üå2§ ·ë—Üå2Ÿ
+œ
+™C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\build.ninja	Íë—Üå2…× ‡ê—Üå2£
+ 
+C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\build.ninja.txt	Íë—Üå2¨
+¥
+¢C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\build_file_index.txt	Íë—Üå2S ¿ë—Üå2©
+¦
+£C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\compile_commands.json	Íë—Üå2	­
+ª
+§C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\compile_commands.json.bin	Íë—Üå2
+³
+°
+­C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\metadata_generation_command.txt	Íë—Üå2˜
+ »ë—Üå2¦
+£
+ C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\prefab_config.json	Íë—Üå2( ½ë—Üå2«
+¨
+¥C:\Users\pavel\OneDrive\Documents\BINUS University\Semester 8\Thesis\Aplikasi\SereneUI\serene_app\android\app\.cxx\Debug\4l563a4e\armeabi-v7a\symbol_folder_index.txt	Íë—Üå2œ ¾ë—Üå2
+>>>>>>> feature/favourite
