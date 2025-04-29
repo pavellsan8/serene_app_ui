@@ -90,7 +90,7 @@ class RegisterScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 50),
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => viewModel.validateStep1(context),
+                      onPressed: () => viewModel.validateNameEmail(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 15),

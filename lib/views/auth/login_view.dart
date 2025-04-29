@@ -155,7 +155,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 onPressed: viewModel.isLoading
                                     ? null
-                                    : () => viewModel.submit(context),
+                                    : () => viewModel.onLoginClick(context),
                                 child: viewModel.isLoading
                                     ? const SizedBox(
                                         width: 20,

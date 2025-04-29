@@ -44,7 +44,7 @@ class RegisterViewModel extends ChangeNotifier {
   }
 
   // validation first page
-  void validateStep1(BuildContext context) {
+  void validateNameEmail(BuildContext context) {
     isSubmitted = true;
     updateFormValidity();
 
@@ -60,7 +60,7 @@ class RegisterViewModel extends ChangeNotifier {
   }
 
   // validation second page
-  Future<void> validateStep2(BuildContext context) async {
+  Future<void> onRegisterClick(BuildContext context) async {
     isSubmitted2 = true;
     updateFormValidity();
 
@@ -70,7 +70,7 @@ class RegisterViewModel extends ChangeNotifier {
 
     try {
       isLoading = true;
-      notifyListeners(); 
+      notifyListeners();
 
       final requestData = RegisterRequest(
         name: nameController.text,

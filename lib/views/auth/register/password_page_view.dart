@@ -116,7 +116,7 @@ class RegisterPasswordScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: viewModel.isLoading
                           ? null
-                          : () => viewModel.validateStep2(context),
+                          : () => viewModel.onRegisterClick(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         padding: const EdgeInsets.symmetric(vertical: 15),

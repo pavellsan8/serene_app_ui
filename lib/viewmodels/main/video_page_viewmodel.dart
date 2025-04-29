@@ -5,10 +5,6 @@ import '../../viewmodels/main/generic_page_viewmodel.dart';
 class VideoPageViewModel extends GenericPageViewModel<Video> {
   final VideoService videoService = VideoService();
 
-  // Filtered Videos for search functionality
-  List<Video> filteredVideos = [];
-  final Set<String> favoriteVideos = {};
-
   // Override fetchData to return Musics
   @override
   Future<List<Video>> fetchData() async {

@@ -37,7 +37,7 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   // submit button function
-  Future<void> submit(BuildContext context) async {
+  Future<void> onLoginClick(BuildContext context) async {
     if (isLoading) return;
 
     isSubmitted = true;
