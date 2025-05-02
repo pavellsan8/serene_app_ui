@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/routes.dart';
 import '../../../widgets/main/chatbot/chat_input_widget.dart';
+import '../../../widgets/main/chatbot/chat_bubble_widget.dart';
 import '../../../viewmodels/main/chatbot_page_viewmodel.dart';
 
 class ChatbotPage extends StatelessWidget {
@@ -94,8 +95,34 @@ class _ChatbotPageContent extends StatelessWidget {
                 : ListView.builder(
                     controller: viewModel.scrollController,
                     padding: const EdgeInsets.all(16),
-                    itemCount: viewModel.messages.length,
+                    itemCount: viewModel.messages.length +
+                        (viewModel.isLoading ? 1 : 0),
                     itemBuilder: (context, index) {
+                      if (index == viewModel.messages.length &&
+                          viewModel.isLoading) {
+                        // Improved typing indicator
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16,
+                            top: 8,
+                            bottom: 8,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                child: const TypingIndicator(),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                       return viewModel.messages[index];
                     },
                   ),

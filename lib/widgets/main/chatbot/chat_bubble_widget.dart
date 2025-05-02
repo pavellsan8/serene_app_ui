@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+
 import '../../../../utils/colors.dart';
 
 class ChatMessage extends StatelessWidget {
@@ -64,6 +67,61 @@ class ChatMessage extends StatelessWidget {
           ],
         ],
       ),
+    );
+  }
+}
+
+class TypingIndicator extends StatefulWidget {
+  const TypingIndicator({super.key});
+
+  @override
+  State<TypingIndicator> createState() => TypingIndicatorState();
+}
+
+class TypingIndicatorState extends State<TypingIndicator>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(3, (index) {
+            final delay = index * 0.4;
+            final position =
+                sin((_controller.value * 2 * pi) + delay) * 0.5 + 0.5;
+            return Container(
+              width: 6,
+              height: 6 + (position * 4),
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              decoration: BoxDecoration(
+                color: AppColors.primaryColor.withAlpha(
+                  (0.7 + (position * 0.3) * 255).toInt(),
+                ),
+                borderRadius: BorderRadius.circular(3),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 }
