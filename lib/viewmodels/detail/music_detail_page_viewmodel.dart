@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 import '../../models/main/music_page_model.dart';
 import '../../services/favourite/music_favourite_service.dart';
@@ -49,6 +50,9 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
           ? _playlist[_currentIndex]
           : null;
 
+  // Audio source for the playlist
+  ConcatenatingAudioSource? _playlistAudioSource;
+
   MusicDetailPageViewModel() {
     // Listen to position updates
     _audioPlayer.positionStream.listen((position) {
@@ -74,6 +78,15 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
 
       notifyListeners();
     });
+
+    // Listen to current index changes (important for notification sync)
+    _audioPlayer.currentIndexStream.listen((index) {
+      if (index != null && _currentIndex != index) {
+        _currentIndex = index;
+        debugPrint("Index changed to: $_currentIndex (from notification or app)");
+        notifyListeners();
+      }
+    });
   }
 
   // Set the playlist and update the view
@@ -83,6 +96,31 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
         initialIndex >= 0 &&
         initialIndex < playlist.length) {
       _currentIndex = initialIndex;
+
+      // Create a list of audio sources with metadata for the background service
+      final audioSources = playlist.map((track) {
+        return AudioSource.uri(
+          Uri.parse(track.audio ?? ''),
+          tag: MediaItem(
+            id: track.id?.toString() ??
+                DateTime.now().millisecondsSinceEpoch.toString(),
+            album: track.album ?? 'Unknown Album',
+            title: track.title ?? 'Unknown Title',
+            artist: track.artist ?? 'Unknown Artist',
+            artUri:
+                track.thumbnail != null ? Uri.parse(track.thumbnail!) : null,
+          ),
+        );
+      }).toList();
+
+      // Store the audio source for reference
+      _playlistAudioSource = ConcatenatingAudioSource(children: audioSources);
+
+      // Set the audio source playlist
+      _audioPlayer.setAudioSource(
+        _playlistAudioSource!,
+        initialIndex: initialIndex,
+      );
     }
     notifyListeners();
   }
@@ -90,13 +128,14 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
   // Play a specific track by index
   Future<void> playTrackAtIndex(int index) async {
     if (index >= 0 && index < _playlist.length) {
-      _currentIndex = index;
-      final Music track = _playlist[index];
-      if (track.audio != null && track.audio!.isNotEmpty) {
-        await playMusic(track.audio!);
-        notifyListeners(); // This should be after awaiting playMusic
-      } else {
-        debugPrint("No audio URL available for track at index $index");
+      try {
+        // Since we've already set up the playlist with setAudioSource,
+        // we just need to skip to the desired track
+        await _audioPlayer.seek(Duration.zero, index: index);
+        await _audioPlayer.play();
+        // _currentIndex will be updated by the currentIndexStream listener
+      } catch (e) {
+        debugPrint("Error playing track at index $index: $e");
       }
     }
   }
@@ -168,7 +207,22 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
   Future<void> playMusic(String url) async {
     try {
       debugPrint("Setting URL and playing: $url");
-      await _audioPlayer.setUrl(url);
+
+      // For playing a single track with notification support
+      final audioSource = AudioSource.uri(
+        Uri.parse(url),
+        tag: MediaItem(
+          id: 'single_track',
+          title: currentMusic?.title ?? 'Unknown Title',
+          artist: currentMusic?.artist ?? 'Unknown Artist',
+          album: currentMusic?.album ?? 'Unknown Album',
+          artUri: currentMusic?.thumbnail != null
+              ? Uri.parse(currentMusic!.thumbnail!)
+              : null,
+        ),
+      );
+
+      await _audioPlayer.setAudioSource(audioSource);
       await _audioPlayer.play();
       // _isPlaying will be updated by the playerStateStream listener
     } catch (e) {
