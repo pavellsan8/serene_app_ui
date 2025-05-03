@@ -36,6 +36,9 @@ class MusicDetailPageViewModel with ChangeNotifier {
           ? _playlist[_currentIndex]
           : null;
 
+  // Audio source for the playlist
+  ConcatenatingAudioSource? _playlistAudioSource;
+
   MusicDetailPageViewModel() {
     // Listen to position updates
     _audioPlayer.positionStream.listen((position) {
@@ -60,6 +63,15 @@ class MusicDetailPageViewModel with ChangeNotifier {
       }
 
       notifyListeners();
+    });
+
+    // Listen to current index changes (important for notification sync)
+    _audioPlayer.currentIndexStream.listen((index) {
+      if (index != null && _currentIndex != index) {
+        _currentIndex = index;
+        debugPrint("Index changed to: $_currentIndex (from notification or app)");
+        notifyListeners();
+      }
     });
   }
 
@@ -87,9 +99,12 @@ class MusicDetailPageViewModel with ChangeNotifier {
         );
       }).toList();
 
+      // Store the audio source for reference
+      _playlistAudioSource = ConcatenatingAudioSource(children: audioSources);
+
       // Set the audio source playlist
       _audioPlayer.setAudioSource(
-        ConcatenatingAudioSource(children: audioSources),
+        _playlistAudioSource!,
         initialIndex: initialIndex,
       );
     }
@@ -99,14 +114,12 @@ class MusicDetailPageViewModel with ChangeNotifier {
   // Play a specific track by index
   Future<void> playTrackAtIndex(int index) async {
     if (index >= 0 && index < _playlist.length) {
-      _currentIndex = index;
-
       try {
         // Since we've already set up the playlist with setAudioSource,
         // we just need to skip to the desired track
         await _audioPlayer.seek(Duration.zero, index: index);
         await _audioPlayer.play();
-        notifyListeners();
+        // _currentIndex will be updated by the currentIndexStream listener
       } catch (e) {
         debugPrint("Error playing track at index $index: $e");
       }
