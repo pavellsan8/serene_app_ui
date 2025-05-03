@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../models/main/video_page_model.dart';
-import '../../../viewmodels/detail/video_detail_page_viewmodel.dart';
-import '../../../widgets/main/video/video_card_widget.dart';
-import '../../../utils/routes.dart';
-import '../../../utils/colors.dart';
+import '../../models/main/video_page_model.dart';
+import '../../viewmodels/detail/video_detail_page_viewmodel.dart';
+import '../../widgets/main/video/video_card_widget.dart';
+import '../../utils/routes.dart';
+import '../../utils/colors.dart';
 
 class VideoDetailPage extends StatefulWidget {
   final Video video;

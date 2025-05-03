@@ -189,8 +189,8 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(
-                height:
-                    height * 0.02), // 2% of screen height for bottom padding
+              height: height * 0.02,
+            ), // 2% of screen height for bottom padding
           ],
         ),
       ),

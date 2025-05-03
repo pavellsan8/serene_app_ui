@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/main/music_page_model.dart';
 import '../../viewmodels/favourite/music_favourite_viewmodel.dart';
 import 'favorite_template_view.dart';
-import '../main/detail/music_detail_page_view.dart';
+import '../detail/music_detail_page_view.dart';
 import '../../widgets/main/music/music_card_widget.dart';
 
 class MusicFavouritesPage extends StatelessWidget {

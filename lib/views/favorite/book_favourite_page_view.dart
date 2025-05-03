@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/main/book_page_model.dart';
 import '../../viewmodels/favourite/book_favourite_viewmodel.dart';
 import 'favorite_template_view.dart';
-import '../main/detail/book_detail_page_view.dart';
+import '../detail/book_detail_page_view.dart';
 import '../../widgets/main/book/regular_card_widget.dart';
 
 class BookFavouritesPage extends StatelessWidget {

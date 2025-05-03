@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:serene_app/views/detail/music_detail_page_view.dart';
 
 import '../../../models/main/music_page_model.dart';
 import '../../../viewmodels/main/music_page_viewmodel.dart';
 import '../../../viewmodels/detail/music_detail_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
-import '../../../views/main/detail/music_detail_page_view.dart';
 import '../../../widgets/main/music/music_card_widget.dart';
 import '../../../utils/colors.dart';
 

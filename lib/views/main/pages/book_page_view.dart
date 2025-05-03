@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../models/main/book_page_model.dart';
 import '../../../viewmodels/main/book_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
-import '../../../views/main/detail/book_detail_page_view.dart';
+import '../../detail/book_detail_page_view.dart';
 import '../../../widgets/main/book/regular_card_widget.dart';
 import '../../../utils/colors.dart';
 

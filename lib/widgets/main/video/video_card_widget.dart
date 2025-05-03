@@ -181,7 +181,7 @@ class VideoShimmerGridWidget extends StatelessWidget {
                 ),
               ),
 
-            // Book cards shimmer
+            // Video cards shimmer
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
@@ -197,7 +197,7 @@ class VideoShimmerGridWidget extends StatelessWidget {
                           // Image shimmer
                           Container(
                             height: 70,
-                            width: 100,
+                            width: 150,
                             decoration: BoxDecoration(
                               color: Colors.grey[300],
                               borderRadius: BorderRadius.circular(8),

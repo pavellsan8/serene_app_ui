@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/main/video_page_model.dart';
 import '../../viewmodels/favourite/video_favourite_viewmodel.dart';
 import 'favorite_template_view.dart';
-import '../main/detail/video_detail_page_view.dart';
+import '../detail/video_detail_page_view.dart';
 import '../../widgets/main/video/video_card_widget.dart';
 
 class VideoFavouritesPage extends StatelessWidget {

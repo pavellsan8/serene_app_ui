@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/main/music_page_model.dart';
-import '../../../viewmodels/detail/music_detail_page_viewmodel.dart';
-import '../../../widgets/main/music/music_image_vinyl_widget.dart';
-import '../../../utils/routes.dart';
-import '../../../utils/colors.dart';
+import '../../models/main/music_page_model.dart';
+import '../../viewmodels/detail/music_detail_page_viewmodel.dart';
+import '../../widgets/main/music/music_image_vinyl_widget.dart';
+import '../../utils/routes.dart';
+import '../../utils/colors.dart';
 
 class MusicDetailPage extends StatefulWidget {
   final Music music;
@@ -32,7 +32,9 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
       final viewModel =
           Provider.of<MusicDetailPageViewModel>(context, listen: false);
 
-      viewModel.checkFavoriteStatus(widget.music.id);
+      if (widget.music.id != null) {
+        viewModel.checkFavoriteStatus(widget.music.id!);
+      }
 
       // Set playlist if available
       if (widget.playlist != null && widget.playlist!.isNotEmpty) {
@@ -168,7 +170,9 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                           size: 24,
                         ),
                         onPressed: () {
-                          viewModel.toggleFavorite(context, widget.music.id);
+                          if (widget.music.id != null) {
+                            viewModel.toggleFavorite(context, widget.music.id!);
+                          }
                         },
                       ),
                     ],

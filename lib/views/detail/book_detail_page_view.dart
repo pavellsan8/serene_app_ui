@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../models/main/book_page_model.dart';
-import '../../../viewmodels/detail/book_detail_page_viewmodel.dart';
-import '../../../widgets/main/book/recommended_card_widget.dart';
-import '../../../utils/routes.dart';
-import '../../../utils/colors.dart';
+import '../../models/main/book_page_model.dart';
+import '../../viewmodels/detail/book_detail_page_viewmodel.dart';
+import '../../widgets/main/book/recommended_card_widget.dart';
+import '../../utils/routes.dart';
+import '../../utils/colors.dart';
 
 class BookDetailPage extends StatefulWidget {
   final Book book;
@@ -37,9 +37,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
   @override
   // Not showing the current book id on the recommendation
   Widget build(BuildContext context) {
-    final List<Book> filteredRecommendations = widget.recommendedBooks
-        .where((b) => b.id != widget.book.id)
-        .toList();
+    final List<Book> filteredRecommendations =
+        widget.recommendedBooks.where((b) => b.id != widget.book.id).toList();
 
     final viewModel = Provider.of<BookDetailViewModel>(context);
 

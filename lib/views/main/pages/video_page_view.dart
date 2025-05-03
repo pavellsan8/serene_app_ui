@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../models/main/video_page_model.dart';
 import '../../../viewmodels/main/video_page_viewmodel.dart';
 import '../../../views/main/template_menu_view.dart';
-import '../../../views/main/detail/video_detail_page_view.dart';
+import '../../detail/video_detail_page_view.dart';
 import '../../../widgets/main/video/video_card_widget.dart';
 import '../../../utils/colors.dart';
 
