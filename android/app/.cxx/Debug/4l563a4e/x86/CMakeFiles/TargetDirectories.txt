@@ -1,2 +1,0 @@
-C:/Users/pavel/OneDrive/Documents/BINUS University/Semester 8/Thesis/Aplikasi/SereneUI/serene_app/android/app/.cxx/Debug/4l563a4e/x86/CMakeFiles/edit_cache.dir
-C:/Users/pavel/OneDrive/Documents/BINUS University/Semester 8/Thesis/Aplikasi/SereneUI/serene_app/android/app/.cxx/Debug/4l563a4e/x86/CMakeFiles/rebuild_cache.dir
