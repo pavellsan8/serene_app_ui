@@ -102,8 +102,7 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
         return AudioSource.uri(
           Uri.parse(track.audio ?? ''),
           tag: MediaItem(
-            id: track.id?.toString() ??
-                DateTime.now().millisecondsSinceEpoch.toString(),
+            id: track.id.toString(),
             album: track.album ?? 'Unknown Album',
             title: track.title ?? 'Unknown Title',
             artist: track.artist ?? 'Unknown Artist',

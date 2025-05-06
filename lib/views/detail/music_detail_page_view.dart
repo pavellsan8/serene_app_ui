@@ -32,9 +32,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
       final viewModel =
           Provider.of<MusicDetailPageViewModel>(context, listen: false);
 
-      if (widget.music.id != null) {
-        viewModel.checkFavoriteStatus(widget.music.id!);
-      }
+      viewModel.checkFavoriteStatus(widget.music.id);
 
       // Set playlist if available
       if (widget.playlist != null && widget.playlist!.isNotEmpty) {
@@ -170,9 +168,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                           size: 24,
                         ),
                         onPressed: () {
-                          if (widget.music.id != null) {
-                            viewModel.toggleFavorite(context, widget.music.id!);
-                          }
+                          viewModel.toggleFavorite(context, widget.music.id);
                         },
                       ),
                     ],
