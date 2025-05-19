@@ -45,7 +45,7 @@ flutter:
     - assets/images/home/
     - assets/images/home/menu/
     - assets/images/home/detail/
-    - assets/images/favourite/
+    - assets/images/about/
     - assets/icons/
 
   fonts:

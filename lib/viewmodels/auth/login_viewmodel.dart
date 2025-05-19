@@ -66,11 +66,20 @@ class LoginViewModel extends ChangeNotifier {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.message)),
         );
-        Navigator.pushNamed(
-          context,
-          AppRoutes.homePage,
-          arguments: this,
-        );
+        if (response.data != null &&
+            response.data!.submitQuestionnaire == false) {
+          // Navigate to questionnaire page if not submitted
+          Navigator.pushNamed(
+            context,
+            AppRoutes.questionnaireIntro,
+          );
+        } else {
+          // Navigate to home page if submitted
+          Navigator.pushNamed(
+            context,
+            AppRoutes.homePage,
+          );
+        }
       }
     } catch (e) {
       if (!context.mounted) return;

@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-
 import '../../utils/colors.dart';
-import '../../viewmodels/questionnaire/emotion_page_viewmodel.dart';
 
 class EmotionChipWidget extends StatelessWidget {
   final String emotion;
-  final EmotionViewModel viewModel;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   const EmotionChipWidget({
     super.key,
     required this.emotion,
-    required this.viewModel,
+    required this.isSelected,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = viewModel.selectedEmotions.contains(emotion);
-
     return GestureDetector(
-      onTap: () => viewModel.toggleEmotion(emotion),
+      onTap: onTap, // <-- call the function correctly here
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 14,

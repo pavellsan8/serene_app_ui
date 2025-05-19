@@ -168,19 +168,19 @@ class AboutUsPage extends StatelessWidget {
                 child: Row(
                   children: [
                     TeamMemberWidget(
-                      image: 'assets/images/favourite/evan.jpg',
+                      image: 'assets/images/about/evan.jpg',
                       name: 'Evan Yauris',
                       role: 'Product Conceptualizer',
                     ),
                     SizedBox(width: 24),
                     TeamMemberWidget(
-                      image: 'assets/images/favourite/nawfal.jpg',
+                      image: 'assets/images/about/nawfal.jpg',
                       name: 'Nawfal Sayeed',
                       role: 'UI / UX Designer',
                     ),
                     SizedBox(width: 24),
                     TeamMemberWidget(
-                      image: 'assets/images/favourite/pavel.jpg',
+                      image: 'assets/images/about/pavel.jpg',
                       name: 'Pavel Susanto',
                       role: 'Application Developer',
                     ),

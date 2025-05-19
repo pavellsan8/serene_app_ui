@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import '../../utils/colors.dart';
 
 import '../../viewmodels/questionnaire/questionnaire_viewmodel.dart';
-import '../../views/questionnaire/pages/feeling_page.dart';
-import '../../views/questionnaire/pages/mood_page.dart';
+// import '../../views/questionnaire/pages/feeling_page.dart';
+// import '../../views/questionnaire/pages/mood_page.dart';
 import '../../views/questionnaire/pages/emotion_page.dart';
 
 class QuestionnaireScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class QuestionnaireScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: 25.0,
+                vertical: 8.0,
                 horizontal: 16.0,
               ),
               child: Stack(
@@ -58,23 +58,23 @@ class QuestionnaireScreen extends StatelessWidget {
             ),
 
             // Progress Bar
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(3, (index) {
-                return Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                    height: 6,
-                    decoration: BoxDecoration(
-                      color: viewModel.currentPage >= index
-                          ? AppColors.primaryColor
-                          : Colors.blue.withAlpha((0.2 * 255).toInt()),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                );
-              }),
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: List.generate(3, (index) {
+            //     return Expanded(
+            //       child: Container(
+            //         margin: const EdgeInsets.symmetric(horizontal: 4.0),
+            //         height: 6,
+            //         decoration: BoxDecoration(
+            //           color: viewModel.currentPage >= index
+            //               ? AppColors.primaryColor
+            //               : Colors.blue.withAlpha((0.2 * 255).toInt()),
+            //           borderRadius: BorderRadius.circular(4),
+            //         ),
+            //       ),
+            //     );
+            //   }),
+            // ),
 
             const SizedBox(height: 10),
 
@@ -84,14 +84,16 @@ class QuestionnaireScreen extends StatelessWidget {
                 controller: viewModel.pageController,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  FeelingPage(
-                    onContinue: () => viewModel.goToNextPage(context),
-                  ),
-                  MoodPage(
-                    onContinue: () => viewModel.goToNextPage(context),
-                  ),
+                  // FeelingPage(
+                  //   onContinue: () => viewModel.goToNextPage(context),
+                  // ),
+                  // MoodPage(
+                  //   onContinue: () => viewModel.goToNextPage(context),
+                  // ),
                   EmotionsPage(
-                    onContinue: () => viewModel.goToNextPage(context),
+                    onContinue: () async {
+                      viewModel.submitQuizData(context);
+                    },
                   ),
                 ],
               ),

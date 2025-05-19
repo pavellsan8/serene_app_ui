@@ -42,11 +42,13 @@ class LoginData {
   final String email;
   final String accessToken;
   final String refreshToken;
+  final bool submitQuestionnaire;
 
   LoginData({
     required this.email,
     required this.accessToken,
     required this.refreshToken,
+    this.submitQuestionnaire = false,
   });
 
   factory LoginData.fromJson(Map<String, dynamic> json) {
@@ -54,6 +56,7 @@ class LoginData {
       email: json['email'],
       accessToken: json['access_token'],
       refreshToken: json['refresh_token'],
+      submitQuestionnaire: json['submit_questionnaire'] ?? false,
     );
   }
 }

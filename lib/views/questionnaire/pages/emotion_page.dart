@@ -15,29 +15,6 @@ class EmotionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final emotionsViewModel = Provider.of<EmotionViewModel>(context);
 
-    final emotionOptions = [
-      'Excited',
-      'Energetic',
-      'Confident',
-      'Joyful',
-      'Calm',
-      'Peaceful',
-      'Grateful',
-      'Relaxed',
-      'Bored',
-      'Lonely',
-      'Empty',
-      'Overwhelmed',
-      'Sad',
-      'Anxious',
-      'Drained',
-      'Frustrated',
-      'Worried',
-      'Pessimistic',
-      'Lost',
-      'Hopeless',
-    ];
-
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -53,21 +30,36 @@ class EmotionsPage extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           Expanded(
-            child: Wrap(
-              spacing: 5,
-              runSpacing: 15,
-              children: emotionOptions
-                  .map((emotion) => EmotionChipWidget(
-                        emotion: emotion,
-                        viewModel: emotionsViewModel,
-                      ))
-                  .toList(),
-            ),
+            child: emotionsViewModel.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : emotionsViewModel.errorMessage != null
+                    ? Center(
+                        child: Text(
+                          emotionsViewModel.errorMessage!,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      )
+                    : Wrap(
+                        spacing: 5,
+                        runSpacing: 15,
+                        children: emotionsViewModel.emotionOptions
+                            .map(
+                              (emotionData) => EmotionChipWidget(
+                                emotion: emotionData.description,
+                                isSelected: emotionsViewModel.selectedEmotionIds
+                                    .contains(emotionData.feelingId),
+                                onTap: () => emotionsViewModel
+                                    .toggleEmotion(emotionData.feelingId),
+                              ),
+                            )
+                            .toList(),
+                      ),
           ),
           ContinueButton(
             onPressed: () {
-              // Save to SharedPreferences before continuing
-              ApplicationStorage.saveEmotions(emotionsViewModel.selectedEmotions);
+              // Save selected IDs to SharedPreferences before continuing
+              ApplicationStorage.saveEmotions(
+                  emotionsViewModel.selectedEmotionIds);
               onContinue();
             },
           ),

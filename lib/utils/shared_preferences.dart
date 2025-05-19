@@ -47,10 +47,18 @@ class ApplicationStorage {
   }
 
   // Save emotions list
-  static Future<void> saveEmotions(List<String> emotions) async {
+  // static Future<void> saveEmotions(List<String> emotions) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setStringList(emotionsKey, emotions);
+  //   debugPrint('Saved emotions to SharedPreferences: $emotions');
+  // }
+
+  static Future<void> saveEmotions(List<int> emotions) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(emotionsKey, emotions);
-    debugPrint('Saved emotions to SharedPreferences: $emotions');
+    // Convert List<int> to List<String>
+    List<String> emotionsAsStrings = emotions.map((e) => e.toString()).toList();
+    await prefs.setStringList(emotionsKey, emotionsAsStrings);
+    debugPrint('Saved emotions to SharedPreferences: $emotionsAsStrings');
   }
 
   // Retrieve Data
@@ -69,10 +77,17 @@ class ApplicationStorage {
   }
 
   // Get emotions list
-  static Future<List<String>> getEmotions() async {
+  // static Future<List<String>> getEmotions() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final value = prefs.getStringList(emotionsKey) ?? [];
+  //   return value;
+  // }
+
+  static Future<List<int>> getEmotions() async {
     final prefs = await SharedPreferences.getInstance();
-    final value = prefs.getStringList(emotionsKey) ?? [];
-    return value;
+    List<String>? emotionsAsStrings = prefs.getStringList(emotionsKey);
+    if (emotionsAsStrings == null) return [];
+    return emotionsAsStrings.map((e) => int.parse(e)).toList();
   }
 
   // Get mood selection

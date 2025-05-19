@@ -42,7 +42,7 @@ class QuestionnaireViewModel extends ChangeNotifier {
 
       // Load emotions
       final emotions = await ApplicationStorage.getEmotions();
-      emotionViewModel.setEmotions(emotions);
+      emotionViewModel.setSelectedEmotions(emotions);
 
       notifyListeners();
     } catch (e) {
@@ -94,7 +94,12 @@ class QuestionnaireViewModel extends ChangeNotifier {
       case 0:
         return feelingViewModel.isValid();
       case 1:
-        return moodViewModel.isValid();
+        // For the mood page
+        final isValid = moodViewModel.selectedMood != null &&
+            moodViewModel.selectedMood!.isNotEmpty;
+        debugPrint(
+            'Mood validation: selected = ${moodViewModel.selectedMood}, isValid = $isValid');
+        return isValid;
       case 2:
         return emotionViewModel.isValid();
       default:
@@ -116,8 +121,8 @@ class QuestionnaireViewModel extends ChangeNotifier {
     try {
       final request = QuestionnaireRequest(
         email: quizData['email'],
-        feeling: quizData['feeling'],
-        mood: quizData['mood'],
+        // feeling: quizData['feeling'],
+        // mood: quizData['mood'],
         emotion: quizData['emotions'],
       );
 

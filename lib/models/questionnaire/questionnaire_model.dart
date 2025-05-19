@@ -1,22 +1,22 @@
 class QuestionnaireRequest {
   final String email;
-  final int feeling;
-  final String mood;
-  final List<String> emotion;
+  // final int feeling;
+  // final String mood;
+  final List<int> emotion;
 
   QuestionnaireRequest({
     required this.email,
-    required this.feeling,
-    required this.mood,
+    // required this.feeling,
+    // required this.mood,
     required this.emotion,
   });
 
   Map<String, dynamic> toJson() {
     return {
       "email": email,
-      "feeling": feeling,
+      // "feeling": feeling,
+      // "mood": mood,
       "emotion": emotion,
-      "mood": mood,
     };
   }
 }
