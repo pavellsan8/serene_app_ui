@@ -80,7 +80,7 @@ class BooksGridWidget extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              book.authorsAsString,
+                              book.authors ?? 'Unknown Author',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(

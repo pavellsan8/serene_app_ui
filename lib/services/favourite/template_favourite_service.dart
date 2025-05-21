@@ -56,8 +56,8 @@ abstract class BaseFavouriteService<T> {
   }
 
   Future<T> getData({String? email}) async {
-    final url = Uri.parse(
-        "${EnvConfig.baseUrl}/api/v1/get-$entity-favourite-list?email=${email?.isNotEmpty == true ? email : await ApplicationStorage.getEmail()}");
+    final url =
+        Uri.parse("${EnvConfig.baseUrl}/api/v2/get-$entity-favourite-list");
     final accessToken = await ApplicationStorage.getAccessToken();
 
     try {

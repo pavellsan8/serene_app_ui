@@ -99,19 +99,22 @@ class _FavoritesPageState<T> extends State<FavoritesPage<T>> {
                 )
               : Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Column(
-                    children: [
-                      SearchBarWidget(
-                        controller: searchController,
-                        onChanged: _filterItems,
-                      ),
-                      SingleChildScrollView(
-                        child: widget.itemBuilder(
-                          context,
-                          filteredItems,
+                  child: SingleChildScrollView(
+                    controller: ScrollController(),
+                    child: Column(
+                      children: [
+                        SearchBarWidget(
+                          controller: searchController,
+                          onChanged: _filterItems,
                         ),
-                      ),
-                    ],
+                        SingleChildScrollView(
+                          child: widget.itemBuilder(
+                            context,
+                            filteredItems,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
     );

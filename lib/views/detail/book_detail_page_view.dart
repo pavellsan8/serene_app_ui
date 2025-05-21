@@ -94,7 +94,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
               ),
               const SizedBox(height: 8),
               Text(
-                widget.book.authorsAsString,
+                widget.book.authors ?? 'Unknown Author',
                 style: const TextStyle(
                   fontSize: 14,
                   color: AppColors.subtitleTextColor,

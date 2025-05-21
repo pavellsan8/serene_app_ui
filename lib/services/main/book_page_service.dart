@@ -6,13 +6,11 @@ import '../../utils/api_url.dart';
 import '../../utils/shared_preferences.dart';
 
 class BookService {
-  Future<BookResponse> getBookData({String? query}) async {
-    String baseUrl = "${EnvConfig.baseUrl}/api/v1/get-book-list";
-    String finalUrl =
-        "$baseUrl?query=${query?.isNotEmpty == true ? query : 'anxious'}";
+  Future<BookResponse> getBookData() async {
+    String baseUrl = "${EnvConfig.baseUrl}/api/v2/get-book-list";
 
     final accessToken = await ApplicationStorage.getAccessToken();
-    final url = Uri.parse(finalUrl);
+    final url = Uri.parse(baseUrl);
 
     try {
       final response = await http.get(

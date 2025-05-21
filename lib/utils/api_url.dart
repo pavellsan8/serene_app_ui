@@ -4,7 +4,7 @@ enum Environment { local, production }
 
 class EnvConfig {
   static const Environment currentEnv =
-      Environment.production; // Ganti sesuai environment aktif
+      Environment.production;
 
   static String get baseUrl {
     switch (currentEnv) {

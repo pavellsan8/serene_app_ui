@@ -6,13 +6,11 @@ import '../../utils/api_url.dart';
 import '../../utils/shared_preferences.dart';
 
 class VideoService {
-  Future<VideoResponse> getVideoData({String? query}) async {
-    String baseUrl = "${EnvConfig.baseUrl}/api/v1/get-video-list";
-    String finalUrl =
-        "$baseUrl?query=${query?.isNotEmpty == true ? query : 'relaxing'}";
+  Future<VideoResponse> getVideoData() async {
+    String baseUrl = "${EnvConfig.baseUrl}/api/v2/get-video-list";
 
     final accessToken = await ApplicationStorage.getAccessToken();
-    final url = Uri.parse(finalUrl);
+    final url = Uri.parse(baseUrl);
 
     try {
       final response = await http.get(

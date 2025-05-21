@@ -44,13 +44,13 @@ class Music {
 
   factory Music.fromJson(Map<String, dynamic> json) {
     return Music(
-      id: json['id'],
-      title: json['title'],
-      audio: json['audio'],
-      artist: json['artist'],
-      album: json['album'],
-      thumbnail: json['thumbnail'],
-      duration: json['duration'],
+      id: json['music_id'] ?? '',
+      title: json['title'] as String?,
+      audio: json['audio'] as String?,
+      artist: json['artist'] as String?,
+      album: json['album'] as String?,
+      thumbnail: json['thumbnail'] as String?,
+      duration: json['duration'] as String?,
     );
   }
 }

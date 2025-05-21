@@ -48,7 +48,7 @@ class Video {
     return Video(
       title: json['title'],
       videoId: json['video_id'],
-      ytLink: json['youtube_link'],
+      ytLink: json['yt_link'],
       channel: json['channel'],
       publishedAt: json['published_at'],
       description: json['description'],

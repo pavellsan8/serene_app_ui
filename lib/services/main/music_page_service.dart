@@ -6,14 +6,12 @@ import '../../utils/api_url.dart';
 import '../../utils/shared_preferences.dart';
 
 class MusicService {
-  Future<MusicResponse> getMusicData({String? search}) async {
-    String baseUrl = "${EnvConfig.baseUrl}/api/v1/get-music-list";
-    String finalUrl =
-        "$baseUrl?search=${search?.isNotEmpty == true ? search : 'chill'}";
+  Future<MusicResponse> getMusicData() async {
+    String baseUrl = "${EnvConfig.baseUrl}/api/v2/get-music-list";
 
     final accessToken = await ApplicationStorage.getAccessToken();
-    final url = Uri.parse(finalUrl);
-    
+    final url = Uri.parse(baseUrl);
+
     try {
       final response = await http.get(
         url,

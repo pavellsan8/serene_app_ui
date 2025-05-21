@@ -25,6 +25,7 @@ class RecommendedBooksWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat',
             ),
           ),
         ),
@@ -78,16 +79,18 @@ class RecommendedBooksWidget extends StatelessWidget {
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              book.authorsAsString,
+                              book.authors ?? 'Unknown Author',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[600],
+                                fontFamily: 'Montserrat',
                               ),
                             ),
                           ],
