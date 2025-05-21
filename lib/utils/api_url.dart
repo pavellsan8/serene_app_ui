@@ -1,14 +1,25 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 enum Environment { local, production }
 
 class EnvConfig {
-  static const Environment currentEnv = Environment.production;
+  static const Environment currentEnv =
+      Environment.production; // Ganti sesuai environment aktif
 
   static String get baseUrl {
     switch (currentEnv) {
       case Environment.production:
-        return "https://serene-api.vercel.app"; // URL Production
-      default:
-        return "http://127.0.0.1:5001"; // URL Local
+        return _getEnvVar('BASE_URL_PRODUCTION');
+      case Environment.local:
+        return _getEnvVar('BASE_URL_LOCAL');
     }
+  }
+
+  static String _getEnvVar(String key) {
+    final value = dotenv.env[key];
+    if (value == null || value.isEmpty) {
+      throw Exception("Environment variable '$key' is missing or empty.");
+    }
+    return value;
   }
 }

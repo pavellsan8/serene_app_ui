@@ -29,7 +29,7 @@ class Book {
   final List<String>? authors;
   final String? description;
   final int? pages;
-  final String? date;
+  final int? date;
   final String? thumbnail;
   final String? url;
 

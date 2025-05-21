@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../utils/routes.dart';
 import '../utils/providers.dart';
@@ -23,6 +24,9 @@ Future<void> main() async {
   // Initialize SharedPreferences safely
   final prefs = await SharedPreferences.getInstance();
 
+  // Load environment variables
+  await dotenv.load(fileName: ".env");
+
   runApp(
     AppProviders.init(
       child: const SereneApp(),
@@ -38,7 +42,7 @@ class SereneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.questionnaireIntro,
+      initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.getRoutes(),
     );
   }
