@@ -13,12 +13,14 @@ class RegisterScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RegisterViewModel(),
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -42,11 +44,11 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
+                          Text(
                             "Please register first so we can help with your mental health.",
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.fontBlackColor,
+                              color: AppColors.getFontColor(context),
                               fontWeight: FontWeight.w500,
                               fontFamily: 'Montserrat',
                             ),

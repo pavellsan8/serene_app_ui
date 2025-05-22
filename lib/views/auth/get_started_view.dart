@@ -41,7 +41,7 @@ class _GetStartedScreenState extends State<GetStartedScreen>
     final authViewModel = Provider.of<AuthViewModel>(context);
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -109,10 +109,14 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.login);
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.login,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor:
+                            AppColors.getOutlineButtonColor(context),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                           side: const BorderSide(
@@ -121,10 +125,10 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                           ),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         "Sign In",
                         style: TextStyle(
-                          color: AppColors.fontBlueColor,
+                          color: AppColors.getPrimaryColor(context),
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           fontFamily: 'Montserrat',
@@ -148,7 +152,10 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.register);
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.register,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,

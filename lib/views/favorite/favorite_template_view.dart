@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:serene_app/utils/colors.dart';
 
 import '../../widgets/favourite/search_bar_widget.dart';
 
@@ -61,7 +62,7 @@ class _FavoritesPageState<T> extends State<FavoritesPage<T>> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
         title: Text(
           widget.appBarTitle,
@@ -71,10 +72,9 @@ class _FavoritesPageState<T> extends State<FavoritesPage<T>> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.getBackgroundColor(context),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          color: Colors.black,
           onPressed: () => Navigator.of(context).pop(),
         ),
         bottom: PreferredSize(

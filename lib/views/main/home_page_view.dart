@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
     final bool isSmallScreen = width < 360; // For very small devices
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       body: SingleChildScrollView(
         controller: ScrollController(),
         child: Column(
@@ -105,7 +105,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: isSmallScreen ? 14 : 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: AppColors.getFontColor(context),
                       fontFamily: 'Montserrat',
                     ),
                   ),
@@ -115,7 +115,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: isSmallScreen ? 12 : 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      color: AppColors.getFontColor(context),
                       fontFamily: 'Montserrat',
                     ),
                   ),
@@ -150,7 +150,7 @@ class HomePage extends StatelessWidget {
                         title: "Sere" "Bot",
                         width: availableWidth * 0.18, // 18% of available width
                         height: availableWidth * 0.18, // 18% of available width
-                        path: "assets/images/home/menu/serebot.png",
+                        path: AppColors.getSerebotPath(context),
                         color: Colors.red.shade400,
                         route: AppRoutes.chatbotPage,
                         description:

@@ -19,14 +19,13 @@ class OtpInputScreen extends StatelessWidget {
         serverOtp: args['serverOtp'],
       ),
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
             icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
+              Icons.arrow_back_ios_new_rounded,
             ),
             onPressed: () => Navigator.pop(context),
           ),
@@ -51,11 +50,11 @@ class OtpInputScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
+                          Text(
                             "Enter the 6-digit verification code sent to your email",
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.fontBlackColor,
+                              color: AppColors.getFontColor(context),
                               fontFamily: 'Montserrat',
                             ),
                           ),

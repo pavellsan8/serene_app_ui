@@ -9,9 +9,9 @@ class QuestionnaireIntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         automaticallyImplyLeading: false,
         elevation: 0,
         actions: const [
@@ -20,17 +20,6 @@ class QuestionnaireIntroScreen extends StatelessWidget {
               horizontal: 17,
               vertical: 20,
             ),
-            // child: TextButton(
-            //   onPressed: () {},
-            //   child: const Text(
-            //     "Skip for now >>>",
-            //     style: TextStyle(
-            //       fontSize: 14,
-            //       fontWeight: FontWeight.w600,
-            //       color: AppColors.buttonColor,
-            //     ),
-            //   ),
-            // ),
           ),
         ],
       ),
@@ -49,9 +38,9 @@ class QuestionnaireIntroScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            const Expanded(
+            Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 28),
+                padding: const EdgeInsets.symmetric(horizontal: 28),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -61,18 +50,18 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: Colors.black87,
+                        color: AppColors.getFontColor(context),
                         fontFamily: 'Montserrat',
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       "Your answers are extremely helpful in assisting us in determining the content.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black54,
+                        color: AppColors.getFontColor(context),
                         fontFamily: 'Montserrat',
                       ),
                     ),

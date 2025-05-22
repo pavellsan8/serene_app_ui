@@ -30,7 +30,7 @@ class _BookPageState extends State<BookPage> {
       itemBuilder: (books) {
         return BooksGridWidget(
           books: books,
-          color: AppColors.backgroundColor,
+          color: AppColors.getBackgroundColor(context),
           onBookTap: (book) {
             Navigator.push(
               context,

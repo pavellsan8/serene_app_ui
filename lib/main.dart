@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../utils/routes.dart';
 import '../utils/providers.dart';
+import '../utils/colors.dart'; // Make sure to import your colors
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,9 @@ class SereneApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.getRoutes(),
+      theme: AppColors.lightTheme,
+      darkTheme: AppColors.darkTheme,
+      themeMode: ThemeMode.system, // This follows device settings
     );
   }
 }

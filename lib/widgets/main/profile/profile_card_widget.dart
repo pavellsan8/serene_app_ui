@@ -24,7 +24,7 @@ class ProfileInfoCardWidget extends StatelessWidget {
     bool isLogout = title == "Log out";
 
     return Card(
-      color: Colors.white,
+      color: AppColors.getCardColor(context),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -34,12 +34,12 @@ class ProfileInfoCardWidget extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             icon,
-            color: isLogout ? Colors.red : AppColors.subtitleTextColor,
+            color: isLogout ? Colors.red : AppColors.getSubtitleColor(context),
           ),
           title: Text(
             title,
             style: TextStyle(
-              color: isLogout ? Colors.red : Colors.black,
+              color: isLogout ? Colors.red : AppColors.getFontColor(context),
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat',
               fontSize: 16,
@@ -48,7 +48,8 @@ class ProfileInfoCardWidget extends StatelessWidget {
           subtitle: Text(
             subtitle,
             style: TextStyle(
-              color: isLogout ? Colors.red : AppColors.subtitleTextColor,
+              color:
+                  isLogout ? Colors.red : AppColors.getSubtitleColor(context),
               fontFamily: 'Montserrat',
               fontSize: 14,
               fontWeight: FontWeight.w500,

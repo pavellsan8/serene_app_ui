@@ -16,12 +16,14 @@ class RegisterPasswordScreen extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: viewModel,
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -45,11 +47,11 @@ class RegisterPasswordScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
+                          Text(
                             "Set your password so that your account is safe",
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.fontBlackColor,
+                              color: AppColors.getFontColor(context),
                               fontWeight: FontWeight.w500,
                               fontFamily: 'Montserrat',
                             ),

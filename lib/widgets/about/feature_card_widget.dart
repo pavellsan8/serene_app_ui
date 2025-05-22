@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/colors.dart';
+
 class FeatureCardAboutWidget extends StatelessWidget {
   final String image;
   final String title;
@@ -15,8 +17,8 @@ class FeatureCardAboutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0),),
+      color: AppColors.getCardColor(context),
       elevation: 4,
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(

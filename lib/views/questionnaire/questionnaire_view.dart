@@ -15,7 +15,7 @@ class QuestionnaireScreen extends StatelessWidget {
     final viewModel = Provider.of<QuestionnaireViewModel>(context);
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -31,28 +31,13 @@ class QuestionnaireScreen extends StatelessWidget {
                     child: Opacity(
                       opacity: viewModel.currentPage > 0 ? 1.0 : 0.0,
                       child: IconButton(
-                        icon: const Icon(Icons.arrow_back),
+                        icon: const Icon(Icons.arrow_back_ios_new_rounded),
                         onPressed: viewModel.currentPage > 0
                             ? viewModel.goToPreviousPage
                             : null,
                       ),
                     ),
                   ),
-                  // Align(
-                  //   alignment: Alignment.centerRight,
-                  //   child: TextButton(
-                  //     onPressed: () {
-                  //       // Handle skip
-                  //     },
-                  //     child: const Text(
-                  //       'Skip for now >>>',
-                  //       style: TextStyle(
-                  //         color: AppColors.buttonColor,
-                  //         fontWeight: FontWeight.w600,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

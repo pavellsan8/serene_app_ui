@@ -42,13 +42,13 @@ class ChatMessage extends StatelessWidget {
                 vertical: 10,
               ),
               decoration: BoxDecoration(
-                color: isUser ? AppColors.primaryColor : Colors.grey.shade200,
+                color: isUser ? AppColors.primaryColor : AppColors.getChatbotBubbleColor(context),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
                 text,
                 style: TextStyle(
-                  color: isUser ? Colors.white : Colors.black87,
+                  color: isUser ? Colors.white : AppColors.getFontColor(context),
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Montserrat',

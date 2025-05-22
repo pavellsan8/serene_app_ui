@@ -18,7 +18,7 @@ class SearchBarWidget extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[300],
+          color: AppColors.getCardColor(context),
           borderRadius: BorderRadius.circular(30),
         ),
         child: TextField(

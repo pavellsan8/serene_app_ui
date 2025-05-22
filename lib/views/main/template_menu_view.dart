@@ -39,7 +39,7 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       body: FutureBuilder<List<T>>(
         future: futureData, // Use the futureData which is set only once
         builder: (context, snapshot) {

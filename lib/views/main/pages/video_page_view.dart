@@ -31,7 +31,7 @@ class _VideoPageState extends State<VideoPage> {
       itemBuilder: (videos) {
         return VideoGridWidget(
           videos: videos,
-          color: AppColors.backgroundColor,
+          color: AppColors.getBackgroundColor(context),
           onVideoTap: (video) {
             Navigator.push(
               context,

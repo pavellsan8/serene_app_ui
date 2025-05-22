@@ -17,12 +17,14 @@ class PasswordInputScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => PasswordInputViewmodel(email: email),
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -46,11 +48,11 @@ class PasswordInputScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
+                          Text(
                             "Create a new password that is easy for you to remember",
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.fontBlackColor,
+                              color: AppColors.getFontColor(context),
                               fontFamily: 'Montserrat',
                             ),
                           ),

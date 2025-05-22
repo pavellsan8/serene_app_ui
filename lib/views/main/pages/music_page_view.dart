@@ -32,7 +32,7 @@ class _MusicPageState extends State<MusicPage> {
       itemBuilder: (musics) {
         return MusicGridWidget(
           musics: musics,
-          color: AppColors.backgroundColor,
+          color: AppColors.getBackgroundColor(context),
           onMusicTap: (music) {
             final int selectedIndex =
                 musics.indexWhere((item) => item.id == music.id);

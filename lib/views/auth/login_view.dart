@@ -14,13 +14,13 @@ class LoginScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => LoginViewModel(),
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context),
           ),
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: AppColors.getBackgroundColor(context),
           elevation: 0,
         ),
         body: Padding(
@@ -52,13 +52,13 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 5),
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               "Login first so you can meet the experts who can help you.",
                               style: TextStyle(
                                 fontSize: 16,
-                                color: AppColors.fontBlackColor,
+                                color: AppColors.getFontColor(context),
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Montserrat',
                               ),

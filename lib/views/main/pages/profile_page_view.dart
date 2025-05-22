@@ -39,13 +39,12 @@ class _ProfilePageState extends State<ProfilePage> {
     final logoutViewModel = Provider.of<LogoutViewModel>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
           "Profile",
           style: TextStyle(
-            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.w600,
             fontFamily: 'Montserrat',
@@ -77,11 +76,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 )
               : profileViewModel.userData == null
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         "No user data available.",
                         style: TextStyle(
-                          color: AppColors.fontBlackColor,
+                          color: AppColors.getFontColor(context),
                           fontSize: 18,
                         ),
                       ),
@@ -135,19 +134,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                       children: [
                                         Text(
                                           profileViewModel.userData!.name,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.fontBlackColor,
+                                            color:
+                                                AppColors.getFontColor(context),
                                             fontFamily: 'Montserrat',
                                           ),
                                         ),
                                         Text(
                                           profileViewModel.userData!.email,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
-                                            color: AppColors.subtitleTextColor,
+                                            color: AppColors.getSubtitleColor(
+                                                context),
                                             fontFamily: 'Montserrat',
                                           ),
                                         ),
@@ -179,14 +180,15 @@ class _ProfilePageState extends State<ProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SizedBox(height: 10),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Text(
                                     "Playlists",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: AppColors.fontBlackColor,
+                                      color: AppColors.getFontColor(context),
                                       fontFamily: 'Montserrat',
                                     ),
                                   ),
@@ -230,14 +232,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
                             "Others",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.fontBlackColor,
+                              color: AppColors.getFontColor(context),
                               fontFamily: 'Montserrat',
                             ),
                           ),

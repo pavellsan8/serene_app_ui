@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../models/main/book_page_model.dart';
 import '../../viewmodels/detail/book_detail_page_viewmodel.dart';
 import '../../widgets/main/book/recommended_card_widget.dart';
-import '../../utils/routes.dart';
+// import '../../utils/routes.dart';
 import '../../utils/colors.dart';
 
 class BookDetailPage extends StatefulWidget {
@@ -43,7 +43,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
     final viewModel = Provider.of<BookDetailViewModel>(context);
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
         title: const Text(
           'Book Detail',
@@ -56,13 +56,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
         ),
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back_ios_outlined,
+            Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
-          onPressed: () => Navigator.pushNamed(
-            context,
-            AppRoutes.bookPage,
-          ),
+          onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: AppColors.primaryColor,
       ),
@@ -95,9 +92,9 @@ class _BookDetailPageState extends State<BookDetailPage> {
               const SizedBox(height: 8),
               Text(
                 widget.book.authors ?? 'Unknown Author',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
-                  color: AppColors.subtitleTextColor,
+                  color: AppColors.getSubtitleColor(context),
                   fontFamily: 'Montserrat',
                 ),
                 textAlign: TextAlign.center,
@@ -106,33 +103,33 @@ class _BookDetailPageState extends State<BookDetailPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.menu_book_rounded,
-                    color: AppColors.subtitleTextColor,
+                    color: AppColors.getSubtitleColor(context),
                     size: 16,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     '${widget.book.pages?.toString() ?? 'Unknown pages'} Pages',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.subtitleTextColor,
+                      color: AppColors.getSubtitleColor(context),
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Montserrat',
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Icon(
+                  Icon(
                     Icons.calendar_today_rounded,
-                    color: AppColors.subtitleTextColor,
+                    color: AppColors.getSubtitleColor(context),
                     size: 16,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     'Published: ${widget.book.date ?? 'Unknown date'}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.subtitleTextColor,
+                      color: AppColors.getSubtitleColor(context),
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Montserrat',
                     ),
@@ -218,10 +215,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 children: [
                   Text(
                     widget.book.description ?? 'No description available.',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'Montserrat',
-                      color: Colors.black,
+                      color: AppColors.getFontColor(context),
                     ),
                     textAlign: TextAlign.justify,
                     maxLines: viewModel.isDescriptionExpanded ? null : 7,

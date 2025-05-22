@@ -27,7 +27,7 @@ class _ChatbotPageContent extends StatelessWidget {
     final viewModel = Provider.of<ChatbotViewModel>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primaryColor,
@@ -36,10 +36,12 @@ class _ChatbotPageContent extends StatelessWidget {
           child: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.homePage);
+              Navigator.pushNamed(
+                context,
+                AppRoutes.homePage,
+              );
             },
           ),
         ),
@@ -49,7 +51,7 @@ class _ChatbotPageContent extends StatelessWidget {
               radius: 20,
               backgroundColor: Colors.white,
               child: Image.asset(
-                "assets/images/home/menu/serebot_white.png",
+                AppColors.getSerebotPath(context),
                 width: 22,
               ),
             ),
@@ -112,7 +114,9 @@ class _ChatbotPageContent extends StatelessWidget {
                             children: [
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 8),
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade200,
                                   borderRadius: BorderRadius.circular(18),

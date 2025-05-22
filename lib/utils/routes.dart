@@ -43,9 +43,9 @@ class AppRoutes {
   static const String completeQuizPage = '/complete_question';
 
   static const String homePage = '/home_page';
+  static const String bookPage = '/book_page';
   static const String musicPage = '/music_page';
   static const String videoPage = '/video_page';
-  static const String bookPage = '/book_page';
   static const String chatbotPage = '/chatbot_page';
   static const String profilePage = '/profile_page';
 
@@ -69,9 +69,9 @@ class AppRoutes {
       questionnairePage: (context) => const QuestionnaireScreen(),
       completeQuizPage: (context) => const CompletePage(),
       homePage: (context) => const HomePage(),
+      bookPage: (context) => const BookPage(),
       musicPage: (context) => const MusicPage(),
       videoPage: (context) => const VideoPage(),
-      bookPage: (context) => const BookPage(),
       chatbotPage: (context) => const ChatbotPage(),
       profilePage: (context) => const ProfilePage(),
       bookFavourite: (context) => const BookFavouritesPage(),

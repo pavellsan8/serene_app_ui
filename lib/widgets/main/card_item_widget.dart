@@ -30,7 +30,7 @@ class CardItem extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.cardItemBgColor,
+          color: AppColors.getCardColor(context),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
@@ -48,10 +48,10 @@ class CardItem extends StatelessWidget {
             Text.rich(
               TextSpan(
                 text: 'Sere',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.primaryColor,
+                  color: AppColors.getPrimaryColor(context),
                   fontFamily: 'Montserrat',
                 ),
                 children: [
@@ -59,10 +59,10 @@ class CardItem extends StatelessWidget {
                     text: title.substring(
                       4,
                     ),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: AppColors.getFontColor(context),
                       fontFamily: 'Montserrat',
                     ),
                   ),
@@ -75,9 +75,9 @@ class CardItem extends StatelessWidget {
               child: Text(
                 description,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: Colors.black,
+                  color: AppColors.getFontColor(context),
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.w500,
                 ),

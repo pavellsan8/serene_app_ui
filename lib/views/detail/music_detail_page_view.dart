@@ -63,7 +63,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
     final viewModel = Provider.of<MusicDetailPageViewModel>(context);
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
         title: const Text(
           "Music Player",
@@ -76,7 +76,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
         ),
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back_ios_outlined,
+            Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
           onPressed: () => Navigator.pushNamed(

@@ -57,7 +57,7 @@ class _CompletePageState extends State<CompletePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.getBackgroundColor(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -86,14 +86,14 @@ class _CompletePageState extends State<CompletePage>
                     const SizedBox(height: 30),
                     FadeTransition(
                       opacity: _opacityAnimation,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
                           "Thank you!",
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: AppColors.getFontColor(context),
                             fontFamily: 'Montserrat',
                           ),
                           textAlign: TextAlign.center,
@@ -103,13 +103,13 @@ class _CompletePageState extends State<CompletePage>
                     const SizedBox(height: 16),
                     FadeTransition(
                       opacity: _opacityAnimation,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           "You have successfully finished the questionnaire.",
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.black87,
+                            color: AppColors.getFontColor(context),
                             fontWeight: FontWeight.w600,
                             height: 1.5,
                             fontFamily: 'Montserrat',
@@ -121,13 +121,13 @@ class _CompletePageState extends State<CompletePage>
                     const SizedBox(height: 12),
                     FadeTransition(
                       opacity: _opacityAnimation,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           "Your answers will enable us to offer personalized recommendations based on your condition.",
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.black54,
+                            color: AppColors.getFontColor(context),
                             fontWeight: FontWeight.w500,
                             height: 1.5,
                             fontFamily: 'Montserrat',

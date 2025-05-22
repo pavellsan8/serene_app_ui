@@ -10,7 +10,7 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.getBackgroundColor(context),
       appBar: AppBar(
         title: const Text(
           'About Us',
@@ -20,10 +20,9 @@ class AboutUsPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.getBackgroundColor(context),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          color: Colors.black,
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -71,13 +70,13 @@ class AboutUsPage extends StatelessWidget {
             // const SizedBox(height: 32),
 
             // About Section
-            const Text(
+            Text(
               'About This App',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
-                color: Colors.black,
+                color: AppColors.getFontColor(context),
               ),
             ),
             const SizedBox(height: 8),
@@ -94,18 +93,18 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Features Section
-            const Text(
+            Text(
               'Key Features',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
-                color: Colors.black,
+                color: AppColors.getFontColor(context),
               ),
             ),
             const SizedBox(height: 16),
-            const FeatureCardAboutWidget(
-              image: 'assets/images/home/menu/serebot_white.png',
+            FeatureCardAboutWidget(
+              image: AppColors.getSerebotPath(context),
               title: 'Chatbot Consultation',
               description:
                   'Share your feelings with an empathetic virtual companion.',
@@ -129,13 +128,13 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Goal Section
-            const Text(
+            Text(
               'Our Goal',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
-                color: Colors.black,
+                color: AppColors.getFontColor(context),
               ),
             ),
             const SizedBox(height: 8),
@@ -150,13 +149,13 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Team Section (New)
-            const Text(
+            Text(
               'Meet the Team',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat',
-                color: Colors.black,
+                color: AppColors.getFontColor(context),
               ),
             ),
             const SizedBox(height: 16),
@@ -198,9 +197,9 @@ class AboutUsPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               alignment: Alignment.center,
-              child: const Column(
+              child: Column(
                 children: [
-                  Text(
+                  const Text(
                     'Thank you for choosing Serene',
                     style: TextStyle(
                       fontSize: 16,
@@ -209,8 +208,8 @@ class AboutUsPage extends StatelessWidget {
                       fontFamily: 'Montserrat',
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'Version 1.2 • © 2025 Serene',
                     style: TextStyle(
                       fontSize: 14,
@@ -218,14 +217,14 @@ class AboutUsPage extends StatelessWidget {
                       fontFamily: 'Montserrat',
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     'Taking small steps toward better mental health, together.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
                       fontStyle: FontStyle.italic,
-                      color: AppColors.primaryColor,
+                      color: AppColors.getPrimaryColor(context),
                       fontFamily: 'Montserrat',
                     ),
                   ),

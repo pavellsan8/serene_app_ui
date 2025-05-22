@@ -44,7 +44,7 @@ class RecommendedBooksWidget extends StatelessWidget {
                   width: 110,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: AppColors.backgroundColor,
+                    color: AppColors.getBackgroundColor(context),
                   ),
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   child: Column(

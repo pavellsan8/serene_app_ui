@@ -13,12 +13,14 @@ class EmailInputScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => EmailInputViewModel(),
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -42,11 +44,11 @@ class EmailInputScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          const Text(
+                          Text(
                             "Enter your registered email to receive a verification code to reset your password.",
                             style: TextStyle(
                               fontSize: 16,
-                              color: AppColors.fontBlackColor,
+                              color: AppColors.getFontColor(context),
                               fontFamily: 'Montserrat',
                             ),
                           ),

@@ -23,17 +23,21 @@ class EmotionChipWidget extends StatelessWidget {
           vertical: 10,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primaryColor : Colors.white,
+          color: isSelected
+              ? AppColors.primaryColor
+              : AppColors.getBackgroundColor(context),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? AppColors.primaryColor : Colors.grey.shade300,
+            color: isSelected
+                ? AppColors.primaryColor
+                : AppColors.getFontColor(context),
             width: 1,
           ),
         ),
         child: Text(
           emotion,
           style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
+            color: isSelected ? Colors.white : AppColors.getFontColor(context),
             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             fontFamily: 'Montserrat',
           ),

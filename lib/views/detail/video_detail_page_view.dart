@@ -82,7 +82,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                 ),
                 leading: IconButton(
                   icon: const Icon(
-                    Icons.arrow_back_ios_outlined,
+                    Icons.arrow_back_ios_new_rounded,
                     color: Colors.white,
                   ),
                   onPressed: () => Navigator.pushNamed(
@@ -92,7 +92,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                 ),
                 backgroundColor: AppColors.primaryColor,
               ),
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.getBackgroundColor(context),
         body: viewModel.isFullScreen
             ? YoutubePlayer(
                 controller: _youtubeController,
@@ -170,7 +170,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                     ),
                     VideoGridWidget(
                       videos: filteredRecommendations,
-                      color: AppColors.backgroundColor,
+                      color: AppColors.getBackgroundColor(context),
                       onVideoTap: (video) {
                         Navigator.push(
                           context,

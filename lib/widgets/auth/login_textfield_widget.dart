@@ -74,10 +74,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           obscureText: widget.obscureText ? _isObscured : false,
           onChanged: widget.onChanged,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'Montserrat',
             fontSize: 16,
-            color: Colors.black,
+            color: AppColors.getFontColor(context),
           ),
           decoration: InputDecoration(
             hintText: widget.hintText,

@@ -16,14 +16,14 @@ class ChatbotInputArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: AppColors.getBackgroundColor(context),
         boxShadow: [
           BoxShadow(
-            color: AppColors.backgroundColor,
+            color: AppColors.getCardColor(context),
             spreadRadius: 1,
             blurRadius: 3,
-            offset: Offset(0, -1),
+            offset: const Offset(0, -1),
           ),
         ],
       ),
@@ -35,8 +35,8 @@ class ChatbotInputArea extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 hintText: "Type your message...",
-                hintStyle: const TextStyle(
-                  color: AppColors.subtitleTextColor,
+                hintStyle: TextStyle(
+                  color: AppColors.getSubtitleColor(context),
                   fontFamily: 'Montserrat',
                 ),
                 border: OutlineInputBorder(
@@ -44,16 +44,16 @@ class ChatbotInputArea extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: Colors.grey.shade100,
+                fillColor: AppColors.getCardColor(context),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 10,
                 ),
               ),
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 16,
-                color: Colors.black,
+                color: AppColors.getFontColor(context),
               ),
               textCapitalization: TextCapitalization.sentences,
               onSubmitted: (_) => onSend(),
