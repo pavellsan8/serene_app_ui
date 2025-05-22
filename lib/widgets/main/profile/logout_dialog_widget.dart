@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:serene_app/utils/colors.dart';
+
+import '../../../utils/colors.dart';
 
 class LogoutDialog extends StatelessWidget {
   final VoidCallback? onConfirm;
@@ -24,13 +25,16 @@ class LogoutDialog extends StatelessWidget {
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
+          color: AppColors.getOutlineButtonColor(context),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 24,
+              ),
               child: Column(
                 children: [
                   const Text(
@@ -46,7 +50,7 @@ class LogoutDialog extends StatelessWidget {
                     'Are you sure? You’ll be logged out from your account.',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color: AppColors.getSubtitleColor(context),
                       fontWeight: FontWeight.w500,
                       fontFamily: 'Montserrat',
                     ),
@@ -82,7 +86,8 @@ class LogoutDialog extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : onConfirm,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primaryColor, // Use AppColors.primaryColor if needed
+                            backgroundColor: AppColors
+                                .primaryColor, // Use AppColors.primaryColor if needed
                             foregroundColor: Colors.white,
                             elevation: 0,
                             shape: RoundedRectangleBorder(

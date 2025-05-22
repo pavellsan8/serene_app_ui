@@ -5,7 +5,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../models/main/video_page_model.dart';
 import '../../viewmodels/detail/video_detail_page_viewmodel.dart';
 import '../../widgets/main/video/video_card_widget.dart';
-import '../../utils/routes.dart';
+// import '../../utils/routes.dart';
 import '../../utils/colors.dart';
 
 class VideoDetailPage extends StatefulWidget {
@@ -85,10 +85,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                     Icons.arrow_back_ios_new_rounded,
                     color: Colors.white,
                   ),
-                  onPressed: () => Navigator.pushNamed(
-                    context,
-                    AppRoutes.videoPage,
-                  ),
+                  onPressed: () => Navigator.pop(context),
                 ),
                 backgroundColor: AppColors.primaryColor,
               ),

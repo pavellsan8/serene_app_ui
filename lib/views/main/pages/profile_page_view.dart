@@ -48,6 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
             fontSize: 20,
             fontWeight: FontWeight.w600,
             fontFamily: 'Montserrat',
+            color: Colors.white,
           ),
         ),
         backgroundColor: AppColors.primaryColor,
@@ -115,15 +116,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                     CircleAvatar(
                                       radius: 40,
                                       backgroundColor:
-                                          AppColors.backgroundColor,
+                                          AppColors.getChatbotBubbleColor(
+                                              context),
                                       child: Text(
                                         getInitials(
                                             profileViewModel.userData!.name),
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'Montserrat',
-                                          color: Colors.black,
+                                          color:
+                                              AppColors.getFontColor(context),
                                         ),
                                       ),
                                     ),

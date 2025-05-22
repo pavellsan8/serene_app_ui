@@ -24,7 +24,7 @@ class ProfileInfoCardWidget extends StatelessWidget {
     bool isLogout = title == "Log out";
 
     return Card(
-      color: AppColors.getCardColor(context),
+      color: AppColors.getBackgroundColor(context),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

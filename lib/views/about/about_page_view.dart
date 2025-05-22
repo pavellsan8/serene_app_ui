@@ -90,7 +90,7 @@ class AboutUsPage extends StatelessWidget {
                 fontFamily: 'Montserrat',
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
 
             // Features Section
             Text(
@@ -187,7 +187,7 @@ class AboutUsPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
 
             // Divider for styling
             const Divider(thickness: 1.5),
@@ -210,7 +210,7 @@ class AboutUsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Version 1.2 • © 2025 Serene',
+                    'Version 1.0 • © 2025 Serene',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,

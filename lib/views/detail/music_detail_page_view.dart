@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/main/music_page_model.dart';
 import '../../viewmodels/detail/music_detail_page_viewmodel.dart';
 import '../../widgets/main/music/music_image_vinyl_widget.dart';
-import '../../utils/routes.dart';
+// import '../../utils/routes.dart';
 import '../../utils/colors.dart';
 
 class MusicDetailPage extends StatefulWidget {
@@ -79,10 +79,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
-          onPressed: () => Navigator.pushNamed(
-            context,
-            AppRoutes.musicPage,
-          ),
+          onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: AppColors.primaryColor,
       ),
