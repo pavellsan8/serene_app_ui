@@ -43,6 +43,10 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
   int _currentIndex = -1;
   final Random _random = Random();
 
+  // Keep track of shuffled indices to avoid repetition
+  List<int> _shuffledIndices = [];
+  int _shufflePosition = 0;
+
   List<Music> get playlist => _playlist;
   int get currentIndex => _currentIndex;
   Music? get currentMusic =>
@@ -83,10 +87,30 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
     _audioPlayer.currentIndexStream.listen((index) {
       if (index != null && _currentIndex != index) {
         _currentIndex = index;
-        debugPrint("Index changed to: $_currentIndex (from notification or app)");
+        debugPrint(
+            "Index changed to: $_currentIndex (from notification or app)");
         notifyListeners();
       }
     });
+  }
+
+  // Generate shuffled indices for the playlist
+  void _generateShuffledIndices() {
+    _shuffledIndices = List.generate(_playlist.length, (index) => index);
+    _shuffledIndices.shuffle(_random);
+
+    // Make sure current song is at the beginning of shuffle
+    if (_currentIndex >= 0 && _currentIndex < _playlist.length) {
+      int currentInShuffle = _shuffledIndices.indexOf(_currentIndex);
+      if (currentInShuffle != 0) {
+        // Swap current song to the beginning
+        _shuffledIndices[currentInShuffle] = _shuffledIndices[0];
+        _shuffledIndices[0] = _currentIndex;
+      }
+    }
+
+    _shufflePosition = 0;
+    debugPrint("Generated shuffled indices: $_shuffledIndices");
   }
 
   // Set the playlist and update the view
@@ -96,6 +120,9 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
         initialIndex >= 0 &&
         initialIndex < playlist.length) {
       _currentIndex = initialIndex;
+
+      // Generate shuffled indices when playlist is set
+      _generateShuffledIndices();
 
       // Create a list of audio sources with metadata for the background service
       final audioSources = playlist.map((track) {
@@ -115,11 +142,14 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
       // Store the audio source for reference
       _playlistAudioSource = ConcatenatingAudioSource(children: audioSources);
 
-      // Set the audio source playlist
+      // Set the audio source playlist with shuffle mode
       _audioPlayer.setAudioSource(
         _playlistAudioSource!,
         initialIndex: initialIndex,
       );
+
+      // Set shuffle mode on the audio player
+      _audioPlayer.setShuffleModeEnabled(_isShuffle);
     }
     notifyListeners();
   }
@@ -128,11 +158,13 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
   Future<void> playTrackAtIndex(int index) async {
     if (index >= 0 && index < _playlist.length) {
       try {
-        // Since we've already set up the playlist with setAudioSource,
-        // we just need to skip to the desired track
         await _audioPlayer.seek(Duration.zero, index: index);
         await _audioPlayer.play();
-        // _currentIndex will be updated by the currentIndexStream listener
+
+        // Update shuffle position if in shuffle mode
+        if (_isShuffle) {
+          _shufflePosition = _shuffledIndices.indexOf(index);
+        }
       } catch (e) {
         debugPrint("Error playing track at index $index: $e");
       }
@@ -144,15 +176,20 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
     if (_playlist.isEmpty) return;
 
     if (_isShuffle) {
-      if (_playlist.length > 1) {
-        int nextIndex;
-        do {
-          nextIndex = _random.nextInt(_playlist.length);
-        } while (nextIndex == _currentIndex && _playlist.length > 1);
+      // Move to next position in shuffled order
+      _shufflePosition++;
 
+      // If we've reached the end of shuffle, regenerate and start over
+      if (_shufflePosition >= _shuffledIndices.length) {
+        _generateShuffledIndices();
+        _shufflePosition = 1; // Skip current song (at position 0)
+      }
+
+      if (_shufflePosition < _shuffledIndices.length) {
+        int nextIndex = _shuffledIndices[_shufflePosition];
+        debugPrint(
+            "Shuffle next: position $_shufflePosition, index $nextIndex");
         await playTrackAtIndex(nextIndex);
-      } else {
-        await playTrackAtIndex(0); // Only one track, replay it
       }
     } else {
       // Play next track in order, or loop back to the beginning
@@ -176,17 +213,18 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
     }
 
     if (_isShuffle) {
-      // Play random track excluding current one if possible
-      if (_playlist.length > 1) {
-        int prevIndex;
-        do {
-          prevIndex = _random.nextInt(_playlist.length);
-        } while (prevIndex == _currentIndex && _playlist.length > 1);
+      // Move to previous position in shuffled order
+      _shufflePosition--;
 
-        await playTrackAtIndex(prevIndex);
-      } else {
-        await playTrackAtIndex(0); // Only one track, replay it
+      // If we're at the beginning, go to the end
+      if (_shufflePosition < 0) {
+        _shufflePosition = _shuffledIndices.length - 1;
       }
+
+      int prevIndex = _shuffledIndices[_shufflePosition];
+      debugPrint(
+          "Shuffle previous: position $_shufflePosition, index $prevIndex");
+      await playTrackAtIndex(prevIndex);
     } else {
       // Play previous track, or loop to the end
       int prevIndex = _currentIndex - 1;
@@ -200,6 +238,18 @@ class MusicDetailPageViewModel extends ChangeNotifier with FavoriteToggleMixin {
   // Toggle shuffle mode
   void toggleShuffle() {
     _isShuffle = !_isShuffle;
+
+    // Enable/disable shuffle mode on audio player
+    _audioPlayer.setShuffleModeEnabled(_isShuffle);
+
+    if (_isShuffle) {
+      // Generate new shuffled order when enabling shuffle
+      _generateShuffledIndices();
+      debugPrint("Shuffle enabled, current position: $_shufflePosition");
+    } else {
+      debugPrint("Shuffle disabled");
+    }
+
     notifyListeners();
   }
 

@@ -36,7 +36,8 @@ class RegisterViewModel extends ChangeNotifier {
   void updateFormValidity() {
     isNameValid = nameController.text.length >= 5;
     isEmailValid = emailController.text.contains("@") &&
-        emailController.text.contains(".");
+        emailController.text.contains(".") &&
+        emailController.text.endsWith("@gmail.com");
     isPasswordValid = passwordController.text.length >= 6;
     isConfirmPasswordValid =
         confirmPasswordController.text == passwordController.text;

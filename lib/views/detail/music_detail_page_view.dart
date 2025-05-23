@@ -90,9 +90,11 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
               vertical: 72,
               horizontal: 32,
             ),
-            child: RotatingDisc(
-              imageUrl:
-                  viewModel.currentMusic?.thumbnail ?? 'default_thumbnail_url',
+            child: Center(
+              child: RotatingDisc(
+                imageUrl: viewModel.currentMusic?.thumbnail ??
+                    'default_thumbnail_url',
+              ),
             ),
             // child: ClipRRect(
             //   borderRadius: BorderRadius.circular(8),

@@ -81,7 +81,7 @@ class RegisterScreen extends StatelessWidget {
                               }
                               return viewModel.isEmailValid
                                   ? null
-                                  : "Please enter a valid email address";
+                                  : "Please enter a valid email address that ends with @gmail.com";
                             },
                           ),
                         ],

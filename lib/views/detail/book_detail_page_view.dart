@@ -73,7 +73,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
-                    viewModel.getHighQualityThumbnail(widget.book.thumbnail),
+                    // viewModel.getHighQualityThumbnail(widget.book.thumbnail),
+                    widget.book.thumbnail ?? '',
                     height: 250,
                     width: 180,
                     fit: BoxFit.cover,

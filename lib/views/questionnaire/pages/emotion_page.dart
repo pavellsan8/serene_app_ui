@@ -40,8 +40,9 @@ class EmotionsPage extends StatelessWidget {
                         ),
                       )
                     : Wrap(
-                        spacing: 5,
+                        spacing: 8,
                         runSpacing: 15,
+                        alignment: WrapAlignment.center,
                         children: emotionsViewModel.emotionOptions
                             .map(
                               (emotionData) => EmotionChipWidget(
