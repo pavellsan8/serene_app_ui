@@ -52,7 +52,7 @@ class ChatbotInputArea extends StatelessWidget {
               ),
               style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontSize: 16,
+                fontSize: 14,
                 color: AppColors.getFontColor(context),
               ),
               textCapitalization: TextCapitalization.sentences,
