@@ -61,7 +61,7 @@ class VideoGridWidget extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) => Container(
                           height: 150,
                           width: double.infinity,
-                          color: Colors.grey[300],
+                          color: AppColors.getBaseColorShimmer(context),
                           child: const Icon(Icons.video_collection_rounded),
                         ),
                       ),
@@ -146,8 +146,8 @@ class VideoShimmerGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
+      baseColor: AppColors.getBaseColorShimmer(context),
+      highlightColor: AppColors.getHighlightColorShimmer(context),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -158,7 +158,7 @@ class VideoShimmerGridWidget extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: double.infinity,
-                    color: Colors.grey[300],
+                    color: AppColors.getBaseColorShimmer(context),
                   ),
                   const SizedBox(height: 8),
                 ],
@@ -175,7 +175,7 @@ class VideoShimmerGridWidget extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: AppColors.getBaseColorShimmer(context),
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
@@ -199,7 +199,7 @@ class VideoShimmerGridWidget extends StatelessWidget {
                             height: 70,
                             width: 150,
                             decoration: BoxDecoration(
-                              color: Colors.grey[300],
+                              color: AppColors.getBaseColorShimmer(context),
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
@@ -215,7 +215,8 @@ class VideoShimmerGridWidget extends StatelessWidget {
                                   Container(
                                     height: 16,
                                     width: double.infinity,
-                                    color: Colors.grey[300],
+                                    color:
+                                        AppColors.getBaseColorShimmer(context),
                                   ),
                                   const SizedBox(height: 8),
                                   // Description lines shimmer
@@ -225,7 +226,8 @@ class VideoShimmerGridWidget extends StatelessWidget {
                                         flex: 2,
                                         child: Container(
                                           height: 12,
-                                          color: Colors.grey[300],
+                                          color: AppColors.getBaseColorShimmer(
+                                              context),
                                         ),
                                       ),
                                       const SizedBox(width: 6),

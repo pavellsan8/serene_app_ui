@@ -9,6 +9,8 @@ class AppColors {
   static const Color cardItemBgColor = Color(0xFFCED9F0);
   static const Color subtitleTextColor = Color(0xFF807777);
   static const Color chatbotBubbleColor = Color.fromARGB(255, 193, 212, 255);
+  static Color? baseColorShimmer = Colors.grey[300];
+  static Color? highlightColorShimmer = Colors.grey[100];
   static const serebotPath = 'assets/images/home/menu/serebot.png';
 
   // Dark theme colors
@@ -20,6 +22,8 @@ class AppColors {
   static const Color darkCardItemBgColor = Color(0xFF3A4358);
   static const Color darkSubtitleTextColor = Color(0xFFB0B3BC);
   static const Color darkChatbotBubbleColor = Color.fromARGB(255, 75, 77, 79);
+  static Color? darkBaseColorShimmer = Colors.grey[800];
+  static Color? darkHighlightColorShimmer = Colors.grey[600];
   static const darkSerebotPath = 'assets/images/home/menu/serebot_dark.png';
 
   // Theme data
@@ -134,6 +138,18 @@ class AppColors {
     return Theme.of(context).brightness == Brightness.dark
         ? darkChatbotBubbleColor
         : chatbotBubbleColor;
+  }
+
+  static Color getBaseColorShimmer(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkBaseColorShimmer!
+        : baseColorShimmer!;
+  }
+
+  static Color getHighlightColorShimmer(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? darkHighlightColorShimmer!
+        : highlightColorShimmer!;
   }
 
   static String getSerebotPath(BuildContext context) {

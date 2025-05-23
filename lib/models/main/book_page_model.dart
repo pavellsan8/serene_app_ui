@@ -53,7 +53,7 @@ class Book {
       pages: json['pages'] as int?,
       date: json['date'] as int?,
       thumbnail: json['thumbnail'] as String?,
-      url: json['web_reader'] as String?,
+      url: json['url'] as String?,
     );
   }
 }

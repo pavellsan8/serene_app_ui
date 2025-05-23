@@ -56,7 +56,7 @@ class BooksGridWidget extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) => Container(
                           height: 150,
                           width: double.infinity,
-                          color: Colors.grey[300],
+                          color: AppColors.getBaseColorShimmer(context),
                           child: const Icon(Icons.book),
                         ),
                       ),
@@ -128,8 +128,8 @@ class BooksShimmerGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
+      baseColor: AppColors.getBaseColorShimmer(context),
+      highlightColor: AppColors.getHighlightColorShimmer(context),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -140,7 +140,7 @@ class BooksShimmerGridWidget extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: double.infinity,
-                    color: Colors.grey[300],
+                    color: AppColors.getBaseColorShimmer(context),
                   ),
                   const SizedBox(height: 8),
                 ],
@@ -157,7 +157,7 @@ class BooksShimmerGridWidget extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: AppColors.getBaseColorShimmer(context),
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
@@ -181,7 +181,7 @@ class BooksShimmerGridWidget extends StatelessWidget {
                             height: 150,
                             width: 120,
                             decoration: BoxDecoration(
-                              color: Colors.grey[300],
+                              color: AppColors.getBaseColorShimmer(context),
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
@@ -197,33 +197,33 @@ class BooksShimmerGridWidget extends StatelessWidget {
                                   Container(
                                     height: 16,
                                     width: double.infinity,
-                                    color: Colors.grey[300],
+                                    color: AppColors.getBaseColorShimmer(context),
                                   ),
                                   const SizedBox(height: 8),
                                   // Author shimmer
                                   Container(
                                     height: 14,
                                     width: 120,
-                                    color: Colors.grey[300],
+                                    color: AppColors.getBaseColorShimmer(context),
                                   ),
                                   const SizedBox(height: 12),
                                   // Description lines shimmer
                                   Container(
                                     height: 12,
                                     width: double.infinity,
-                                    color: Colors.grey[300],
+                                    color: AppColors.getBaseColorShimmer(context),
                                   ),
                                   const SizedBox(height: 6),
                                   Container(
                                     height: 12,
                                     width: double.infinity,
-                                    color: Colors.grey[300],
+                                    color: AppColors.getBaseColorShimmer(context),
                                   ),
                                   const SizedBox(height: 6),
                                   Container(
                                     height: 12,
                                     width: 150,
-                                    color: Colors.grey[300],
+                                    color: AppColors.getBaseColorShimmer(context),
                                   ),
                                 ],
                               ),

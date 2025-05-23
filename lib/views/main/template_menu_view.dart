@@ -166,10 +166,10 @@ class _GenericPageState<T> extends State<GenericPage<T>> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  widget.itemBuilder(
-                      snapshot.data!), // Use the passed itemBuilder function
-                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: widget.itemBuilder(snapshot.data!),
+                  ), // Use the passed itemBuilder function
                 ],
               ),
             ),
