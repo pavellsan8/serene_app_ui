@@ -1,0 +1,33 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+import '../../models/main/video_page_model.dart';
+import '../../utils/api_url.dart';
+import '../../utils/shared_preferences.dart';
+
+class VideoService {
+  Future<VideoResponse> getVideoData() async {
+    String baseUrl = "${EnvConfig.baseUrl}/api/v2/get-video-list";
+
+    final accessToken = await ApplicationStorage.getAccessToken();
+    final url = Uri.parse(baseUrl);
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $accessToken",
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        return VideoResponse.fromJson(jsonResponse);
+      } else {
+        throw Exception('Failed to load Videos: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching Videos: $e');
+    }
+  }
+}
