@@ -69,7 +69,14 @@ class QuestionnaireViewModel extends ChangeNotifier {
         // Show validation error
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Please complete this page before continuing'),
+            content: Text(
+              'Please complete this page before continuing',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
           ),
         );
       }
@@ -142,7 +149,14 @@ class QuestionnaireViewModel extends ChangeNotifier {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error submitting data: $e'),
+            content: Text(
+              'Error submitting data: $e',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
             backgroundColor: Colors.red,
           ),
         );

@@ -48,7 +48,14 @@ class OtpInputViewModel extends ChangeNotifier {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Invalid OTP! Please check and try again."),
+            content: Text(
+              "Invalid OTP! Please check and try again.",
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
           ),
         );
       }
@@ -71,7 +78,14 @@ class OtpInputViewModel extends ChangeNotifier {
       serverOtp = response.otpCode.toString().trim();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.message),
+          content: Text(
+            response.message,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
         ),
       );
     } catch (e) {
@@ -80,7 +94,14 @@ class OtpInputViewModel extends ChangeNotifier {
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Failed to resend OTP. Please try again."),
+          content: Text(
+            "Failed to resend OTP. Please try again.",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
         ),
       );
     }

@@ -39,7 +39,14 @@ class EmailInputViewModel extends ChangeNotifier {
       serverOtp = response.otpCode.toString().trim();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.message),
+          content: Text(
+            response.message,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
         ),
       );
 
@@ -56,7 +63,14 @@ class EmailInputViewModel extends ChangeNotifier {
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Failed to send OTP. Please try again."),
+          content: Text(
+            "Failed to send OTP. Please try again.",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
         ),
       );
     }

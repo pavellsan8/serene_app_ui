@@ -18,7 +18,16 @@ class LogoutViewModel extends ChangeNotifier {
       if (!context.mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(response.message)),
+        SnackBar(
+          content: Text(
+            response.message,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
+        ),
       );
 
       if (response.status == 200) {
@@ -30,7 +39,16 @@ class LogoutViewModel extends ChangeNotifier {
     } catch (e) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Logout Failed: ${e.toString()}")),
+        SnackBar(
+          content: Text(
+            "Logout Failed: ${e.toString()}",
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
+        ),
       );
     } finally {
       isLoading = false;

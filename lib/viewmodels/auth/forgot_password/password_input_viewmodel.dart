@@ -49,7 +49,14 @@ class PasswordInputViewmodel extends ChangeNotifier {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(response.message),
+          content: Text(
+            response.message,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
         ),
       );
 
@@ -63,7 +70,14 @@ class PasswordInputViewmodel extends ChangeNotifier {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Password reset failed: ${e.toString()}"),
+          content: Text(
+            "Password reset failed: ${e.toString()}",
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
         ),
       );
     }

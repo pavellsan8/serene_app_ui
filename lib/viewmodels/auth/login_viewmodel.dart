@@ -64,7 +64,16 @@ class LoginViewModel extends ChangeNotifier {
       // response API 200
       if (response.status == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.message)),
+          SnackBar(
+            content: Text(
+              response.message,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ),
         );
         if (response.data != null &&
             response.data!.submitQuestionnaire == false) {
@@ -80,6 +89,19 @@ class LoginViewModel extends ChangeNotifier {
             AppRoutes.homePage,
           );
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              response.message,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ),
+        );
       }
     } catch (e) {
       if (!context.mounted) return;

@@ -87,7 +87,16 @@ class RegisterViewModel extends ChangeNotifier {
 
       if (response.status == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.message)),
+          SnackBar(
+            content: Text(
+              response.message,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ),
         );
         Navigator.pushNamed(
           context,
@@ -95,7 +104,16 @@ class RegisterViewModel extends ChangeNotifier {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.message)),
+          SnackBar(
+            content: Text(
+              response.message,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ),
         );
       }
     } catch (e) {
@@ -104,7 +122,14 @@ class RegisterViewModel extends ChangeNotifier {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Error: ${e.toString()}"),
+          content: Text(
+            "Error: ${e.toString()}",
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat',
+            ),
+          ),
         ),
       );
     }
