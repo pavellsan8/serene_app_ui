@@ -14,7 +14,7 @@ class GetStartedScreen extends StatefulWidget {
 }
 
 class _GetStartedScreenState extends State<GetStartedScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   final List<Map<String, String>> onboardingData = [
     {
       'image': 'assets/images/auth/welcome_1.png',
@@ -37,6 +37,36 @@ class _GetStartedScreenState extends State<GetStartedScreen>
   ];
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  // Handle app lifecycle untuk pause/resume auto slide
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final authViewModel = Provider.of<AuthViewModel>(context, listen: false);
+
+    switch (state) {
+      case AppLifecycleState.paused:
+      case AppLifecycleState.inactive:
+        authViewModel.pauseAutoSlide();
+        break;
+      case AppLifecycleState.resumed:
+        authViewModel.resumeAutoSlide();
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
 
@@ -47,6 +77,11 @@ class _GetStartedScreenState extends State<GetStartedScreen>
           children: [
             Expanded(
               child: GestureDetector(
+                // Pause auto slide saat user mulai drag
+                onHorizontalDragStart: (_) {
+                  authViewModel.pauseAutoSlide();
+                },
+                // Resume auto slide setelah drag selesai
                 onHorizontalDragEnd: (details) {
                   if (details.primaryVelocity! > 0) {
                     if (authViewModel.currentPage > 0) {
@@ -57,6 +92,7 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                       authViewModel.goToPage(authViewModel.currentPage + 1);
                     }
                   }
+                  // Auto slide akan restart otomatis di goToPage()
                 },
                 child: PageView.builder(
                   controller: authViewModel.pageController,
@@ -79,7 +115,12 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                 children: List.generate(
                   onboardingData.length,
                   (index) => GestureDetector(
-                    onTap: () => authViewModel.goToPage(index),
+                    onTap: () {
+                      // Pause sebentar lalu pindah ke halaman yang dipilih
+                      authViewModel.pauseAutoSlide();
+                      authViewModel.goToPage(index);
+                      // Auto slide akan restart otomatis di goToPage()
+                    },
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -109,6 +150,8 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
+                        // Stop auto slide ketika user akan navigate
+                        authViewModel.pauseAutoSlide();
                         Navigator.pushNamed(
                           context,
                           AppRoutes.login,
@@ -152,6 +195,8 @@ class _GetStartedScreenState extends State<GetStartedScreen>
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
+                        // Stop auto slide ketika user akan navigate
+                        authViewModel.pauseAutoSlide();
                         Navigator.pushNamed(
                           context,
                           AppRoutes.register,

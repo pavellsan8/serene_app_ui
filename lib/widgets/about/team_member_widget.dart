@@ -29,7 +29,7 @@ class TeamMemberWidget extends StatelessWidget {
           name,
           style: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             fontFamily: 'Montserrat',
           ),
         ),

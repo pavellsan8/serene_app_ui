@@ -190,7 +190,7 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Divider for styling
-            const Divider(thickness: 1.5),
+            const Divider(thickness: 0.5),
             const SizedBox(height: 8),
 
             // Footer Section
