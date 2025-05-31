@@ -131,33 +131,35 @@ class _ProfilePageState extends State<ProfilePage> {
                                       ),
                                     ),
                                     const SizedBox(width: 20),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          profileViewModel.userData!.name,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color:
-                                                AppColors.getFontColor(context),
-                                            fontFamily: 'Montserrat',
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            profileViewModel.userData!.name,
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color:
+                                                  AppColors.getFontColor(context),
+                                              fontFamily: 'Montserrat',
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          profileViewModel.userData!.email,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.getSubtitleColor(
-                                                context),
-                                            fontFamily: 'Montserrat',
+                                          Text(
+                                            profileViewModel.userData!.email,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: AppColors.getSubtitleColor(
+                                                  context),
+                                              fontFamily: 'Montserrat',
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
