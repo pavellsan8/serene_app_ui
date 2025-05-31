@@ -43,7 +43,7 @@ class SereneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.emailInput,
+      initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.getRoutes(),
       theme: AppColors.lightTheme,
       darkTheme: AppColors.darkTheme,
