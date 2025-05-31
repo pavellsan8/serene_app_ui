@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class TeamMemberWidget extends StatelessWidget {
   final String image;
   final String name;
-  // final String role;
+  final String email;
 
   const TeamMemberWidget({
     super.key,
     required this.image,
     required this.name,
-    // required this.role,
+    required this.email,
   });
 
   @override
@@ -34,14 +34,14 @@ class TeamMemberWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4.0),
-        // Text(
-        //   role,
-        //   style: const TextStyle(
-        //     fontSize: 14,
-        //     color: Colors.grey,
-        //     fontFamily: 'Montserrat',
-        //   ),
-        // ),
+        Text(
+          email,
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.grey,
+            fontFamily: 'Montserrat',
+          ),
+        ),
       ],
     );
   }

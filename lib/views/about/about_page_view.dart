@@ -169,19 +169,19 @@ class AboutUsPage extends StatelessWidget {
                     TeamMemberWidget(
                       image: 'assets/images/about/evan.jpg',
                       name: 'Evan Yauris',
-                      // role: 'Product Conceptualizer',
+                      email: 'evan.yauris@binus.ac.id',
                     ),
                     SizedBox(width: 24),
                     TeamMemberWidget(
                       image: 'assets/images/about/nawfal.jpg',
                       name: 'Nawfal Sayeed',
-                      // role: 'UI / UX Designer',
+                      email: 'nawfal.sayeed@binus.ac.id',
                     ),
                     SizedBox(width: 24),
                     TeamMemberWidget(
                       image: 'assets/images/about/pavel.jpg',
                       name: 'Pavel Susanto',
-                      // role: 'Application Developer',
+                      email: 'pavel.susanto@binus.ac.id',
                     ),
                   ],
                 ),
