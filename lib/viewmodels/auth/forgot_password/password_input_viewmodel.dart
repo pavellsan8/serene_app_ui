@@ -17,7 +17,7 @@ class PasswordInputViewmodel extends ChangeNotifier {
   bool isConfirmPasswordValid = true;
   bool isPasswordObscured = true;
   bool isConfirmPasswordObscured = true;
-  bool isSubmitted2 = false;
+  bool isSubmitted = false;
   bool isLoading = false;
 
   PasswordInputViewmodel({required this.email}) {
@@ -32,8 +32,26 @@ class PasswordInputViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Tambahkan getter untuk mengecek apakah form valid
+  bool get isFormValid {
+    return passwordController.text.isNotEmpty &&
+        confirmPasswordController.text.isNotEmpty &&
+        passwordController.text.length >= 6 &&
+        passwordController.text == confirmPasswordController.text;
+  }
+
   Future<void> validatePassword(BuildContext context) async {
-    isSubmitted2 = true;
+    isSubmitted = true;
+    notifyListeners(); // Update UI untuk menampilkan error messages
+
+    updateFormValidity();
+
+    // Cek apakah form valid sebelum loading
+    if (!isFormValid) {
+      return; // Keluar tanpa loading jika form tidak valid
+    }
+
+    // Baru set loading jika form valid
     isLoading = true;
     notifyListeners();
 

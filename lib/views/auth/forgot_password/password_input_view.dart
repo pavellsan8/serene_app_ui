@@ -63,20 +63,20 @@ class PasswordInputScreen extends StatelessWidget {
                             controller: viewModel.passwordController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted2) return null;
-                              return viewModel.isPasswordValid
-                                  ? null
-                                  : "At least 6 characters required";
+                              if (!viewModel.isSubmitted) return null;
+                              if (value == null || value.isEmpty) {
+                                return "At least 6 characters required";
+                              }
+                              return null;
                             },
-                            obscureText: viewModel.isConfirmPasswordObscured,
+                            obscureText: viewModel.isPasswordObscured,
                             suffixIcon: IconButton(
                               icon: Icon(
-                                viewModel.isConfirmPasswordObscured
+                                viewModel.isPasswordObscured
                                     ? Icons.visibility_off
                                     : Icons.visibility,
                               ),
-                              onPressed:
-                                  viewModel.toggleConfirmPasswordVisibility,
+                              onPressed: viewModel.togglePasswordVisibility,
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -86,7 +86,7 @@ class PasswordInputScreen extends StatelessWidget {
                             controller: viewModel.confirmPasswordController,
                             onChanged: (_) {},
                             validator: (value) {
-                              if (!viewModel.isSubmitted2) {
+                              if (!viewModel.isSubmitted) {
                                 return null;
                               }
                               if (value == null || value.isEmpty) {
