@@ -154,6 +154,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 context),
                                             fontFamily: 'Montserrat',
                                           ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
                                     ),
