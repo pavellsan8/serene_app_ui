@@ -34,7 +34,7 @@ class PasswordInputViewmodel extends ChangeNotifier {
 
   // Tambahkan getter untuk mengecek apakah form valid
   bool get isFormValid {
-    return passwordController.text.isNotEmpty &&
+    return passwordController.text.length >= 6 &&
         confirmPasswordController.text.isNotEmpty &&
         passwordController.text.length >= 6 &&
         passwordController.text == confirmPasswordController.text;

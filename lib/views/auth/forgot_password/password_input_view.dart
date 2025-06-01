@@ -64,7 +64,9 @@ class PasswordInputScreen extends StatelessWidget {
                             onChanged: (_) {},
                             validator: (value) {
                               if (!viewModel.isSubmitted) return null;
-                              if (value == null || value.isEmpty) {
+                              if (value == null ||
+                                  value.isEmpty ||
+                                  value.length < 6) {
                                 return "At least 6 characters required";
                               }
                               return null;
@@ -89,7 +91,9 @@ class PasswordInputScreen extends StatelessWidget {
                               if (!viewModel.isSubmitted) {
                                 return null;
                               }
-                              if (value == null || value.isEmpty) {
+                              if (value == null ||
+                                  value.isEmpty ||
+                                  value.length < 6) {
                                 return "At least 6 characters required";
                               }
                               if (value != viewModel.passwordController.text) {
