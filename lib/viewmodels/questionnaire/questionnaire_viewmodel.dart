@@ -133,34 +133,37 @@ class QuestionnaireViewModel extends ChangeNotifier {
         emotion: quizData['emotions'],
       );
 
-      questionnaireInputService.submitQuestionnaire(request);
-
-      // Clear the questionnaire data from SharedPreferences
+      var response =
+          await questionnaireInputService.submitQuestionnaire(request);
       await ApplicationStorage.clearQuestionnaireData();
 
-      // Navigate to completion page after submission
       if (context.mounted) {
-        Navigator.pushNamed(
+        Navigator.of(
           context,
-          AppRoutes.completeQuizPage,
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Error submitting data: $e',
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Montserrat',
+          rootNavigator: true,
+        ).pop(); // Close loading dialog
+        if (response.status == 200) {
+          Navigator.pushNamed(
+            context,
+            AppRoutes.completeQuizPage,
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                response.message,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Montserrat',
+                ),
               ),
             ),
-            backgroundColor: Colors.red,
-          ),
-        );
+          );
+        }
       }
+    } catch (e) {
+      debugPrint('Error submitting questionnaire: $e');
     }
   }
 
