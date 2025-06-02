@@ -28,16 +28,21 @@ class EmailInputViewModel extends ChangeNotifier {
     isSubmitted = true;
     updateFormValidity();
 
+    if (!isEmailValid) {
+      return;
+    }
+
     isLoading = true;
     notifyListeners();
 
     try {
       final request = EmailOtpRequest(email: emailController.text);
       final response = await _emailOtpInputService.sendOtp(request);
+
       if (!context.mounted) return;
 
-      serverOtp = response.otpCode.toString().trim();
       if (response.status == 200) {
+        serverOtp = response.otpCode.toString();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -49,6 +54,15 @@ class EmailInputViewModel extends ChangeNotifier {
               ),
             ),
           ),
+        );
+
+        Navigator.pushNamed(
+          context,
+          AppRoutes.otpInput,
+          arguments: {
+            'email': emailController.text,
+            'serverOtp': serverOtp,
+          },
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -64,17 +78,9 @@ class EmailInputViewModel extends ChangeNotifier {
           ),
         );
       }
-
-      Navigator.pushNamed(
-        context,
-        AppRoutes.otpInput,
-        arguments: {
-          'email': emailController.text,
-          'serverOtp': serverOtp,
-        },
-      );
     } catch (e) {
-      debugPrint('Error validating email: $e');
+      if (!context.mounted) return;
+      debugPrint("Error during email validation: $e");
     }
 
     isLoading = false;

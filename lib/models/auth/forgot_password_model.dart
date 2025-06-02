@@ -15,12 +15,12 @@ class EmailOtpRequest {
 class EmailOtpResponse {
   final int status;
   final String message;
-  final int otpCode;
+  final int? otpCode;
 
   EmailOtpResponse({
     required this.status,
     required this.message,
-    required this.otpCode,
+    this.otpCode,
   });
 
   factory EmailOtpResponse.fromJson(Map<String, dynamic> json) {
