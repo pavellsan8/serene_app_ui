@@ -37,18 +37,33 @@ class EmailInputViewModel extends ChangeNotifier {
       if (!context.mounted) return;
 
       serverOtp = response.otpCode.toString().trim();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            response.message,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Montserrat',
+      if (response.status == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              response.message,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
             ),
           ),
-        ),
-      );
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              response.message,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ),
+        );
+      }
 
       Navigator.pushNamed(
         context,
@@ -59,20 +74,7 @@ class EmailInputViewModel extends ChangeNotifier {
         },
       );
     } catch (e) {
-      if (!context.mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            "Failed to send OTP. Please try again.",
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-        ),
-      );
+      debugPrint('Error validating email: $e');
     }
 
     isLoading = false;
