@@ -28,7 +28,6 @@ class _MusicPageState extends State<MusicPage> {
       image: 'assets/images/home/detail/music_ilustration.jpg',
       feature: 'Hear',
       subtitle: 'Let the music flow in your mind.',
-      // Pass your custom widget to itemBuilder
       itemBuilder: (musics) {
         return MusicGridWidget(
           musics: musics,

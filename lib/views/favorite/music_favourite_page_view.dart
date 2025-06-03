@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/main/music_page_model.dart';
+import '../../viewmodels/detail/music_detail_page_viewmodel.dart';
 import '../../viewmodels/favourite/music_favourite_viewmodel.dart';
 import 'favorite_template_view.dart';
 import '../detail/music_detail_page_view.dart';
@@ -22,19 +23,25 @@ class MusicFavouritesPage extends StatelessWidget {
             isLoading: viewModel.isLoading,
             searchPredicate: (music, query) {
               final lowercaseQuery = query.toLowerCase();
-              // Search by title
               return music.title!.toLowerCase().contains(lowercaseQuery);
             },
-            itemBuilder: (context, books) {
+            itemBuilder: (context, musics) {
               return MusicGridWidget(
-                musics: books,
+                musics: musics,
                 color: Colors.transparent,
                 onMusicTap: (music) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MusicDetailPage(
-                        music: music,
+                      builder: (context) => ChangeNotifierProvider(
+                        create: (context) => MusicDetailPageViewModel(),
+                        child: MusicDetailPage(
+                          music: music,
+                          playlist: musics,
+                          initialIndex: musics.indexWhere(
+                            (item) => item.id == music.id,
+                          ),
+                        ),
                       ),
                     ),
                   );
