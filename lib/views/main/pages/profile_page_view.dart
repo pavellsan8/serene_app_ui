@@ -141,8 +141,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
-                                              color:
-                                                  AppColors.getFontColor(context),
+                                              color: AppColors.getFontColor(
+                                                  context),
                                               fontFamily: 'Montserrat',
                                             ),
                                           ),
@@ -225,7 +225,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ProfileInfoCardWidget(
                                   icon: Icons.book_outlined,
                                   title: "Favorites Books",
-                                  subtitle: "Playlist of book that you like",
+                                  subtitle: "Collection of book that you like",
                                   onTap: () {
                                     Navigator.pushNamed(
                                       context,
