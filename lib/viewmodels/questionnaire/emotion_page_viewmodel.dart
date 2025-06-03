@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../services/questionnaire/emotion_list_service.dart';
 import '../../models/questionnaire/emotion_list_model.dart';
 
@@ -50,6 +51,11 @@ class EmotionViewModel extends ChangeNotifier {
   void setSelectedEmotions(List<int> ids) {
     _selectedEmotionIds.clear();
     _selectedEmotionIds.addAll(ids);
+    notifyListeners();
+  }
+
+  void resetSelections() {
+    _selectedEmotionIds.clear();
     notifyListeners();
   }
 

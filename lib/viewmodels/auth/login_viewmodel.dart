@@ -78,15 +78,17 @@ class LoginViewModel extends ChangeNotifier {
         if (response.data != null &&
             response.data!.submitQuestionnaire == false) {
           // Navigate to questionnaire page if not submitted
-          Navigator.pushNamed(
+          Navigator.pushNamedAndRemoveUntil(
             context,
             AppRoutes.questionnaireIntro,
+            (route) => false,
           );
         } else {
           // Navigate to home page if submitted
-          Navigator.pushNamed(
+          Navigator.pushNamedAndRemoveUntil(
             context,
             AppRoutes.homePage,
+            (route) => false,
           );
         }
       } else {

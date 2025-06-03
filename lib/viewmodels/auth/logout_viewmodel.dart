@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/auth/logout_service.dart';
 import '../../utils/routes.dart';
+import '../../utils/shared_preferences.dart';
 
 class LogoutViewModel extends ChangeNotifier {
   final LogoutService logoutService = LogoutService();
@@ -31,6 +32,8 @@ class LogoutViewModel extends ChangeNotifier {
       );
 
       if (response.status == 200) {
+        ApplicationStorage.clearQuestionnaireData();
+
         Navigator.pushNamed(
           context,
           AppRoutes.getStarted,

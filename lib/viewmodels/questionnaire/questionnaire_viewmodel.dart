@@ -20,12 +20,37 @@ class QuestionnaireViewModel extends ChangeNotifier {
   int currentPage = 0;
 
   // Add listeners to child ViewModels
-  QuestionnaireViewModel() {
+  QuestionnaireViewModel({bool resetData = true}) {
     feelingViewModel.addListener(_notifyListeners);
     moodViewModel.addListener(_notifyListeners);
     emotionViewModel.addListener(_notifyListeners);
 
-    _initializeFromStorage();
+    if (resetData) {
+      _resetAndInitialize();
+    } else {
+      _initializeFromStorage();
+    }
+  }
+
+  Future<void> _resetAndInitialize() async {
+    try {
+      await ApplicationStorage.clearQuestionnaireData();
+
+      if (feelingViewModel.selectedValue != null) {
+        feelingViewModel.selectedValue = 1;
+      }
+
+      if (moodViewModel.selectedMood != null) {
+        moodViewModel.selectedMood = null;
+      }
+
+      emotionViewModel.resetSelections();
+
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Error resetting questionnaire data: $e');
+      _initializeFromStorage();
+    }
   }
 
   Future<void> _initializeFromStorage() async {

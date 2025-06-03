@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/colors.dart';
-import '../../utils/routes.dart';
+import '../../viewmodels/questionnaire/questionnaire_viewmodel.dart';
+import '../../views/questionnaire/questionnaire_view.dart';
 
 class QuestionnaireIntroScreen extends StatelessWidget {
   const QuestionnaireIntroScreen({super.key});
@@ -77,7 +79,17 @@ class QuestionnaireIntroScreen extends StatelessWidget {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.questionnairePage);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (context) => QuestionnaireViewModel(
+                            resetData: true,
+                          ),
+                          child: const QuestionnaireScreen(),
+                        ),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,

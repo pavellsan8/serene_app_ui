@@ -146,9 +146,10 @@ class _CompletePageState extends State<CompletePage>
                 children: [
                   ContinueButton(
                     onPressed: () {
-                      Navigator.pushNamed(
+                      Navigator.pushNamedAndRemoveUntil(
                         context,
-                        AppRoutes.homePage, // ganti ke hoem page
+                        AppRoutes.homePage, // ganti ke home
+                        (route) => false,
                       );
                     },
                   ),

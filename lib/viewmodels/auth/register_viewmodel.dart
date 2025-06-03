@@ -98,9 +98,10 @@ class RegisterViewModel extends ChangeNotifier {
             ),
           ),
         );
-        Navigator.pushNamed(
+        Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.login,
+          (route) => false,
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

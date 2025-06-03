@@ -58,7 +58,6 @@ class EmotionsPage extends StatelessWidget {
           ),
           ContinueButton(
             onPressed: () {
-              // Save selected IDs to SharedPreferences before continuing
               ApplicationStorage.saveEmotions(
                   emotionsViewModel.selectedEmotionIds);
               onContinue();
