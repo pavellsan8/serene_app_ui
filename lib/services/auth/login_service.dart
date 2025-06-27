@@ -34,7 +34,7 @@ class LoginService {
 
       return loginResponse;
     } catch (e) {
-      throw Exception("Failed to register: $e");
+      throw Exception("Failed to login: $e");
     }
   }
 
