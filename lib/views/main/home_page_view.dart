@@ -151,7 +151,6 @@ class HomePage extends StatelessWidget {
                         width: availableWidth * 0.18, // 18% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: AppColors.getSerebotPath(context),
-                        color: Colors.red.shade400,
                         route: AppRoutes.chatbotPage,
                         description:
                             "Talk to our chatbot for support and advice.",
@@ -161,7 +160,6 @@ class HomePage extends StatelessWidget {
                         width: availableWidth * 0.16, // 16% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: "assets/images/home/menu/serehear.png",
-                        color: Colors.blue.shade400,
                         route: AppRoutes.musicPage,
                         description: "Listen to calming music for relaxation.",
                       ),
@@ -170,7 +168,6 @@ class HomePage extends StatelessWidget {
                         width: availableWidth * 0.18, // 18% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: "assets/images/home/menu/serewatch.png",
-                        color: Colors.green.shade400,
                         route: AppRoutes.videoPage,
                         description: "Watch videos that help you relax.",
                       ),
@@ -179,7 +176,6 @@ class HomePage extends StatelessWidget {
                         width: availableWidth * 0.16, // 16% of available width
                         height: availableWidth * 0.18, // 18% of available width
                         path: "assets/images/home/menu/sereread.png",
-                        color: Colors.orange.shade400,
                         route: AppRoutes.bookPage,
                         description: "Read books that bring calm and peace.",
                       ),

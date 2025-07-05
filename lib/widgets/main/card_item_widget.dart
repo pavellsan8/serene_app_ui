@@ -7,7 +7,6 @@ class CardItem extends StatelessWidget {
   final String path;
   final double width;
   final double height;
-  final Color color;
   final String route;
   final String description;
 
@@ -17,7 +16,6 @@ class CardItem extends StatelessWidget {
     required this.path,
     required this.width,
     required this.height,
-    required this.color,
     required this.route,
     required this.description,
   });
