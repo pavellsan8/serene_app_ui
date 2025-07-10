@@ -19,13 +19,15 @@ import '../views/main/pages/music_page_view.dart';
 import '../views/main/pages/video_page_view.dart';
 import '../views/main/pages/book_page_view.dart';
 import '../views/main/pages/chatbot_page_view.dart';
+
 import '../views/main/pages/profile_page_view.dart';
+import '../views/others/update_emotion_view.dart';
 
 import '../views/favorite/book_favourite_page_view.dart';
 import '../views/favorite/music_favourite_page_view.dart';
 import '../views/favorite/video_favourite_page_view.dart';
 
-import '../views/about/about_page_view.dart';
+import '../views/others/about_page_view.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash';
@@ -47,7 +49,9 @@ class AppRoutes {
   static const String musicPage = '/music_page';
   static const String videoPage = '/video_page';
   static const String chatbotPage = '/chatbot_page';
+
   static const String profilePage = '/profile_page';
+  static const String editEmotion = '/edit_emotion';
 
   static const String bookFavourite = '/book_favourite';
   static const String musicFavourite = '/music_favourite';
@@ -74,6 +78,7 @@ class AppRoutes {
       videoPage: (context) => const VideoPage(),
       chatbotPage: (context) => const ChatbotPage(),
       profilePage: (context) => const ProfilePage(),
+      editEmotion: (context) => const QuestionnaireUpdateAnswerScreen(),
       bookFavourite: (context) => const BookFavouritesPage(),
       musicFavourite: (context) => const MusicFavouritesPage(),
       videoFavourite: (context) => const VideoFavouritesPage(),
