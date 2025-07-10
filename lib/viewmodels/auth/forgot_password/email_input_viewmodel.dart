@@ -56,12 +56,14 @@ class EmailInputViewModel extends ChangeNotifier {
           ),
         );
 
-        Navigator.pushNamed(
+        Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.otpInput,
+          (route) => false,
           arguments: {
             'email': emailController.text,
             'serverOtp': serverOtp,
+            'nextRoute': AppRoutes.passwordInput,
           },
         );
       } else {

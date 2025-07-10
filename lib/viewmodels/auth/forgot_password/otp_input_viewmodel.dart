@@ -1,20 +1,51 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 import '../../../models/auth/forgot_password_model.dart';
 import '../../../services/auth/email_input_service.dart';
-import '../../../utils/routes.dart';
 
 class OtpInputViewModel extends ChangeNotifier {
   final TextEditingController otpController = TextEditingController();
   final EmailOtpInputService _emailOtpInputService = EmailOtpInputService();
   final String email;
   String? serverOtp;
+  final String nextRoute;
 
   bool isOtpValid = true;
   bool isLoading = false;
   bool _isDisposed = false;
 
-  OtpInputViewModel({required this.email, required this.serverOtp});
+  int remainingSeconds = 60;
+  bool isResendEnabled = false;
+  Timer? _timer;
+
+  OtpInputViewModel({
+    required this.email,
+    required this.serverOtp,
+    required this.nextRoute,
+  }) {
+    _startTimer();
+  }
+
+  void _startTimer() {
+    isResendEnabled = false;
+    remainingSeconds = 60;
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_isDisposed) {
+        timer.cancel();
+        return;
+      }
+      if (remainingSeconds > 0) {
+        remainingSeconds--;
+        notifyListeners();
+      } else {
+        isResendEnabled = true;
+        timer.cancel();
+        notifyListeners();
+      }
+    });
+  }
 
   void validateOtp(BuildContext context) {
     if (_isDisposed) return;
@@ -34,9 +65,10 @@ class OtpInputViewModel extends ChangeNotifier {
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!_isDisposed && context.mounted) {
-          Navigator.pushNamed(
+          Navigator.pushNamedAndRemoveUntil(
             context,
-            AppRoutes.passwordInput,
+            nextRoute,
+            (route) => false,
             arguments: {
               'email': emailToPass,
               'serverOtp': otpToPass,
@@ -63,7 +95,7 @@ class OtpInputViewModel extends ChangeNotifier {
   }
 
   Future<void> resendOtp(BuildContext context) async {
-    if (_isDisposed) return;
+    if (_isDisposed || !isResendEnabled) return;
 
     isLoading = true;
     if (!_isDisposed) notifyListeners();
@@ -88,6 +120,7 @@ class OtpInputViewModel extends ChangeNotifier {
           ),
         ),
       );
+      _startTimer();
     } catch (e) {
       if (_isDisposed) return;
       if (!context.mounted) return;
@@ -113,6 +146,7 @@ class OtpInputViewModel extends ChangeNotifier {
   @override
   void dispose() {
     _isDisposed = true;
+    _timer?.cancel();
     otpController.removeListener(() {});
 
     if (otpController.hasListeners) {

@@ -55,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Login first so you can meet the experts who can help you.",
+                              "Login to explore soothing content for your mind and body.",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: AppColors.getFontColor(context),

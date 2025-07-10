@@ -17,6 +17,7 @@ class OtpInputScreen extends StatelessWidget {
       create: (context) => OtpInputViewModel(
         email: args['email'],
         serverOtp: args['serverOtp'],
+        nextRoute: args['nextRoute'],
       ),
       child: Scaffold(
         backgroundColor: AppColors.getBackgroundColor(context),
@@ -75,17 +76,26 @@ class OtpInputScreen extends StatelessWidget {
                                   fontFamily: 'Montserrat',
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () => viewModel.resendOtp(context),
-                                child: const Text(
-                                  "Resend OTP",
-                                  style: TextStyle(
-                                    color: AppColors.primaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Montserrat',
-                                  ),
-                                ),
-                              ),
+                              viewModel.isResendEnabled
+                                  ? GestureDetector(
+                                      onTap: () => viewModel.resendOtp(context),
+                                      child: const Text(
+                                        "Resend OTP",
+                                        style: TextStyle(
+                                          color: AppColors.primaryColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Montserrat',
+                                        ),
+                                      ),
+                                    )
+                                  : Text(
+                                      "Resend OTP in ${viewModel.remainingSeconds}s",
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Montserrat',
+                                      ),
+                                    ),
                             ],
                           ),
                         ],

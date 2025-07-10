@@ -23,16 +23,19 @@ class RegisterRequest {
 class RegisterResponse {
   final int status;
   final String message;
+  final int? otpCode;
 
   RegisterResponse({
     required this.status,
     required this.message,
+    this.otpCode,
   });
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
     return RegisterResponse(
       status: json["status"],
       message: json["message"],
+      otpCode: json["otp_code"],
     );
   }
 }

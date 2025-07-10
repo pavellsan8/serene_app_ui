@@ -25,6 +25,8 @@ class RegisterViewModel extends ChangeNotifier {
   bool isSubmitted2 = false;
   bool isLoading = false;
 
+  String? serverOtp;
+
   RegisterViewModel() {
     nameController.addListener(updateFormValidity);
     emailController.addListener(updateFormValidity);
@@ -80,6 +82,7 @@ class RegisterViewModel extends ChangeNotifier {
       );
 
       final response = await _registerService.registerUser(requestData);
+      serverOtp = response.otpCode.toString();
 
       isLoading = false;
       notifyListeners();
@@ -98,10 +101,14 @@ class RegisterViewModel extends ChangeNotifier {
             ),
           ),
         );
-        Navigator.pushNamedAndRemoveUntil(
+        Navigator.pushNamed(
           context,
-          AppRoutes.login,
-          (route) => false,
+          AppRoutes.otpInput,
+          arguments: {
+            'email': emailController.text,
+            'serverOtp': serverOtp,
+            'nextRoute': AppRoutes.login,
+          },
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
