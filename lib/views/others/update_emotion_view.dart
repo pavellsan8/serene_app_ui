@@ -10,42 +10,79 @@ class QuestionnaireUpdateAnswerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<QuestionnaireViewModel>(context);
-
-    return Scaffold(
-      backgroundColor: AppColors.getBackgroundColor(context),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                // horizontal: 16.0,
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            // PageView
-            Expanded(
-              child: PageView(
-                controller: viewModel.pageController,
-                physics: const NeverScrollableScrollPhysics(),
+    return ChangeNotifierProvider(
+      create: (context) => QuestionnaireViewModel(
+        resetData: false,
+        updateMode: true,
+      ),
+      child: Scaffold(
+        backgroundColor: AppColors.getBackgroundColor(context),
+        body: SafeArea(
+          child: Consumer<QuestionnaireViewModel>(
+            builder: (context, viewModel, child) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  EmotionsPage(
-                    onContinue: () async {
-                      viewModel.submitQuizData(context);
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
                   ),
+                  const SizedBox(height: 10),
+
+                  // Show loading indicator while fetching user answers
+                  if (viewModel.emotionViewModel.isLoading)
+                    const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  else if (viewModel.emotionViewModel.errorMessage != null)
+                    Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              viewModel.emotionViewModel.errorMessage!,
+                              style: const TextStyle(color: Colors.red),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {
+                                viewModel.emotionViewModel
+                                    .fetchEmotionsWithUserAnswers();
+                              },
+                              child: const Text('Retry'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  else
+                    Expanded(
+                      child: PageView(
+                        controller: viewModel.pageController,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          EmotionsPage(
+                            onContinue: () async {
+                              viewModel.submitQuizData(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                 ],
-              ),
-            ),
-          ],
+              );
+            },
+          ),
         ),
       ),
     );

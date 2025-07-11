@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 import '../../models/questionnaire/emotion_list_model.dart';
 import '../../utils/api_url.dart';
+import '../../utils/shared_preferences.dart';
 
 class EmotionListService {
   Future<List<EmotionListData>> getEmotionList() async {
@@ -33,12 +35,14 @@ class EmotionListService {
   Future<List<EmotionListData>> getEmotionListUserAnswer() async {
     final url =
         Uri.parse("${EnvConfig.baseUrl}/api/v1/get-emotion-list-user-answer");
+    final accessToken = await ApplicationStorage.getAccessToken();
 
     try {
       final response = await http.get(
         url,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer $accessToken",
         },
       );
 

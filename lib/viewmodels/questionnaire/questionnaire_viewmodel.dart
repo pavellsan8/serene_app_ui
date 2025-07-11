@@ -19,14 +19,20 @@ class QuestionnaireViewModel extends ChangeNotifier {
   final PageController pageController = PageController();
   int currentPage = 0;
 
+  bool isUpdateMode = false;
+
   // Add listeners to child ViewModels
-  QuestionnaireViewModel({bool resetData = true}) {
+  QuestionnaireViewModel({bool resetData = true, bool updateMode = false}) {
+    isUpdateMode = updateMode;
+
     feelingViewModel.addListener(_notifyListeners);
     moodViewModel.addListener(_notifyListeners);
     emotionViewModel.addListener(_notifyListeners);
 
-    if (resetData) {
+    if (resetData && !updateMode) {
       _resetAndInitialize();
+    } else if (updateMode) {
+      _initializeForUpdate();
     } else {
       _initializeFromStorage();
     }
@@ -75,40 +81,51 @@ class QuestionnaireViewModel extends ChangeNotifier {
     }
   }
 
+  Future<void> _initializeForUpdate() async {
+    try {
+      // Load emotions with user's previous answers
+      await emotionViewModel.fetchEmotionsWithUserAnswers();
+
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Error initializing for update: $e');
+    }
+  }
+
   // Helper to propagate changes upward
   void _notifyListeners() {
     notifyListeners();
   }
 
-  void goToNextPage(BuildContext context) {
-    if (currentPage < 2) {
-      // Ensure the current page is validated before proceeding
-      if (_validateCurrentPage()) {
-        pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-        currentPage++;
-        notifyListeners();
-      } else {
-        // Show validation error
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Please complete this page before continuing',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Montserrat',
-              ),
-            ),
-          ),
-        );
-      }
-    } else {
-      submitQuizData(context);
-    }
-  }
+  // void goToNextPage(BuildContext context) {
+  //   if (currentPage < 2) {
+  //     // Ensure the current page is validated before proceeding
+  //     if (_validateCurrentPage()) {
+  //       pageController.nextPage(
+  //         duration: const Duration(milliseconds: 300),
+  //         curve: Curves.easeInOut,
+  //       );
+  //       currentPage++;
+  //       notifyListeners();
+  //     } else {
+  //       // Show validation error
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(
+  //           content: Text(
+  //             'Please complete this page before continuing',
+  //             style: TextStyle(
+  //               fontSize: 12,
+  //               fontWeight: FontWeight.w500,
+  //               fontFamily: 'Montserrat',
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     }
+  //   } else {
+  //     submitQuizData(context);
+  //   }
+  // }
 
   void goToPreviousPage() {
     if (currentPage > 0) {
@@ -121,23 +138,23 @@ class QuestionnaireViewModel extends ChangeNotifier {
     }
   }
 
-  bool _validateCurrentPage() {
-    switch (currentPage) {
-      case 0:
-        return feelingViewModel.isValid();
-      case 1:
-        // For the mood page
-        final isValid = moodViewModel.selectedMood != null &&
-            moodViewModel.selectedMood!.isNotEmpty;
-        debugPrint(
-            'Mood validation: selected = ${moodViewModel.selectedMood}, isValid = $isValid');
-        return isValid;
-      case 2:
-        return emotionViewModel.isValid();
-      default:
-        return false;
-    }
-  }
+  // bool _validateCurrentPage() {
+  //   switch (currentPage) {
+  //     case 0:
+  //       return feelingViewModel.isValid();
+  //     case 1:
+  //       // For the mood page
+  //       final isValid = moodViewModel.selectedMood != null &&
+  //           moodViewModel.selectedMood!.isNotEmpty;
+  //       debugPrint(
+  //           'Mood validation: selected = ${moodViewModel.selectedMood}, isValid = $isValid');
+  //       return isValid;
+  //     case 2:
+  //       return emotionViewModel.isValid();
+  //     default:
+  //       return false;
+  //   }
+  // }
 
   void submitQuizData(BuildContext context) async {
     // Show loading indicator
@@ -158,20 +175,41 @@ class QuestionnaireViewModel extends ChangeNotifier {
         emotion: quizData['emotions'],
       );
 
-      var response =
-          await questionnaireInputService.submitQuestionnaire(request);
-      await ApplicationStorage.clearQuestionnaireData();
+      QuestionnaireResponse response;
+
+      if (isUpdateMode) {
+        response = await questionnaireInputService.updateQuestionnaire(request);
+      } else {
+        response = await questionnaireInputService.submitQuestionnaire(request);
+        await ApplicationStorage.clearQuestionnaireData();
+      }
 
       if (context.mounted) {
         Navigator.of(
           context,
           rootNavigator: true,
-        ).pop(); // Close loading dialog
+        ).pop();
         if (response.status == 200) {
-          Navigator.pushNamed(
-            context,
-            AppRoutes.completeQuizPage,
-          );
+          if (isUpdateMode) {
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                  'Your answers have been updated successfully!',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
+              ),
+            );
+          } else {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.completeQuizPage,
+            );
+          }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
